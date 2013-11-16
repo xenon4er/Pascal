@@ -52,7 +52,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="ParserBaseException.cs" />
     <Compile Include="IdentDescr.cs" />
-    <Compile Include="RealIdentDescr.cs" />
     <Compile Include="VarDescr.cs" />
     <Compile Include="AstNode.cs" />
     <Compile Include="NumAstNode.cs" />

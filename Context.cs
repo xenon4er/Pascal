@@ -20,7 +20,7 @@ namespace MathExpr
                 return false;
         }
 
-        public bool find_var(string name)
+        public IdentDescr find_var(string name)
         {
             LinkedListNode<IdentDescr> k;
             LinkedList<IdentDescr> tmp = idents;
@@ -31,13 +31,13 @@ namespace MathExpr
                 for (k = tmp.First; k != null; k = k.Next)
                 {
                     if (k.Value.name.CompareTo(name) == 0)
-                        return true;
+                        return k.Value;
                 }
                 tmpCon = tmpCon.upper;
                 if (tmpCon != null)
                     tmp = tmpCon.idents;
             }
-            return false;
+            return null;
         }
     }
 }

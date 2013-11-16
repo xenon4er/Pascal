@@ -17,9 +17,11 @@ namespace MathExpr
       public VarType varType;
       public LinkedList<Parametr> parametrs; // list of parametrs
       
+      //вообще, скорее всего нам будет достаточно хранить заначение в string
+      public string value;
       public string stringValue = "";
       public int intValue = 0;
-      public float realValue = 0;
+      public double realValue = 0;
       /*
     public int Type {
       get;

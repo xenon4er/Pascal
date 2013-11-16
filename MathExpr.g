@@ -34,6 +34,7 @@ tokens {
   MOD_INT = 'mod'     ;
   AND     = 'and'     ;
   OR      = 'or'      ;
+  CONVERT ;
   XOR     = 'xor'     ;
   DDD = ':';
   TTT = ';';

@@ -29,6 +29,7 @@ namespace MathExpr
         AstNodePrinter.Print(program);
         Console.WriteLine();
         MathExprIntepreter.Execute(program, mainContext);
+        AstNodePrinter.Print(program);
       }
       catch (Exception e) {
         Console.WriteLine("Error: {0}", e);

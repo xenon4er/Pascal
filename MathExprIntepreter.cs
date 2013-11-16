@@ -31,7 +31,7 @@ namespace MathExpr
         switch (node.Type)
         {
             case AstNodeType.UNKNOWN:
-                throw new IntepreterException("Неопределенный тип узла AST-дерева");
+                throw new IntepreterException("Неопределенный тип узла AST-дерева " + node.Line);
 
            
 
@@ -69,6 +69,7 @@ namespace MathExpr
                         context.idents.AddLast(newIdent);
                     }
                 }
+               
                 break;
 
             case AstNodeType.FUNCTION:
@@ -250,25 +251,37 @@ namespace MathExpr
                 break;
 
             
-            case AstNodeType.REAL:              
-                return ((NumAstNode)node).Value;
-                break;
-
-            case AstNodeType.INTEGER:
-
-                break;
-            
-            case AstNodeType.STRING:
-                break;
 
             case AstNodeType.ASSIGN:
-                CommonTree childNodeAssign = (CommonTree)node.GetChild(0);
-                if (!context.find_var(childNodeAssign.Text))
+                CommonTree nodeAssign0 = (CommonTree)node.GetChild(0);
+                IdentDescr ident = context.find_var(nodeAssign0.Text);
+                //поменял find_var теперь если есть, то возвращает ident, если нет - null
+                if (null == ident)
                 {
-                    throw new IntepreterException("Переменная не описана: строка " + childNodeAssign.Line);
+                    throw new IntepreterException("Переменная не описана: строка " + nodeAssign0.Line);
                 }
-                //AstNodeType t = node.GetChild(1).Type;
-                ExecuteNode(node.GetChild(1),context);
+                CommonTree nodeAssign1 = (CommonTree)node.GetChild(1);
+                //ExecuteNode(node.GetChild(1),context);
+                switch (nodeAssign1.Type)
+                {
+                    case AstNodeType.INTEGER:
+                        //ident.intValue = Convert.ToInt32(nodeAssign1.Text);
+                        ident.value = nodeAssign1.Text;
+                        break;
+                    case AstNodeType.REAL:
+                        //ident.realValue = Convert.ToDouble(nodeAssign1.Text);
+                        ident.value = nodeAssign1.Text;
+                        break;
+                    case AstNodeType.STRING:
+                        ident.stringValue = ident.value = nodeAssign1.Text;
+                        ident.value = nodeAssign1.Text;
+                        break;
+                    default:
+                        ExecuteNode(nodeAssign1, context);
+                        break;
+
+                }
+               
                 break;
             
             case AstNodeType.REPEAT:
@@ -286,6 +299,7 @@ namespace MathExpr
                 break;
 
             case AstNodeType.ADD:
+                ConvertType(node.GetChild(0), AstNodeType.REAL, 0);
                 for (int i = 0; i < node.ChildCount; i++)
                 {
                     CommonTree childNode = (CommonTree)node.GetChild(i);
@@ -300,7 +314,7 @@ namespace MathExpr
                     break;
              
             default:
-                throw new IntepreterException("Неизвестный тип узла AST-дерева");
+                throw new IntepreterException("Неизвестный тип узла AST-дерева " + node.Line);
         }
         return 0;
     }
@@ -309,6 +323,29 @@ namespace MathExpr
         ExecuteNode(programNode, context);
     }
 
+    private void ConvertType(ITree node, int toType, int pos)
+    {
+        ITree parent = node.Parent;
+
+        AstNode conv = new AstNode(new Antlr.Runtime.CommonToken(AstNodeType.CONVERT, "CONVERT")) { Parent = node.Parent };
+        parent.SetChild(pos, conv);
+        node.Parent = conv;
+        switch (toType)
+        {
+            case AstNodeType.INTEGER:
+                conv.AddChild(new AstNode(new Antlr.Runtime.CommonToken(AstNodeType.INTEGER, "INTEGER")){Parent = conv});
+                break;
+            case AstNodeType.REAL:
+                conv.AddChild(new AstNode(new Antlr.Runtime.CommonToken(AstNodeType.REAL, "REAL")) { Parent = conv });
+                break;
+            case AstNodeType.STRING:
+                conv.AddChild(new AstNode(new Antlr.Runtime.CommonToken(AstNodeType.STRING, "STRING")) { Parent = conv });
+                break;
+        }
+        conv.AddChild(node);
+        conv.AddChild(new AstNode());
+        
+    }
 
     public static void Execute(ITree programNode, Context context) {
         MathExprIntepreter mei=new MathExprIntepreter(programNode, context);

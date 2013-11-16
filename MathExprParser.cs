@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 MathExpr.g 2013-11-05 17:58:41
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 MathExpr.g 2013-11-17 00:33:41
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -54,6 +54,7 @@ public partial class MathExprParser : Parser
 		"MOD_INT", 
 		"AND", 
 		"OR", 
+		"CONVERT", 
 		"XOR", 
 		"DDD", 
 		"TTT", 
@@ -90,52 +91,53 @@ public partial class MathExprParser : Parser
     public const int WHILE = 19;
     public const int FOR = 14;
     public const int DO = 18;
-    public const int SUB = 37;
-    public const int TTT = 29;
+    public const int SUB = 38;
+    public const int TTT = 30;
     public const int AND = 25;
     public const int EOF = -1;
     public const int FUNC_CALL = 8;
     public const int IF = 20;
-    public const int ML_COMMENT = 31;
+    public const int T__55 = 55;
+    public const int ML_COMMENT = 32;
     public const int INC = 10;
     public const int T__51 = 51;
     public const int T__52 = 52;
     public const int THEN = 21;
     public const int T__53 = 53;
-    public const int DDD = 28;
+    public const int DDD = 29;
     public const int UNKNOWN = 4;
     public const int T__54 = 54;
-    public const int COMPARE = 41;
-    public const int IDENT = 35;
+    public const int COMPARE = 42;
+    public const int IDENT = 36;
     public const int VAR = 5;
     public const int T__50 = 50;
-    public const int ADD = 36;
+    public const int ADD = 37;
     public const int PARAMS = 9;
-    public const int INTEGER = 32;
-    public const int T__42 = 42;
+    public const int INTEGER = 33;
     public const int T__43 = 43;
     public const int T__46 = 46;
-    public const int XOR = 27;
+    public const int XOR = 28;
     public const int T__47 = 47;
     public const int T__44 = 44;
     public const int T__45 = 45;
+    public const int CONVERT = 27;
     public const int TO = 17;
     public const int T__48 = 48;
     public const int T__49 = 49;
     public const int DIV_INT = 23;
     public const int ELSE = 22;
-    public const int MUL = 38;
+    public const int MUL = 39;
     public const int PROCEDURE = 13;
-    public const int REAL = 33;
-    public const int WS = 30;
+    public const int REAL = 34;
+    public const int WS = 31;
     public const int UNTIL = 16;
     public const int BLOCK = 6;
     public const int OR = 26;
-    public const int ASSIGN = 40;
+    public const int ASSIGN = 41;
     public const int PROGRAM = 7;
     public const int REPEAT = 15;
-    public const int DIV = 39;
-    public const int STRING = 34;
+    public const int DIV = 40;
+    public const int STRING = 35;
 
     // delegates
     // delegators
@@ -191,7 +193,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "group"
-    // MathExpr.g:90:1: group : ( '(' term ')' | REAL -> REAL[double.Parse($REAL.text, NFI)] | INTEGER | STRING | func_call | IDENT );
+    // MathExpr.g:91:1: group : ( '(' term ')' | REAL -> REAL[double.Parse($REAL.text, NFI)] | INTEGER | STRING | func_call | IDENT );
     public MathExprParser.group_return group() // throws RecognitionException [1]
     {   
         MathExprParser.group_return retval = new MathExprParser.group_return();
@@ -224,11 +226,11 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:90:6: ( '(' term ')' | REAL -> REAL[double.Parse($REAL.text, NFI)] | INTEGER | STRING | func_call | IDENT )
+            // MathExpr.g:91:6: ( '(' term ')' | REAL -> REAL[double.Parse($REAL.text, NFI)] | INTEGER | STRING | func_call | IDENT )
             int alt1 = 6;
             switch ( input.LA(1) ) 
             {
-            case 42:
+            case 43:
             	{
                 alt1 = 1;
                 }
@@ -252,11 +254,11 @@ public partial class MathExprParser : Parser
             	{
                 int LA1_5 = input.LA(2);
 
-                if ( (LA1_5 == EOF || (LA1_5 >= UNTIL && LA1_5 <= DO) || (LA1_5 >= THEN && LA1_5 <= OR) || LA1_5 == TTT || (LA1_5 >= ADD && LA1_5 <= DIV) || LA1_5 == COMPARE || (LA1_5 >= 43 && LA1_5 <= 44) || LA1_5 == 54) )
+                if ( (LA1_5 == EOF || (LA1_5 >= UNTIL && LA1_5 <= DO) || (LA1_5 >= THEN && LA1_5 <= OR) || LA1_5 == TTT || (LA1_5 >= ADD && LA1_5 <= DIV) || LA1_5 == COMPARE || (LA1_5 >= 44 && LA1_5 <= 45) || LA1_5 == 55) )
                 {
                     alt1 = 6;
                 }
-                else if ( (LA1_5 == 42) )
+                else if ( (LA1_5 == 43) )
                 {
                     alt1 = 5;
                 }
@@ -281,24 +283,24 @@ public partial class MathExprParser : Parser
             switch (alt1) 
             {
                 case 1 :
-                    // MathExpr.g:91:3: '(' term ')'
+                    // MathExpr.g:92:3: '(' term ')'
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	char_literal1=(IToken)Match(input,42,FOLLOW_42_in_group784); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_term_in_group787);
+                    	char_literal1=(IToken)Match(input,43,FOLLOW_43_in_group790); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_term_in_group793);
                     	term2 = term();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, term2.Tree);
-                    	char_literal3=(IToken)Match(input,43,FOLLOW_43_in_group789); if (state.failed) return retval;
+                    	char_literal3=(IToken)Match(input,44,FOLLOW_44_in_group795); if (state.failed) return retval;
 
                     }
                     break;
                 case 2 :
-                    // MathExpr.g:92:3: REAL
+                    // MathExpr.g:93:3: REAL
                     {
-                    	REAL4=(IToken)Match(input,REAL,FOLLOW_REAL_in_group794); if (state.failed) return retval; 
+                    	REAL4=(IToken)Match(input,REAL,FOLLOW_REAL_in_group800); if (state.failed) return retval; 
                     	if ( (state.backtracking==0) ) stream_REAL.Add(REAL4);
 
 
@@ -315,7 +317,7 @@ public partial class MathExprParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (object)adaptor.GetNilNode();
-                    	// 92:8: -> REAL[double.Parse($REAL.text, NFI)]
+                    	// 93:8: -> REAL[double.Parse($REAL.text, NFI)]
                     	{
                     	    adaptor.AddChild(root_0, new NumAstNode(REAL, double.Parse(((REAL4 != null) ? REAL4.Text : null), NFI)));
 
@@ -325,11 +327,11 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 3 :
-                    // MathExpr.g:93:3: INTEGER
+                    // MathExpr.g:94:3: INTEGER
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	INTEGER5=(IToken)Match(input,INTEGER,FOLLOW_INTEGER_in_group806); if (state.failed) return retval;
+                    	INTEGER5=(IToken)Match(input,INTEGER,FOLLOW_INTEGER_in_group812); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{INTEGER5_tree = (object)adaptor.Create(INTEGER5);
                     		adaptor.AddChild(root_0, INTEGER5_tree);
@@ -338,11 +340,11 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 4 :
-                    // MathExpr.g:94:3: STRING
+                    // MathExpr.g:95:3: STRING
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	STRING6=(IToken)Match(input,STRING,FOLLOW_STRING_in_group810); if (state.failed) return retval;
+                    	STRING6=(IToken)Match(input,STRING,FOLLOW_STRING_in_group816); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{STRING6_tree = (object)adaptor.Create(STRING6);
                     		adaptor.AddChild(root_0, STRING6_tree);
@@ -351,11 +353,11 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 5 :
-                    // MathExpr.g:95:3: func_call
+                    // MathExpr.g:96:3: func_call
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_func_call_in_group814);
+                    	PushFollow(FOLLOW_func_call_in_group820);
                     	func_call7 = func_call();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -364,11 +366,11 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 6 :
-                    // MathExpr.g:96:3: IDENT
+                    // MathExpr.g:97:3: IDENT
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	IDENT8=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_group818); if (state.failed) return retval;
+                    	IDENT8=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_group824); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{IDENT8_tree = (object)adaptor.Create(IDENT8);
                     		adaptor.AddChild(root_0, IDENT8_tree);
@@ -414,7 +416,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "mult"
-    // MathExpr.g:100:1: mult : group ( ( MUL | DIV | DIV_INT | MOD_INT | AND ) group )* ;
+    // MathExpr.g:101:1: mult : group ( ( MUL | DIV | DIV_INT | MOD_INT | AND ) group )* ;
     public MathExprParser.mult_return mult() // throws RecognitionException [1]
     {   
         MathExprParser.mult_return retval = new MathExprParser.mult_return();
@@ -436,17 +438,17 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:100:5: ( group ( ( MUL | DIV | DIV_INT | MOD_INT | AND ) group )* )
-            // MathExpr.g:100:7: group ( ( MUL | DIV | DIV_INT | MOD_INT | AND ) group )*
+            // MathExpr.g:101:5: ( group ( ( MUL | DIV | DIV_INT | MOD_INT | AND ) group )* )
+            // MathExpr.g:101:7: group ( ( MUL | DIV | DIV_INT | MOD_INT | AND ) group )*
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_group_in_mult827);
+            	PushFollow(FOLLOW_group_in_mult833);
             	group9 = group();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, group9.Tree);
-            	// MathExpr.g:100:13: ( ( MUL | DIV | DIV_INT | MOD_INT | AND ) group )*
+            	// MathExpr.g:101:13: ( ( MUL | DIV | DIV_INT | MOD_INT | AND ) group )*
             	do 
             	{
             	    int alt2 = 2;
@@ -461,7 +463,7 @@ public partial class MathExprParser : Parser
             	    switch (alt2) 
             		{
             			case 1 :
-            			    // MathExpr.g:100:15: ( MUL | DIV | DIV_INT | MOD_INT | AND ) group
+            			    // MathExpr.g:101:15: ( MUL | DIV | DIV_INT | MOD_INT | AND ) group
             			    {
             			    	set10=(IToken)input.LT(1);
             			    	set10 = (IToken)input.LT(1);
@@ -478,7 +480,7 @@ public partial class MathExprParser : Parser
             			    	    throw mse;
             			    	}
 
-            			    	PushFollow(FOLLOW_group_in_mult854);
+            			    	PushFollow(FOLLOW_group_in_mult860);
             			    	group11 = group();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -534,7 +536,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "add"
-    // MathExpr.g:101:1: add : mult ( ( ADD | SUB | OR ) mult )* ;
+    // MathExpr.g:102:1: add : mult ( ( ADD | SUB | OR ) mult )* ;
     public MathExprParser.add_return add() // throws RecognitionException [1]
     {   
         MathExprParser.add_return retval = new MathExprParser.add_return();
@@ -556,17 +558,17 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:101:4: ( mult ( ( ADD | SUB | OR ) mult )* )
-            // MathExpr.g:101:7: mult ( ( ADD | SUB | OR ) mult )*
+            // MathExpr.g:102:4: ( mult ( ( ADD | SUB | OR ) mult )* )
+            // MathExpr.g:102:7: mult ( ( ADD | SUB | OR ) mult )*
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_mult_in_add866);
+            	PushFollow(FOLLOW_mult_in_add872);
             	mult12 = mult();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, mult12.Tree);
-            	// MathExpr.g:101:13: ( ( ADD | SUB | OR ) mult )*
+            	// MathExpr.g:102:13: ( ( ADD | SUB | OR ) mult )*
             	do 
             	{
             	    int alt3 = 2;
@@ -581,7 +583,7 @@ public partial class MathExprParser : Parser
             	    switch (alt3) 
             		{
             			case 1 :
-            			    // MathExpr.g:101:15: ( ADD | SUB | OR ) mult
+            			    // MathExpr.g:102:15: ( ADD | SUB | OR ) mult
             			    {
             			    	set13=(IToken)input.LT(1);
             			    	set13 = (IToken)input.LT(1);
@@ -598,7 +600,7 @@ public partial class MathExprParser : Parser
             			    	    throw mse;
             			    	}
 
-            			    	PushFollow(FOLLOW_mult_in_add886);
+            			    	PushFollow(FOLLOW_mult_in_add892);
             			    	mult14 = mult();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -654,7 +656,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "logic"
-    // MathExpr.g:102:1: logic : add ( COMPARE add )* ;
+    // MathExpr.g:103:1: logic : add ( COMPARE add )* ;
     public MathExprParser.logic_return logic() // throws RecognitionException [1]
     {   
         MathExprParser.logic_return retval = new MathExprParser.logic_return();
@@ -676,17 +678,17 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:102:6: ( add ( COMPARE add )* )
-            // MathExpr.g:102:8: add ( COMPARE add )*
+            // MathExpr.g:103:6: ( add ( COMPARE add )* )
+            // MathExpr.g:103:8: add ( COMPARE add )*
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_add_in_logic898);
+            	PushFollow(FOLLOW_add_in_logic904);
             	add15 = add();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, add15.Tree);
-            	// MathExpr.g:102:12: ( COMPARE add )*
+            	// MathExpr.g:103:12: ( COMPARE add )*
             	do 
             	{
             	    int alt4 = 2;
@@ -701,14 +703,14 @@ public partial class MathExprParser : Parser
             	    switch (alt4) 
             		{
             			case 1 :
-            			    // MathExpr.g:102:14: COMPARE add
+            			    // MathExpr.g:103:14: COMPARE add
             			    {
-            			    	COMPARE16=(IToken)Match(input,COMPARE,FOLLOW_COMPARE_in_logic902); if (state.failed) return retval;
+            			    	COMPARE16=(IToken)Match(input,COMPARE,FOLLOW_COMPARE_in_logic908); if (state.failed) return retval;
             			    	if ( state.backtracking == 0 )
             			    	{COMPARE16_tree = (object)adaptor.Create(COMPARE16);
             			    		root_0 = (object)adaptor.BecomeRoot(COMPARE16_tree, root_0);
             			    	}
-            			    	PushFollow(FOLLOW_add_in_logic905);
+            			    	PushFollow(FOLLOW_add_in_logic911);
             			    	add17 = add();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -764,7 +766,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "term"
-    // MathExpr.g:104:1: term : logic ;
+    // MathExpr.g:105:1: term : logic ;
     public MathExprParser.term_return term() // throws RecognitionException [1]
     {   
         MathExprParser.term_return retval = new MathExprParser.term_return();
@@ -782,12 +784,12 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:104:5: ( logic )
-            // MathExpr.g:104:7: logic
+            // MathExpr.g:105:5: ( logic )
+            // MathExpr.g:105:7: logic
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_logic_in_term918);
+            	PushFollow(FOLLOW_logic_in_term924);
             	logic18 = logic();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -831,7 +833,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "params_"
-    // MathExpr.g:106:1: params_ : ( term ( ',' term )* )? ;
+    // MathExpr.g:107:1: params_ : ( term ( ',' term )* )? ;
     public MathExprParser.params__return params_() // throws RecognitionException [1]
     {   
         MathExprParser.params__return retval = new MathExprParser.params__return();
@@ -853,36 +855,36 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:106:8: ( ( term ( ',' term )* )? )
-            // MathExpr.g:106:10: ( term ( ',' term )* )?
+            // MathExpr.g:107:8: ( ( term ( ',' term )* )? )
+            // MathExpr.g:107:10: ( term ( ',' term )* )?
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	// MathExpr.g:106:10: ( term ( ',' term )* )?
+            	// MathExpr.g:107:10: ( term ( ',' term )* )?
             	int alt6 = 2;
             	int LA6_0 = input.LA(1);
 
-            	if ( ((LA6_0 >= INTEGER && LA6_0 <= IDENT) || LA6_0 == 42) )
+            	if ( ((LA6_0 >= INTEGER && LA6_0 <= IDENT) || LA6_0 == 43) )
             	{
             	    alt6 = 1;
             	}
             	switch (alt6) 
             	{
             	    case 1 :
-            	        // MathExpr.g:106:12: term ( ',' term )*
+            	        // MathExpr.g:107:12: term ( ',' term )*
             	        {
-            	        	PushFollow(FOLLOW_term_in_params_929);
+            	        	PushFollow(FOLLOW_term_in_params_935);
             	        	term19 = term();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
             	        	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, term19.Tree);
-            	        	// MathExpr.g:106:17: ( ',' term )*
+            	        	// MathExpr.g:107:17: ( ',' term )*
             	        	do 
             	        	{
             	        	    int alt5 = 2;
             	        	    int LA5_0 = input.LA(1);
 
-            	        	    if ( (LA5_0 == 44) )
+            	        	    if ( (LA5_0 == 45) )
             	        	    {
             	        	        alt5 = 1;
             	        	    }
@@ -891,10 +893,10 @@ public partial class MathExprParser : Parser
             	        	    switch (alt5) 
             	        		{
             	        			case 1 :
-            	        			    // MathExpr.g:106:18: ',' term
+            	        			    // MathExpr.g:107:18: ',' term
             	        			    {
-            	        			    	char_literal20=(IToken)Match(input,44,FOLLOW_44_in_params_932); if (state.failed) return retval;
-            	        			    	PushFollow(FOLLOW_term_in_params_935);
+            	        			    	char_literal20=(IToken)Match(input,45,FOLLOW_45_in_params_938); if (state.failed) return retval;
+            	        			    	PushFollow(FOLLOW_term_in_params_941);
             	        			    	term21 = term();
             	        			    	state.followingStackPointer--;
             	        			    	if (state.failed) return retval;
@@ -956,7 +958,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "func_call"
-    // MathExpr.g:108:1: func_call : IDENT ( '(' params_ ')' ) -> ^( FUNC_CALL IDENT ^( PARAMS ( params_ )? ) ) ;
+    // MathExpr.g:109:1: func_call : IDENT ( '(' params_ ')' ) -> ^( FUNC_CALL IDENT ^( PARAMS ( params_ )? ) ) ;
     public MathExprParser.func_call_return func_call() // throws RecognitionException [1]
     {   
         MathExprParser.func_call_return retval = new MathExprParser.func_call_return();
@@ -975,7 +977,7 @@ public partial class MathExprParser : Parser
         object char_literal25_tree=null;
         RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
         RewriteRuleTokenStream stream_43 = new RewriteRuleTokenStream(adaptor,"token 43");
-        RewriteRuleTokenStream stream_42 = new RewriteRuleTokenStream(adaptor,"token 42");
+        RewriteRuleTokenStream stream_44 = new RewriteRuleTokenStream(adaptor,"token 44");
         RewriteRuleSubtreeStream stream_params_ = new RewriteRuleSubtreeStream(adaptor,"rule params_");
         try 
     	{
@@ -983,25 +985,25 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:108:10: ( IDENT ( '(' params_ ')' ) -> ^( FUNC_CALL IDENT ^( PARAMS ( params_ )? ) ) )
-            // MathExpr.g:109:3: IDENT ( '(' params_ ')' )
+            // MathExpr.g:109:10: ( IDENT ( '(' params_ ')' ) -> ^( FUNC_CALL IDENT ^( PARAMS ( params_ )? ) ) )
+            // MathExpr.g:110:3: IDENT ( '(' params_ ')' )
             {
-            	IDENT22=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_func_call950); if (state.failed) return retval; 
+            	IDENT22=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_func_call956); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_IDENT.Add(IDENT22);
 
-            	// MathExpr.g:109:9: ( '(' params_ ')' )
-            	// MathExpr.g:109:11: '(' params_ ')'
+            	// MathExpr.g:110:9: ( '(' params_ ')' )
+            	// MathExpr.g:110:11: '(' params_ ')'
             	{
-            		char_literal23=(IToken)Match(input,42,FOLLOW_42_in_func_call954); if (state.failed) return retval; 
-            		if ( (state.backtracking==0) ) stream_42.Add(char_literal23);
+            		char_literal23=(IToken)Match(input,43,FOLLOW_43_in_func_call960); if (state.failed) return retval; 
+            		if ( (state.backtracking==0) ) stream_43.Add(char_literal23);
 
-            		PushFollow(FOLLOW_params__in_func_call956);
+            		PushFollow(FOLLOW_params__in_func_call962);
             		params_24 = params_();
             		state.followingStackPointer--;
             		if (state.failed) return retval;
             		if ( (state.backtracking==0) ) stream_params_.Add(params_24.Tree);
-            		char_literal25=(IToken)Match(input,43,FOLLOW_43_in_func_call958); if (state.failed) return retval; 
-            		if ( (state.backtracking==0) ) stream_43.Add(char_literal25);
+            		char_literal25=(IToken)Match(input,44,FOLLOW_44_in_func_call964); if (state.failed) return retval; 
+            		if ( (state.backtracking==0) ) stream_44.Add(char_literal25);
 
 
             	}
@@ -1020,20 +1022,20 @@ public partial class MathExprParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (object)adaptor.GetNilNode();
-            	// 109:30: -> ^( FUNC_CALL IDENT ^( PARAMS ( params_ )? ) )
+            	// 110:30: -> ^( FUNC_CALL IDENT ^( PARAMS ( params_ )? ) )
             	{
-            	    // MathExpr.g:110:5: ^( FUNC_CALL IDENT ^( PARAMS ( params_ )? ) )
+            	    // MathExpr.g:111:5: ^( FUNC_CALL IDENT ^( PARAMS ( params_ )? ) )
             	    {
             	    object root_1 = (object)adaptor.GetNilNode();
             	    root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(FUNC_CALL, "FUNC_CALL"), root_1);
 
             	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
-            	    // MathExpr.g:110:23: ^( PARAMS ( params_ )? )
+            	    // MathExpr.g:111:23: ^( PARAMS ( params_ )? )
             	    {
             	    object root_2 = (object)adaptor.GetNilNode();
             	    root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(PARAMS, "PARAMS"), root_2);
 
-            	    // MathExpr.g:110:32: ( params_ )?
+            	    // MathExpr.g:111:32: ( params_ )?
             	    if ( stream_params_.HasNext() )
             	    {
             	        adaptor.AddChild(root_2, stream_params_.NextTree());
@@ -1088,7 +1090,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "func_descr"
-    // MathExpr.g:114:1: func_descr : FUNCTION IDENT '(' ( var_list )? ')' ':' type ';' ( var )? expr -> ^( FUNCTION type IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) ) ;
+    // MathExpr.g:115:1: func_descr : FUNCTION IDENT '(' ( var_list )? ')' ':' type ';' ( var )? expr -> ^( FUNCTION type IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) ) ;
     public MathExprParser.func_descr_return func_descr() // throws RecognitionException [1]
     {   
         MathExprParser.func_descr_return retval = new MathExprParser.func_descr_return();
@@ -1120,7 +1122,7 @@ public partial class MathExprParser : Parser
         RewriteRuleTokenStream stream_FUNCTION = new RewriteRuleTokenStream(adaptor,"token FUNCTION");
         RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
         RewriteRuleTokenStream stream_43 = new RewriteRuleTokenStream(adaptor,"token 43");
-        RewriteRuleTokenStream stream_42 = new RewriteRuleTokenStream(adaptor,"token 42");
+        RewriteRuleTokenStream stream_44 = new RewriteRuleTokenStream(adaptor,"token 44");
         RewriteRuleTokenStream stream_DDD = new RewriteRuleTokenStream(adaptor,"token DDD");
         RewriteRuleTokenStream stream_TTT = new RewriteRuleTokenStream(adaptor,"token TTT");
         RewriteRuleSubtreeStream stream_var = new RewriteRuleSubtreeStream(adaptor,"rule var");
@@ -1133,19 +1135,19 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:114:11: ( FUNCTION IDENT '(' ( var_list )? ')' ':' type ';' ( var )? expr -> ^( FUNCTION type IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) ) )
-            // MathExpr.g:115:2: FUNCTION IDENT '(' ( var_list )? ')' ':' type ';' ( var )? expr
+            // MathExpr.g:115:11: ( FUNCTION IDENT '(' ( var_list )? ')' ':' type ';' ( var )? expr -> ^( FUNCTION type IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) ) )
+            // MathExpr.g:116:2: FUNCTION IDENT '(' ( var_list )? ')' ':' type ';' ( var )? expr
             {
-            	FUNCTION26=(IToken)Match(input,FUNCTION,FOLLOW_FUNCTION_in_func_descr992); if (state.failed) return retval; 
+            	FUNCTION26=(IToken)Match(input,FUNCTION,FOLLOW_FUNCTION_in_func_descr998); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_FUNCTION.Add(FUNCTION26);
 
-            	IDENT27=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_func_descr994); if (state.failed) return retval; 
+            	IDENT27=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_func_descr1000); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_IDENT.Add(IDENT27);
 
-            	char_literal28=(IToken)Match(input,42,FOLLOW_42_in_func_descr997); if (state.failed) return retval; 
-            	if ( (state.backtracking==0) ) stream_42.Add(char_literal28);
+            	char_literal28=(IToken)Match(input,43,FOLLOW_43_in_func_descr1003); if (state.failed) return retval; 
+            	if ( (state.backtracking==0) ) stream_43.Add(char_literal28);
 
-            	// MathExpr.g:115:22: ( var_list )?
+            	// MathExpr.g:116:22: ( var_list )?
             	int alt7 = 2;
             	int LA7_0 = input.LA(1);
 
@@ -1158,7 +1160,7 @@ public partial class MathExprParser : Parser
             	    case 1 :
             	        // MathExpr.g:0:0: var_list
             	        {
-            	        	PushFollow(FOLLOW_var_list_in_func_descr999);
+            	        	PushFollow(FOLLOW_var_list_in_func_descr1005);
             	        	var_list29 = var_list();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -1169,21 +1171,21 @@ public partial class MathExprParser : Parser
 
             	}
 
-            	char_literal30=(IToken)Match(input,43,FOLLOW_43_in_func_descr1002); if (state.failed) return retval; 
-            	if ( (state.backtracking==0) ) stream_43.Add(char_literal30);
+            	char_literal30=(IToken)Match(input,44,FOLLOW_44_in_func_descr1008); if (state.failed) return retval; 
+            	if ( (state.backtracking==0) ) stream_44.Add(char_literal30);
 
-            	char_literal31=(IToken)Match(input,DDD,FOLLOW_DDD_in_func_descr1004); if (state.failed) return retval; 
+            	char_literal31=(IToken)Match(input,DDD,FOLLOW_DDD_in_func_descr1010); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_DDD.Add(char_literal31);
 
-            	PushFollow(FOLLOW_type_in_func_descr1006);
+            	PushFollow(FOLLOW_type_in_func_descr1012);
             	type32 = type();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( (state.backtracking==0) ) stream_type.Add(type32.Tree);
-            	char_literal33=(IToken)Match(input,TTT,FOLLOW_TTT_in_func_descr1008); if (state.failed) return retval; 
+            	char_literal33=(IToken)Match(input,TTT,FOLLOW_TTT_in_func_descr1014); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_TTT.Add(char_literal33);
 
-            	// MathExpr.g:115:49: ( var )?
+            	// MathExpr.g:116:49: ( var )?
             	int alt8 = 2;
             	int LA8_0 = input.LA(1);
 
@@ -1194,9 +1196,9 @@ public partial class MathExprParser : Parser
             	switch (alt8) 
             	{
             	    case 1 :
-            	        // MathExpr.g:115:50: var
+            	        // MathExpr.g:116:50: var
             	        {
-            	        	PushFollow(FOLLOW_var_in_func_descr1011);
+            	        	PushFollow(FOLLOW_var_in_func_descr1017);
             	        	var34 = var();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -1207,7 +1209,7 @@ public partial class MathExprParser : Parser
 
             	}
 
-            	PushFollow(FOLLOW_expr_in_func_descr1015);
+            	PushFollow(FOLLOW_expr_in_func_descr1021);
             	expr35 = expr();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -1226,19 +1228,19 @@ public partial class MathExprParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (object)adaptor.GetNilNode();
-            	// 115:62: -> ^( FUNCTION type IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) )
+            	// 116:62: -> ^( FUNCTION type IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) )
             	{
-            	    // MathExpr.g:116:5: ^( FUNCTION type IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) )
+            	    // MathExpr.g:117:5: ^( FUNCTION type IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) )
             	    {
             	    object root_1 = (object)adaptor.GetNilNode();
             	    root_1 = (object)adaptor.BecomeRoot(stream_FUNCTION.NextNode(), root_1);
 
             	    adaptor.AddChild(root_1, stream_type.NextTree());
             	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
-            	    // MathExpr.g:116:28: ( ^( PARAMS var_list ) )?
+            	    // MathExpr.g:117:28: ( ^( PARAMS var_list ) )?
             	    if ( stream_var_list.HasNext() )
             	    {
-            	        // MathExpr.g:116:28: ^( PARAMS var_list )
+            	        // MathExpr.g:117:28: ^( PARAMS var_list )
             	        {
             	        object root_2 = (object)adaptor.GetNilNode();
             	        root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(PARAMS, "PARAMS"), root_2);
@@ -1250,10 +1252,10 @@ public partial class MathExprParser : Parser
 
             	    }
             	    stream_var_list.Reset();
-            	    // MathExpr.g:116:48: ( ^( var ) )?
+            	    // MathExpr.g:117:48: ( ^( var ) )?
             	    if ( stream_var.HasNext() )
             	    {
-            	        // MathExpr.g:116:48: ^( var )
+            	        // MathExpr.g:117:48: ^( var )
             	        {
             	        object root_2 = (object)adaptor.GetNilNode();
             	        root_2 = (object)adaptor.BecomeRoot(stream_var.NextNode(), root_2);
@@ -1263,7 +1265,7 @@ public partial class MathExprParser : Parser
 
             	    }
             	    stream_var.Reset();
-            	    // MathExpr.g:116:56: ^( expr )
+            	    // MathExpr.g:117:56: ^( expr )
             	    {
             	    object root_2 = (object)adaptor.GetNilNode();
             	    root_2 = (object)adaptor.BecomeRoot(stream_expr.NextNode(), root_2);
@@ -1315,7 +1317,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "proc_descr"
-    // MathExpr.g:119:1: proc_descr : PROCEDURE IDENT '(' ( var_list )? ')' ';' ( var )? expr -> ^( PROCEDURE IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) ) ;
+    // MathExpr.g:120:1: proc_descr : PROCEDURE IDENT '(' ( var_list )? ')' ';' ( var )? expr -> ^( PROCEDURE IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) ) ;
     public MathExprParser.proc_descr_return proc_descr() // throws RecognitionException [1]
     {   
         MathExprParser.proc_descr_return retval = new MathExprParser.proc_descr_return();
@@ -1342,7 +1344,7 @@ public partial class MathExprParser : Parser
         object char_literal41_tree=null;
         RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
         RewriteRuleTokenStream stream_43 = new RewriteRuleTokenStream(adaptor,"token 43");
-        RewriteRuleTokenStream stream_42 = new RewriteRuleTokenStream(adaptor,"token 42");
+        RewriteRuleTokenStream stream_44 = new RewriteRuleTokenStream(adaptor,"token 44");
         RewriteRuleTokenStream stream_TTT = new RewriteRuleTokenStream(adaptor,"token TTT");
         RewriteRuleTokenStream stream_PROCEDURE = new RewriteRuleTokenStream(adaptor,"token PROCEDURE");
         RewriteRuleSubtreeStream stream_var = new RewriteRuleSubtreeStream(adaptor,"rule var");
@@ -1354,19 +1356,19 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:119:11: ( PROCEDURE IDENT '(' ( var_list )? ')' ';' ( var )? expr -> ^( PROCEDURE IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) ) )
-            // MathExpr.g:120:2: PROCEDURE IDENT '(' ( var_list )? ')' ';' ( var )? expr
+            // MathExpr.g:120:11: ( PROCEDURE IDENT '(' ( var_list )? ')' ';' ( var )? expr -> ^( PROCEDURE IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) ) )
+            // MathExpr.g:121:2: PROCEDURE IDENT '(' ( var_list )? ')' ';' ( var )? expr
             {
-            	PROCEDURE36=(IToken)Match(input,PROCEDURE,FOLLOW_PROCEDURE_in_proc_descr1057); if (state.failed) return retval; 
+            	PROCEDURE36=(IToken)Match(input,PROCEDURE,FOLLOW_PROCEDURE_in_proc_descr1063); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_PROCEDURE.Add(PROCEDURE36);
 
-            	IDENT37=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_proc_descr1059); if (state.failed) return retval; 
+            	IDENT37=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_proc_descr1065); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_IDENT.Add(IDENT37);
 
-            	char_literal38=(IToken)Match(input,42,FOLLOW_42_in_proc_descr1062); if (state.failed) return retval; 
-            	if ( (state.backtracking==0) ) stream_42.Add(char_literal38);
+            	char_literal38=(IToken)Match(input,43,FOLLOW_43_in_proc_descr1068); if (state.failed) return retval; 
+            	if ( (state.backtracking==0) ) stream_43.Add(char_literal38);
 
-            	// MathExpr.g:120:23: ( var_list )?
+            	// MathExpr.g:121:23: ( var_list )?
             	int alt9 = 2;
             	int LA9_0 = input.LA(1);
 
@@ -1379,7 +1381,7 @@ public partial class MathExprParser : Parser
             	    case 1 :
             	        // MathExpr.g:0:0: var_list
             	        {
-            	        	PushFollow(FOLLOW_var_list_in_proc_descr1064);
+            	        	PushFollow(FOLLOW_var_list_in_proc_descr1070);
             	        	var_list39 = var_list();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -1390,13 +1392,13 @@ public partial class MathExprParser : Parser
 
             	}
 
-            	char_literal40=(IToken)Match(input,43,FOLLOW_43_in_proc_descr1067); if (state.failed) return retval; 
-            	if ( (state.backtracking==0) ) stream_43.Add(char_literal40);
+            	char_literal40=(IToken)Match(input,44,FOLLOW_44_in_proc_descr1073); if (state.failed) return retval; 
+            	if ( (state.backtracking==0) ) stream_44.Add(char_literal40);
 
-            	char_literal41=(IToken)Match(input,TTT,FOLLOW_TTT_in_proc_descr1069); if (state.failed) return retval; 
+            	char_literal41=(IToken)Match(input,TTT,FOLLOW_TTT_in_proc_descr1075); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_TTT.Add(char_literal41);
 
-            	// MathExpr.g:120:41: ( var )?
+            	// MathExpr.g:121:41: ( var )?
             	int alt10 = 2;
             	int LA10_0 = input.LA(1);
 
@@ -1407,9 +1409,9 @@ public partial class MathExprParser : Parser
             	switch (alt10) 
             	{
             	    case 1 :
-            	        // MathExpr.g:120:42: var
+            	        // MathExpr.g:121:42: var
             	        {
-            	        	PushFollow(FOLLOW_var_in_proc_descr1072);
+            	        	PushFollow(FOLLOW_var_in_proc_descr1078);
             	        	var42 = var();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -1420,7 +1422,7 @@ public partial class MathExprParser : Parser
 
             	}
 
-            	PushFollow(FOLLOW_expr_in_proc_descr1076);
+            	PushFollow(FOLLOW_expr_in_proc_descr1082);
             	expr43 = expr();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -1439,18 +1441,18 @@ public partial class MathExprParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (object)adaptor.GetNilNode();
-            	// 120:53: -> ^( PROCEDURE IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) )
+            	// 121:53: -> ^( PROCEDURE IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) )
             	{
-            	    // MathExpr.g:121:5: ^( PROCEDURE IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) )
+            	    // MathExpr.g:122:5: ^( PROCEDURE IDENT ( ^( PARAMS var_list ) )? ( ^( var ) )? ^( expr ) )
             	    {
             	    object root_1 = (object)adaptor.GetNilNode();
             	    root_1 = (object)adaptor.BecomeRoot(stream_PROCEDURE.NextNode(), root_1);
 
             	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
-            	    // MathExpr.g:121:25: ( ^( PARAMS var_list ) )?
+            	    // MathExpr.g:122:25: ( ^( PARAMS var_list ) )?
             	    if ( stream_var_list.HasNext() )
             	    {
-            	        // MathExpr.g:121:25: ^( PARAMS var_list )
+            	        // MathExpr.g:122:25: ^( PARAMS var_list )
             	        {
             	        object root_2 = (object)adaptor.GetNilNode();
             	        root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(PARAMS, "PARAMS"), root_2);
@@ -1462,10 +1464,10 @@ public partial class MathExprParser : Parser
 
             	    }
             	    stream_var_list.Reset();
-            	    // MathExpr.g:121:45: ( ^( var ) )?
+            	    // MathExpr.g:122:45: ( ^( var ) )?
             	    if ( stream_var.HasNext() )
             	    {
-            	        // MathExpr.g:121:45: ^( var )
+            	        // MathExpr.g:122:45: ^( var )
             	        {
             	        object root_2 = (object)adaptor.GetNilNode();
             	        root_2 = (object)adaptor.BecomeRoot(stream_var.NextNode(), root_2);
@@ -1475,7 +1477,7 @@ public partial class MathExprParser : Parser
 
             	    }
             	    stream_var.Reset();
-            	    // MathExpr.g:121:53: ^( expr )
+            	    // MathExpr.g:122:53: ^( expr )
             	    {
             	    object root_2 = (object)adaptor.GetNilNode();
             	    root_2 = (object)adaptor.BecomeRoot(stream_expr.NextNode(), root_2);
@@ -1527,7 +1529,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "var"
-    // MathExpr.g:124:1: var : 'var' var_list -> ^( VAR var_list ) ;
+    // MathExpr.g:125:1: var : 'var' var_list -> ^( VAR var_list ) ;
     public MathExprParser.var_return var() // throws RecognitionException [1]
     {   
         MathExprParser.var_return retval = new MathExprParser.var_return();
@@ -1548,13 +1550,13 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:124:4: ( 'var' var_list -> ^( VAR var_list ) )
-            // MathExpr.g:125:2: 'var' var_list
+            // MathExpr.g:125:4: ( 'var' var_list -> ^( VAR var_list ) )
+            // MathExpr.g:126:2: 'var' var_list
             {
-            	string_literal44=(IToken)Match(input,VAR,FOLLOW_VAR_in_var1116); if (state.failed) return retval; 
+            	string_literal44=(IToken)Match(input,VAR,FOLLOW_VAR_in_var1122); if (state.failed) return retval; 
             	if ( (state.backtracking==0) ) stream_VAR.Add(string_literal44);
 
-            	PushFollow(FOLLOW_var_list_in_var1118);
+            	PushFollow(FOLLOW_var_list_in_var1124);
             	var_list45 = var_list();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -1573,9 +1575,9 @@ public partial class MathExprParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (object)adaptor.GetNilNode();
-            	// 125:17: -> ^( VAR var_list )
+            	// 126:17: -> ^( VAR var_list )
             	{
-            	    // MathExpr.g:125:20: ^( VAR var_list )
+            	    // MathExpr.g:126:20: ^( VAR var_list )
             	    {
             	    object root_1 = (object)adaptor.GetNilNode();
             	    root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(VAR, "VAR"), root_1);
@@ -1626,7 +1628,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "var_list"
-    // MathExpr.g:128:1: var_list : ( exprvar ( ';' )+ ( exprvar ( ';' )+ )* | exprvar ( ';' )* ( exprvar ( ';' )* )* );
+    // MathExpr.g:129:1: var_list : ( exprvar ( ';' )+ ( exprvar ( ';' )+ )* | exprvar ( ';' )* ( exprvar ( ';' )* )* );
     public MathExprParser.var_list_return var_list() // throws RecognitionException [1]
     {   
         MathExprParser.var_list_return retval = new MathExprParser.var_list_return();
@@ -1658,22 +1660,22 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:128:9: ( exprvar ( ';' )+ ( exprvar ( ';' )+ )* | exprvar ( ';' )* ( exprvar ( ';' )* )* )
+            // MathExpr.g:129:9: ( exprvar ( ';' )+ ( exprvar ( ';' )+ )* | exprvar ( ';' )* ( exprvar ( ';' )* )* )
             int alt17 = 2;
             alt17 = dfa17.Predict(input);
             switch (alt17) 
             {
                 case 1 :
-                    // MathExpr.g:129:2: exprvar ( ';' )+ ( exprvar ( ';' )+ )*
+                    // MathExpr.g:130:2: exprvar ( ';' )+ ( exprvar ( ';' )+ )*
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_exprvar_in_var_list1137);
+                    	PushFollow(FOLLOW_exprvar_in_var_list1143);
                     	exprvar46 = exprvar();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, exprvar46.Tree);
-                    	// MathExpr.g:129:10: ( ';' )+
+                    	// MathExpr.g:130:10: ( ';' )+
                     	int cnt11 = 0;
                     	do 
                     	{
@@ -1689,9 +1691,9 @@ public partial class MathExprParser : Parser
                     	    switch (alt11) 
                     		{
                     			case 1 :
-                    			    // MathExpr.g:129:11: ';'
+                    			    // MathExpr.g:130:11: ';'
                     			    {
-                    			    	char_literal47=(IToken)Match(input,TTT,FOLLOW_TTT_in_var_list1140); if (state.failed) return retval;
+                    			    	char_literal47=(IToken)Match(input,TTT,FOLLOW_TTT_in_var_list1146); if (state.failed) return retval;
 
                     			    }
                     			    break;
@@ -1709,7 +1711,7 @@ public partial class MathExprParser : Parser
                     	loop11:
                     		;	// Stops C# compiler whining that label 'loop11' has no statements
 
-                    	// MathExpr.g:129:18: ( exprvar ( ';' )+ )*
+                    	// MathExpr.g:130:18: ( exprvar ( ';' )+ )*
                     	do 
                     	{
                     	    int alt13 = 2;
@@ -1719,7 +1721,7 @@ public partial class MathExprParser : Parser
                     	    {
                     	        int LA13_2 = input.LA(2);
 
-                    	        if ( (LA13_2 == DDD || LA13_2 == 44) )
+                    	        if ( (LA13_2 == DDD || LA13_2 == 45) )
                     	        {
                     	            alt13 = 1;
                     	        }
@@ -1731,14 +1733,14 @@ public partial class MathExprParser : Parser
                     	    switch (alt13) 
                     		{
                     			case 1 :
-                    			    // MathExpr.g:129:19: exprvar ( ';' )+
+                    			    // MathExpr.g:130:19: exprvar ( ';' )+
                     			    {
-                    			    	PushFollow(FOLLOW_exprvar_in_var_list1146);
+                    			    	PushFollow(FOLLOW_exprvar_in_var_list1152);
                     			    	exprvar48 = exprvar();
                     			    	state.followingStackPointer--;
                     			    	if (state.failed) return retval;
                     			    	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, exprvar48.Tree);
-                    			    	// MathExpr.g:129:27: ( ';' )+
+                    			    	// MathExpr.g:130:27: ( ';' )+
                     			    	int cnt12 = 0;
                     			    	do 
                     			    	{
@@ -1754,9 +1756,9 @@ public partial class MathExprParser : Parser
                     			    	    switch (alt12) 
                     			    		{
                     			    			case 1 :
-                    			    			    // MathExpr.g:129:28: ';'
+                    			    			    // MathExpr.g:130:28: ';'
                     			    			    {
-                    			    			    	char_literal49=(IToken)Match(input,TTT,FOLLOW_TTT_in_var_list1149); if (state.failed) return retval;
+                    			    			    	char_literal49=(IToken)Match(input,TTT,FOLLOW_TTT_in_var_list1155); if (state.failed) return retval;
 
                     			    			    }
                     			    			    break;
@@ -1790,16 +1792,16 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 2 :
-                    // MathExpr.g:130:4: exprvar ( ';' )* ( exprvar ( ';' )* )*
+                    // MathExpr.g:131:4: exprvar ( ';' )* ( exprvar ( ';' )* )*
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_exprvar_in_var_list1160);
+                    	PushFollow(FOLLOW_exprvar_in_var_list1166);
                     	exprvar50 = exprvar();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, exprvar50.Tree);
-                    	// MathExpr.g:130:12: ( ';' )*
+                    	// MathExpr.g:131:12: ( ';' )*
                     	do 
                     	{
                     	    int alt14 = 2;
@@ -1814,9 +1816,9 @@ public partial class MathExprParser : Parser
                     	    switch (alt14) 
                     		{
                     			case 1 :
-                    			    // MathExpr.g:130:13: ';'
+                    			    // MathExpr.g:131:13: ';'
                     			    {
-                    			    	char_literal51=(IToken)Match(input,TTT,FOLLOW_TTT_in_var_list1163); if (state.failed) return retval;
+                    			    	char_literal51=(IToken)Match(input,TTT,FOLLOW_TTT_in_var_list1169); if (state.failed) return retval;
 
                     			    }
                     			    break;
@@ -1829,7 +1831,7 @@ public partial class MathExprParser : Parser
                     	loop14:
                     		;	// Stops C# compiler whining that label 'loop14' has no statements
 
-                    	// MathExpr.g:130:20: ( exprvar ( ';' )* )*
+                    	// MathExpr.g:131:20: ( exprvar ( ';' )* )*
                     	do 
                     	{
                     	    int alt16 = 2;
@@ -1839,7 +1841,7 @@ public partial class MathExprParser : Parser
                     	    {
                     	        int LA16_2 = input.LA(2);
 
-                    	        if ( (LA16_2 == DDD || LA16_2 == 44) )
+                    	        if ( (LA16_2 == DDD || LA16_2 == 45) )
                     	        {
                     	            alt16 = 1;
                     	        }
@@ -1851,14 +1853,14 @@ public partial class MathExprParser : Parser
                     	    switch (alt16) 
                     		{
                     			case 1 :
-                    			    // MathExpr.g:130:21: exprvar ( ';' )*
+                    			    // MathExpr.g:131:21: exprvar ( ';' )*
                     			    {
-                    			    	PushFollow(FOLLOW_exprvar_in_var_list1169);
+                    			    	PushFollow(FOLLOW_exprvar_in_var_list1175);
                     			    	exprvar52 = exprvar();
                     			    	state.followingStackPointer--;
                     			    	if (state.failed) return retval;
                     			    	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, exprvar52.Tree);
-                    			    	// MathExpr.g:130:29: ( ';' )*
+                    			    	// MathExpr.g:131:29: ( ';' )*
                     			    	do 
                     			    	{
                     			    	    int alt15 = 2;
@@ -1873,9 +1875,9 @@ public partial class MathExprParser : Parser
                     			    	    switch (alt15) 
                     			    		{
                     			    			case 1 :
-                    			    			    // MathExpr.g:130:30: ';'
+                    			    			    // MathExpr.g:131:30: ';'
                     			    			    {
-                    			    			    	char_literal53=(IToken)Match(input,TTT,FOLLOW_TTT_in_var_list1172); if (state.failed) return retval;
+                    			    			    	char_literal53=(IToken)Match(input,TTT,FOLLOW_TTT_in_var_list1178); if (state.failed) return retval;
 
                     			    			    }
                     			    			    break;
@@ -1941,7 +1943,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "exprvar"
-    // MathExpr.g:133:1: exprvar : ( ident_list ( ':' type ) ( ';' )? -> ^( ':' type ident_list ) | IDENT ':' 'array' '[' INTEGER '..' INTEGER ']' 'of' type ( ';' )? -> ^( 'array' type IDENT INTEGER INTEGER ) );
+    // MathExpr.g:134:1: exprvar : ( ident_list ( ':' type ) ( ';' )? -> ^( ':' type ident_list ) | IDENT ':' 'array' '[' INTEGER '..' INTEGER ']' 'of' type ( ';' )? -> ^( 'array' type IDENT INTEGER INTEGER ) );
     public MathExprParser.exprvar_return exprvar() // throws RecognitionException [1]
     {   
         MathExprParser.exprvar_return retval = new MathExprParser.exprvar_return();
@@ -1984,11 +1986,11 @@ public partial class MathExprParser : Parser
         RewriteRuleTokenStream stream_INTEGER = new RewriteRuleTokenStream(adaptor,"token INTEGER");
         RewriteRuleTokenStream stream_48 = new RewriteRuleTokenStream(adaptor,"token 48");
         RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
-        RewriteRuleTokenStream stream_45 = new RewriteRuleTokenStream(adaptor,"token 45");
         RewriteRuleTokenStream stream_47 = new RewriteRuleTokenStream(adaptor,"token 47");
         RewriteRuleTokenStream stream_DDD = new RewriteRuleTokenStream(adaptor,"token DDD");
         RewriteRuleTokenStream stream_46 = new RewriteRuleTokenStream(adaptor,"token 46");
         RewriteRuleTokenStream stream_TTT = new RewriteRuleTokenStream(adaptor,"token TTT");
+        RewriteRuleTokenStream stream_50 = new RewriteRuleTokenStream(adaptor,"token 50");
         RewriteRuleSubtreeStream stream_ident_list = new RewriteRuleSubtreeStream(adaptor,"rule ident_list");
         RewriteRuleSubtreeStream stream_type = new RewriteRuleSubtreeStream(adaptor,"rule type");
         try 
@@ -1997,7 +1999,7 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:133:8: ( ident_list ( ':' type ) ( ';' )? -> ^( ':' type ident_list ) | IDENT ':' 'array' '[' INTEGER '..' INTEGER ']' 'of' type ( ';' )? -> ^( 'array' type IDENT INTEGER INTEGER ) )
+            // MathExpr.g:134:8: ( ident_list ( ':' type ) ( ';' )? -> ^( ':' type ident_list ) | IDENT ':' 'array' '[' INTEGER '..' INTEGER ']' 'of' type ( ';' )? -> ^( 'array' type IDENT INTEGER INTEGER ) )
             int alt20 = 2;
             int LA20_0 = input.LA(1);
 
@@ -2009,11 +2011,11 @@ public partial class MathExprParser : Parser
                 {
                     int LA20_2 = input.LA(3);
 
-                    if ( (LA20_2 == 45) )
+                    if ( (LA20_2 == 46) )
                     {
                         alt20 = 2;
                     }
-                    else if ( ((LA20_2 >= 50 && LA20_2 <= 52)) )
+                    else if ( ((LA20_2 >= 51 && LA20_2 <= 53)) )
                     {
                         alt20 = 1;
                     }
@@ -2026,7 +2028,7 @@ public partial class MathExprParser : Parser
                         throw nvae_d20s2;
                     }
                 }
-                else if ( (LA20_1 == 44) )
+                else if ( (LA20_1 == 45) )
                 {
                     alt20 = 1;
                 }
@@ -2050,20 +2052,20 @@ public partial class MathExprParser : Parser
             switch (alt20) 
             {
                 case 1 :
-                    // MathExpr.g:134:2: ident_list ( ':' type ) ( ';' )?
+                    // MathExpr.g:135:2: ident_list ( ':' type ) ( ';' )?
                     {
-                    	PushFollow(FOLLOW_ident_list_in_exprvar1187);
+                    	PushFollow(FOLLOW_ident_list_in_exprvar1193);
                     	ident_list54 = ident_list();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( (state.backtracking==0) ) stream_ident_list.Add(ident_list54.Tree);
-                    	// MathExpr.g:134:13: ( ':' type )
-                    	// MathExpr.g:134:14: ':' type
+                    	// MathExpr.g:135:13: ( ':' type )
+                    	// MathExpr.g:135:14: ':' type
                     	{
-                    		char_literal55=(IToken)Match(input,DDD,FOLLOW_DDD_in_exprvar1190); if (state.failed) return retval; 
+                    		char_literal55=(IToken)Match(input,DDD,FOLLOW_DDD_in_exprvar1196); if (state.failed) return retval; 
                     		if ( (state.backtracking==0) ) stream_DDD.Add(char_literal55);
 
-                    		PushFollow(FOLLOW_type_in_exprvar1192);
+                    		PushFollow(FOLLOW_type_in_exprvar1198);
                     		type56 = type();
                     		state.followingStackPointer--;
                     		if (state.failed) return retval;
@@ -2071,7 +2073,7 @@ public partial class MathExprParser : Parser
 
                     	}
 
-                    	// MathExpr.g:134:24: ( ';' )?
+                    	// MathExpr.g:135:24: ( ';' )?
                     	int alt18 = 2;
                     	int LA18_0 = input.LA(1);
 
@@ -2087,9 +2089,9 @@ public partial class MathExprParser : Parser
                     	switch (alt18) 
                     	{
                     	    case 1 :
-                    	        // MathExpr.g:134:25: ';'
+                    	        // MathExpr.g:135:25: ';'
                     	        {
-                    	        	char_literal57=(IToken)Match(input,TTT,FOLLOW_TTT_in_exprvar1196); if (state.failed) return retval; 
+                    	        	char_literal57=(IToken)Match(input,TTT,FOLLOW_TTT_in_exprvar1202); if (state.failed) return retval; 
                     	        	if ( (state.backtracking==0) ) stream_TTT.Add(char_literal57);
 
 
@@ -2112,9 +2114,9 @@ public partial class MathExprParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (object)adaptor.GetNilNode();
-                    	// 134:31: -> ^( ':' type ident_list )
+                    	// 135:31: -> ^( ':' type ident_list )
                     	{
-                    	    // MathExpr.g:134:34: ^( ':' type ident_list )
+                    	    // MathExpr.g:135:34: ^( ':' type ident_list )
                     	    {
                     	    object root_1 = (object)adaptor.GetNilNode();
                     	    root_1 = (object)adaptor.BecomeRoot(stream_DDD.NextNode(), root_1);
@@ -2131,41 +2133,41 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 2 :
-                    // MathExpr.g:135:3: IDENT ':' 'array' '[' INTEGER '..' INTEGER ']' 'of' type ( ';' )?
+                    // MathExpr.g:136:3: IDENT ':' 'array' '[' INTEGER '..' INTEGER ']' 'of' type ( ';' )?
                     {
-                    	IDENT58=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_exprvar1212); if (state.failed) return retval; 
+                    	IDENT58=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_exprvar1218); if (state.failed) return retval; 
                     	if ( (state.backtracking==0) ) stream_IDENT.Add(IDENT58);
 
-                    	char_literal59=(IToken)Match(input,DDD,FOLLOW_DDD_in_exprvar1214); if (state.failed) return retval; 
+                    	char_literal59=(IToken)Match(input,DDD,FOLLOW_DDD_in_exprvar1220); if (state.failed) return retval; 
                     	if ( (state.backtracking==0) ) stream_DDD.Add(char_literal59);
 
-                    	string_literal60=(IToken)Match(input,45,FOLLOW_45_in_exprvar1216); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_45.Add(string_literal60);
+                    	string_literal60=(IToken)Match(input,46,FOLLOW_46_in_exprvar1222); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_46.Add(string_literal60);
 
-                    	char_literal61=(IToken)Match(input,46,FOLLOW_46_in_exprvar1218); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_46.Add(char_literal61);
+                    	char_literal61=(IToken)Match(input,47,FOLLOW_47_in_exprvar1224); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_47.Add(char_literal61);
 
-                    	INTEGER62=(IToken)Match(input,INTEGER,FOLLOW_INTEGER_in_exprvar1220); if (state.failed) return retval; 
+                    	INTEGER62=(IToken)Match(input,INTEGER,FOLLOW_INTEGER_in_exprvar1226); if (state.failed) return retval; 
                     	if ( (state.backtracking==0) ) stream_INTEGER.Add(INTEGER62);
 
-                    	string_literal63=(IToken)Match(input,47,FOLLOW_47_in_exprvar1222); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_47.Add(string_literal63);
+                    	string_literal63=(IToken)Match(input,48,FOLLOW_48_in_exprvar1228); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_48.Add(string_literal63);
 
-                    	INTEGER64=(IToken)Match(input,INTEGER,FOLLOW_INTEGER_in_exprvar1224); if (state.failed) return retval; 
+                    	INTEGER64=(IToken)Match(input,INTEGER,FOLLOW_INTEGER_in_exprvar1230); if (state.failed) return retval; 
                     	if ( (state.backtracking==0) ) stream_INTEGER.Add(INTEGER64);
 
-                    	char_literal65=(IToken)Match(input,48,FOLLOW_48_in_exprvar1227); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_48.Add(char_literal65);
+                    	char_literal65=(IToken)Match(input,49,FOLLOW_49_in_exprvar1233); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_49.Add(char_literal65);
 
-                    	string_literal66=(IToken)Match(input,49,FOLLOW_49_in_exprvar1229); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_49.Add(string_literal66);
+                    	string_literal66=(IToken)Match(input,50,FOLLOW_50_in_exprvar1235); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_50.Add(string_literal66);
 
-                    	PushFollow(FOLLOW_type_in_exprvar1231);
+                    	PushFollow(FOLLOW_type_in_exprvar1237);
                     	type67 = type();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( (state.backtracking==0) ) stream_type.Add(type67.Tree);
-                    	// MathExpr.g:135:61: ( ';' )?
+                    	// MathExpr.g:136:61: ( ';' )?
                     	int alt19 = 2;
                     	int LA19_0 = input.LA(1);
 
@@ -2181,9 +2183,9 @@ public partial class MathExprParser : Parser
                     	switch (alt19) 
                     	{
                     	    case 1 :
-                    	        // MathExpr.g:135:62: ';'
+                    	        // MathExpr.g:136:62: ';'
                     	        {
-                    	        	char_literal68=(IToken)Match(input,TTT,FOLLOW_TTT_in_exprvar1234); if (state.failed) return retval; 
+                    	        	char_literal68=(IToken)Match(input,TTT,FOLLOW_TTT_in_exprvar1240); if (state.failed) return retval; 
                     	        	if ( (state.backtracking==0) ) stream_TTT.Add(char_literal68);
 
 
@@ -2195,7 +2197,7 @@ public partial class MathExprParser : Parser
 
 
                     	// AST REWRITE
-                    	// elements:          45, INTEGER, INTEGER, IDENT, type
+                    	// elements:          46, INTEGER, INTEGER, IDENT, type
                     	// token labels:      
                     	// rule labels:       retval
                     	// token list labels: 
@@ -2206,12 +2208,12 @@ public partial class MathExprParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (object)adaptor.GetNilNode();
-                    	// 135:68: -> ^( 'array' type IDENT INTEGER INTEGER )
+                    	// 136:68: -> ^( 'array' type IDENT INTEGER INTEGER )
                     	{
-                    	    // MathExpr.g:135:71: ^( 'array' type IDENT INTEGER INTEGER )
+                    	    // MathExpr.g:136:71: ^( 'array' type IDENT INTEGER INTEGER )
                     	    {
                     	    object root_1 = (object)adaptor.GetNilNode();
-                    	    root_1 = (object)adaptor.BecomeRoot(stream_45.NextNode(), root_1);
+                    	    root_1 = (object)adaptor.BecomeRoot(stream_46.NextNode(), root_1);
 
                     	    adaptor.AddChild(root_1, stream_type.NextTree());
                     	    adaptor.AddChild(root_1, stream_IDENT.NextNode());
@@ -2264,7 +2266,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "type"
-    // MathExpr.g:139:1: type : ( 'real' -> REAL | 'integer' -> INTEGER | 'string' -> STRING );
+    // MathExpr.g:140:1: type : ( 'real' -> REAL | 'integer' -> INTEGER | 'string' -> STRING );
     public MathExprParser.type_return type() // throws RecognitionException [1]
     {   
         MathExprParser.type_return retval = new MathExprParser.type_return();
@@ -2281,7 +2283,7 @@ public partial class MathExprParser : Parser
         object string_literal71_tree=null;
         RewriteRuleTokenStream stream_51 = new RewriteRuleTokenStream(adaptor,"token 51");
         RewriteRuleTokenStream stream_52 = new RewriteRuleTokenStream(adaptor,"token 52");
-        RewriteRuleTokenStream stream_50 = new RewriteRuleTokenStream(adaptor,"token 50");
+        RewriteRuleTokenStream stream_53 = new RewriteRuleTokenStream(adaptor,"token 53");
 
         try 
     	{
@@ -2289,21 +2291,21 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:139:5: ( 'real' -> REAL | 'integer' -> INTEGER | 'string' -> STRING )
+            // MathExpr.g:140:5: ( 'real' -> REAL | 'integer' -> INTEGER | 'string' -> STRING )
             int alt21 = 3;
             switch ( input.LA(1) ) 
             {
-            case 50:
+            case 51:
             	{
                 alt21 = 1;
                 }
                 break;
-            case 51:
+            case 52:
             	{
                 alt21 = 2;
                 }
                 break;
-            case 52:
+            case 53:
             	{
                 alt21 = 3;
                 }
@@ -2319,10 +2321,10 @@ public partial class MathExprParser : Parser
             switch (alt21) 
             {
                 case 1 :
-                    // MathExpr.g:140:2: 'real'
+                    // MathExpr.g:141:2: 'real'
                     {
-                    	string_literal69=(IToken)Match(input,50,FOLLOW_50_in_type1261); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_50.Add(string_literal69);
+                    	string_literal69=(IToken)Match(input,51,FOLLOW_51_in_type1267); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_51.Add(string_literal69);
 
 
 
@@ -2338,7 +2340,7 @@ public partial class MathExprParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (object)adaptor.GetNilNode();
-                    	// 140:9: -> REAL
+                    	// 141:9: -> REAL
                     	{
                     	    adaptor.AddChild(root_0, (object)adaptor.Create(REAL, "REAL"));
 
@@ -2348,10 +2350,10 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 2 :
-                    // MathExpr.g:141:4: 'integer'
+                    // MathExpr.g:142:4: 'integer'
                     {
-                    	string_literal70=(IToken)Match(input,51,FOLLOW_51_in_type1270); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_51.Add(string_literal70);
+                    	string_literal70=(IToken)Match(input,52,FOLLOW_52_in_type1276); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_52.Add(string_literal70);
 
 
 
@@ -2367,7 +2369,7 @@ public partial class MathExprParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (object)adaptor.GetNilNode();
-                    	// 141:14: -> INTEGER
+                    	// 142:14: -> INTEGER
                     	{
                     	    adaptor.AddChild(root_0, (object)adaptor.Create(INTEGER, "INTEGER"));
 
@@ -2377,10 +2379,10 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 3 :
-                    // MathExpr.g:142:4: 'string'
+                    // MathExpr.g:143:4: 'string'
                     {
-                    	string_literal71=(IToken)Match(input,52,FOLLOW_52_in_type1279); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_52.Add(string_literal71);
+                    	string_literal71=(IToken)Match(input,53,FOLLOW_53_in_type1285); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_53.Add(string_literal71);
 
 
 
@@ -2396,7 +2398,7 @@ public partial class MathExprParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (object)adaptor.GetNilNode();
-                    	// 142:13: -> STRING
+                    	// 143:13: -> STRING
                     	{
                     	    adaptor.AddChild(root_0, (object)adaptor.Create(STRING, "STRING"));
 
@@ -2443,7 +2445,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "ident_list"
-    // MathExpr.g:145:1: ident_list : IDENT ( ',' IDENT )* ;
+    // MathExpr.g:146:1: ident_list : IDENT ( ',' IDENT )* ;
     public MathExprParser.ident_list_return ident_list() // throws RecognitionException [1]
     {   
         MathExprParser.ident_list_return retval = new MathExprParser.ident_list_return();
@@ -2465,23 +2467,23 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:145:11: ( IDENT ( ',' IDENT )* )
-            // MathExpr.g:146:2: IDENT ( ',' IDENT )*
+            // MathExpr.g:146:11: ( IDENT ( ',' IDENT )* )
+            // MathExpr.g:147:2: IDENT ( ',' IDENT )*
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	IDENT72=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_ident_list1293); if (state.failed) return retval;
+            	IDENT72=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_ident_list1299); if (state.failed) return retval;
             	if ( state.backtracking == 0 )
             	{IDENT72_tree = (object)adaptor.Create(IDENT72);
             		adaptor.AddChild(root_0, IDENT72_tree);
             	}
-            	// MathExpr.g:146:8: ( ',' IDENT )*
+            	// MathExpr.g:147:8: ( ',' IDENT )*
             	do 
             	{
             	    int alt22 = 2;
             	    int LA22_0 = input.LA(1);
 
-            	    if ( (LA22_0 == 44) )
+            	    if ( (LA22_0 == 45) )
             	    {
             	        alt22 = 1;
             	    }
@@ -2490,10 +2492,10 @@ public partial class MathExprParser : Parser
             	    switch (alt22) 
             		{
             			case 1 :
-            			    // MathExpr.g:146:9: ',' IDENT
+            			    // MathExpr.g:147:9: ',' IDENT
             			    {
-            			    	char_literal73=(IToken)Match(input,44,FOLLOW_44_in_ident_list1296); if (state.failed) return retval;
-            			    	IDENT74=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_ident_list1299); if (state.failed) return retval;
+            			    	char_literal73=(IToken)Match(input,45,FOLLOW_45_in_ident_list1302); if (state.failed) return retval;
+            			    	IDENT74=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_ident_list1305); if (state.failed) return retval;
             			    	if ( state.backtracking == 0 )
             			    	{IDENT74_tree = (object)adaptor.Create(IDENT74);
             			    		adaptor.AddChild(root_0, IDENT74_tree);
@@ -2549,7 +2551,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "expr"
-    // MathExpr.g:149:1: expr : ( IDENT ASSIGN term | IDENT -> ^( FUNC_CALL IDENT PARAMS ) | 'begin' expr_list 'end' -> ^( BLOCK expr_list ) | FOR IDENT ASSIGN term TO term DO expr | WHILE logic DO expr | REPEAT expr_list UNTIL logic | IF logic THEN expr ( ELSE expr )? | INC '(' IDENT ')' | DEC '(' IDENT ')' | func_call | func_descr | proc_descr );
+    // MathExpr.g:150:1: expr : ( IDENT ASSIGN term | IDENT -> ^( FUNC_CALL IDENT PARAMS ) | 'begin' expr_list 'end' -> ^( BLOCK expr_list ) | FOR IDENT ASSIGN term TO term DO expr | WHILE logic DO expr | REPEAT expr_list UNTIL logic | IF logic THEN expr ( ELSE expr )? | INC '(' IDENT ')' | DEC '(' IDENT ')' | func_call | func_descr | proc_descr );
     public MathExprParser.expr_return expr() // throws RecognitionException [1]
     {   
         MathExprParser.expr_return retval = new MathExprParser.expr_return();
@@ -2639,7 +2641,7 @@ public partial class MathExprParser : Parser
         object IDENT110_tree=null;
         object char_literal111_tree=null;
         RewriteRuleTokenStream stream_IDENT = new RewriteRuleTokenStream(adaptor,"token IDENT");
-        RewriteRuleTokenStream stream_53 = new RewriteRuleTokenStream(adaptor,"token 53");
+        RewriteRuleTokenStream stream_55 = new RewriteRuleTokenStream(adaptor,"token 55");
         RewriteRuleTokenStream stream_54 = new RewriteRuleTokenStream(adaptor,"token 54");
         RewriteRuleSubtreeStream stream_expr_list = new RewriteRuleSubtreeStream(adaptor,"rule expr_list");
         try 
@@ -2648,27 +2650,27 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:149:5: ( IDENT ASSIGN term | IDENT -> ^( FUNC_CALL IDENT PARAMS ) | 'begin' expr_list 'end' -> ^( BLOCK expr_list ) | FOR IDENT ASSIGN term TO term DO expr | WHILE logic DO expr | REPEAT expr_list UNTIL logic | IF logic THEN expr ( ELSE expr )? | INC '(' IDENT ')' | DEC '(' IDENT ')' | func_call | func_descr | proc_descr )
+            // MathExpr.g:150:5: ( IDENT ASSIGN term | IDENT -> ^( FUNC_CALL IDENT PARAMS ) | 'begin' expr_list 'end' -> ^( BLOCK expr_list ) | FOR IDENT ASSIGN term TO term DO expr | WHILE logic DO expr | REPEAT expr_list UNTIL logic | IF logic THEN expr ( ELSE expr )? | INC '(' IDENT ')' | DEC '(' IDENT ')' | func_call | func_descr | proc_descr )
             int alt24 = 12;
             alt24 = dfa24.Predict(input);
             switch (alt24) 
             {
                 case 1 :
-                    // MathExpr.g:150:3: IDENT ASSIGN term
+                    // MathExpr.g:151:3: IDENT ASSIGN term
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	IDENT75=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1312); if (state.failed) return retval;
+                    	IDENT75=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1318); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{IDENT75_tree = (object)adaptor.Create(IDENT75);
                     		adaptor.AddChild(root_0, IDENT75_tree);
                     	}
-                    	ASSIGN76=(IToken)Match(input,ASSIGN,FOLLOW_ASSIGN_in_expr1314); if (state.failed) return retval;
+                    	ASSIGN76=(IToken)Match(input,ASSIGN,FOLLOW_ASSIGN_in_expr1320); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{ASSIGN76_tree = (object)adaptor.Create(ASSIGN76);
                     		root_0 = (object)adaptor.BecomeRoot(ASSIGN76_tree, root_0);
                     	}
-                    	PushFollow(FOLLOW_term_in_expr1317);
+                    	PushFollow(FOLLOW_term_in_expr1323);
                     	term77 = term();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -2677,9 +2679,9 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 2 :
-                    // MathExpr.g:151:4: IDENT
+                    // MathExpr.g:152:4: IDENT
                     {
-                    	IDENT78=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1322); if (state.failed) return retval; 
+                    	IDENT78=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1328); if (state.failed) return retval; 
                     	if ( (state.backtracking==0) ) stream_IDENT.Add(IDENT78);
 
 
@@ -2696,9 +2698,9 @@ public partial class MathExprParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (object)adaptor.GetNilNode();
-                    	// 151:10: -> ^( FUNC_CALL IDENT PARAMS )
+                    	// 152:10: -> ^( FUNC_CALL IDENT PARAMS )
                     	{
-                    	    // MathExpr.g:151:13: ^( FUNC_CALL IDENT PARAMS )
+                    	    // MathExpr.g:152:13: ^( FUNC_CALL IDENT PARAMS )
                     	    {
                     	    object root_1 = (object)adaptor.GetNilNode();
                     	    root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(FUNC_CALL, "FUNC_CALL"), root_1);
@@ -2715,18 +2717,18 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 3 :
-                    // MathExpr.g:152:4: 'begin' expr_list 'end'
+                    // MathExpr.g:153:4: 'begin' expr_list 'end'
                     {
-                    	string_literal79=(IToken)Match(input,53,FOLLOW_53_in_expr1337); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_53.Add(string_literal79);
+                    	string_literal79=(IToken)Match(input,54,FOLLOW_54_in_expr1343); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_54.Add(string_literal79);
 
-                    	PushFollow(FOLLOW_expr_list_in_expr1339);
+                    	PushFollow(FOLLOW_expr_list_in_expr1345);
                     	expr_list80 = expr_list();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( (state.backtracking==0) ) stream_expr_list.Add(expr_list80.Tree);
-                    	string_literal81=(IToken)Match(input,54,FOLLOW_54_in_expr1341); if (state.failed) return retval; 
-                    	if ( (state.backtracking==0) ) stream_54.Add(string_literal81);
+                    	string_literal81=(IToken)Match(input,55,FOLLOW_55_in_expr1347); if (state.failed) return retval; 
+                    	if ( (state.backtracking==0) ) stream_55.Add(string_literal81);
 
 
 
@@ -2742,9 +2744,9 @@ public partial class MathExprParser : Parser
                     	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
                     	root_0 = (object)adaptor.GetNilNode();
-                    	// 152:28: -> ^( BLOCK expr_list )
+                    	// 153:28: -> ^( BLOCK expr_list )
                     	{
-                    	    // MathExpr.g:152:31: ^( BLOCK expr_list )
+                    	    // MathExpr.g:153:31: ^( BLOCK expr_list )
                     	    {
                     	    object root_1 = (object)adaptor.GetNilNode();
                     	    root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(BLOCK, "BLOCK"), root_1);
@@ -2760,34 +2762,34 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 4 :
-                    // MathExpr.g:153:4: FOR IDENT ASSIGN term TO term DO expr
+                    // MathExpr.g:154:4: FOR IDENT ASSIGN term TO term DO expr
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	FOR82=(IToken)Match(input,FOR,FOLLOW_FOR_in_expr1354); if (state.failed) return retval;
+                    	FOR82=(IToken)Match(input,FOR,FOLLOW_FOR_in_expr1360); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{FOR82_tree = (object)adaptor.Create(FOR82);
                     		root_0 = (object)adaptor.BecomeRoot(FOR82_tree, root_0);
                     	}
-                    	IDENT83=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1357); if (state.failed) return retval;
+                    	IDENT83=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1363); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{IDENT83_tree = (object)adaptor.Create(IDENT83);
                     		adaptor.AddChild(root_0, IDENT83_tree);
                     	}
-                    	ASSIGN84=(IToken)Match(input,ASSIGN,FOLLOW_ASSIGN_in_expr1359); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_term_in_expr1362);
+                    	ASSIGN84=(IToken)Match(input,ASSIGN,FOLLOW_ASSIGN_in_expr1365); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_term_in_expr1368);
                     	term85 = term();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, term85.Tree);
-                    	TO86=(IToken)Match(input,TO,FOLLOW_TO_in_expr1364); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_term_in_expr1367);
+                    	TO86=(IToken)Match(input,TO,FOLLOW_TO_in_expr1370); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_term_in_expr1373);
                     	term87 = term();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, term87.Tree);
-                    	DO88=(IToken)Match(input,DO,FOLLOW_DO_in_expr1369); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_expr_in_expr1372);
+                    	DO88=(IToken)Match(input,DO,FOLLOW_DO_in_expr1375); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_expr_in_expr1378);
                     	expr89 = expr();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -2796,22 +2798,22 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 5 :
-                    // MathExpr.g:154:4: WHILE logic DO expr
+                    // MathExpr.g:155:4: WHILE logic DO expr
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	WHILE90=(IToken)Match(input,WHILE,FOLLOW_WHILE_in_expr1377); if (state.failed) return retval;
+                    	WHILE90=(IToken)Match(input,WHILE,FOLLOW_WHILE_in_expr1383); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{WHILE90_tree = (object)adaptor.Create(WHILE90);
                     		root_0 = (object)adaptor.BecomeRoot(WHILE90_tree, root_0);
                     	}
-                    	PushFollow(FOLLOW_logic_in_expr1380);
+                    	PushFollow(FOLLOW_logic_in_expr1386);
                     	logic91 = logic();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, logic91.Tree);
-                    	DO92=(IToken)Match(input,DO,FOLLOW_DO_in_expr1382); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_expr_in_expr1385);
+                    	DO92=(IToken)Match(input,DO,FOLLOW_DO_in_expr1388); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_expr_in_expr1391);
                     	expr93 = expr();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -2820,22 +2822,22 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 6 :
-                    // MathExpr.g:155:4: REPEAT expr_list UNTIL logic
+                    // MathExpr.g:156:4: REPEAT expr_list UNTIL logic
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	REPEAT94=(IToken)Match(input,REPEAT,FOLLOW_REPEAT_in_expr1390); if (state.failed) return retval;
+                    	REPEAT94=(IToken)Match(input,REPEAT,FOLLOW_REPEAT_in_expr1396); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{REPEAT94_tree = (object)adaptor.Create(REPEAT94);
                     		root_0 = (object)adaptor.BecomeRoot(REPEAT94_tree, root_0);
                     	}
-                    	PushFollow(FOLLOW_expr_list_in_expr1393);
+                    	PushFollow(FOLLOW_expr_list_in_expr1399);
                     	expr_list95 = expr_list();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expr_list95.Tree);
-                    	UNTIL96=(IToken)Match(input,UNTIL,FOLLOW_UNTIL_in_expr1395); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_logic_in_expr1398);
+                    	UNTIL96=(IToken)Match(input,UNTIL,FOLLOW_UNTIL_in_expr1401); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_logic_in_expr1404);
                     	logic97 = logic();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -2844,27 +2846,27 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 7 :
-                    // MathExpr.g:156:4: IF logic THEN expr ( ELSE expr )?
+                    // MathExpr.g:157:4: IF logic THEN expr ( ELSE expr )?
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	IF98=(IToken)Match(input,IF,FOLLOW_IF_in_expr1405); if (state.failed) return retval;
+                    	IF98=(IToken)Match(input,IF,FOLLOW_IF_in_expr1411); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{IF98_tree = (object)adaptor.Create(IF98);
                     		root_0 = (object)adaptor.BecomeRoot(IF98_tree, root_0);
                     	}
-                    	PushFollow(FOLLOW_logic_in_expr1408);
+                    	PushFollow(FOLLOW_logic_in_expr1414);
                     	logic99 = logic();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, logic99.Tree);
-                    	THEN100=(IToken)Match(input,THEN,FOLLOW_THEN_in_expr1410); if (state.failed) return retval;
-                    	PushFollow(FOLLOW_expr_in_expr1413);
+                    	THEN100=(IToken)Match(input,THEN,FOLLOW_THEN_in_expr1416); if (state.failed) return retval;
+                    	PushFollow(FOLLOW_expr_in_expr1419);
                     	expr101 = expr();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
                     	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expr101.Tree);
-                    	// MathExpr.g:156:25: ( ELSE expr )?
+                    	// MathExpr.g:157:25: ( ELSE expr )?
                     	int alt23 = 2;
                     	int LA23_0 = input.LA(1);
 
@@ -2880,10 +2882,10 @@ public partial class MathExprParser : Parser
                     	switch (alt23) 
                     	{
                     	    case 1 :
-                    	        // MathExpr.g:156:27: ELSE expr
+                    	        // MathExpr.g:157:27: ELSE expr
                     	        {
-                    	        	ELSE102=(IToken)Match(input,ELSE,FOLLOW_ELSE_in_expr1417); if (state.failed) return retval;
-                    	        	PushFollow(FOLLOW_expr_in_expr1420);
+                    	        	ELSE102=(IToken)Match(input,ELSE,FOLLOW_ELSE_in_expr1423); if (state.failed) return retval;
+                    	        	PushFollow(FOLLOW_expr_in_expr1426);
                     	        	expr103 = expr();
                     	        	state.followingStackPointer--;
                     	        	if (state.failed) return retval;
@@ -2898,51 +2900,51 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 8 :
-                    // MathExpr.g:157:4: INC '(' IDENT ')'
+                    // MathExpr.g:158:4: INC '(' IDENT ')'
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	INC104=(IToken)Match(input,INC,FOLLOW_INC_in_expr1427); if (state.failed) return retval;
+                    	INC104=(IToken)Match(input,INC,FOLLOW_INC_in_expr1433); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{INC104_tree = (object)adaptor.Create(INC104);
                     		root_0 = (object)adaptor.BecomeRoot(INC104_tree, root_0);
                     	}
-                    	char_literal105=(IToken)Match(input,42,FOLLOW_42_in_expr1430); if (state.failed) return retval;
-                    	IDENT106=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1433); if (state.failed) return retval;
+                    	char_literal105=(IToken)Match(input,43,FOLLOW_43_in_expr1436); if (state.failed) return retval;
+                    	IDENT106=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1439); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{IDENT106_tree = (object)adaptor.Create(IDENT106);
                     		adaptor.AddChild(root_0, IDENT106_tree);
                     	}
-                    	char_literal107=(IToken)Match(input,43,FOLLOW_43_in_expr1435); if (state.failed) return retval;
+                    	char_literal107=(IToken)Match(input,44,FOLLOW_44_in_expr1441); if (state.failed) return retval;
 
                     }
                     break;
                 case 9 :
-                    // MathExpr.g:158:4: DEC '(' IDENT ')'
+                    // MathExpr.g:159:4: DEC '(' IDENT ')'
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	DEC108=(IToken)Match(input,DEC,FOLLOW_DEC_in_expr1441); if (state.failed) return retval;
+                    	DEC108=(IToken)Match(input,DEC,FOLLOW_DEC_in_expr1447); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{DEC108_tree = (object)adaptor.Create(DEC108);
                     		root_0 = (object)adaptor.BecomeRoot(DEC108_tree, root_0);
                     	}
-                    	char_literal109=(IToken)Match(input,42,FOLLOW_42_in_expr1444); if (state.failed) return retval;
-                    	IDENT110=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1447); if (state.failed) return retval;
+                    	char_literal109=(IToken)Match(input,43,FOLLOW_43_in_expr1450); if (state.failed) return retval;
+                    	IDENT110=(IToken)Match(input,IDENT,FOLLOW_IDENT_in_expr1453); if (state.failed) return retval;
                     	if ( state.backtracking == 0 )
                     	{IDENT110_tree = (object)adaptor.Create(IDENT110);
                     		adaptor.AddChild(root_0, IDENT110_tree);
                     	}
-                    	char_literal111=(IToken)Match(input,43,FOLLOW_43_in_expr1449); if (state.failed) return retval;
+                    	char_literal111=(IToken)Match(input,44,FOLLOW_44_in_expr1455); if (state.failed) return retval;
 
                     }
                     break;
                 case 10 :
-                    // MathExpr.g:159:4: func_call
+                    // MathExpr.g:160:4: func_call
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_func_call_in_expr1455);
+                    	PushFollow(FOLLOW_func_call_in_expr1461);
                     	func_call112 = func_call();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -2951,11 +2953,11 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 11 :
-                    // MathExpr.g:160:4: func_descr
+                    // MathExpr.g:161:4: func_descr
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_func_descr_in_expr1461);
+                    	PushFollow(FOLLOW_func_descr_in_expr1467);
                     	func_descr113 = func_descr();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -2964,11 +2966,11 @@ public partial class MathExprParser : Parser
                     }
                     break;
                 case 12 :
-                    // MathExpr.g:161:4: proc_descr
+                    // MathExpr.g:162:4: proc_descr
                     {
                     	root_0 = (object)adaptor.GetNilNode();
 
-                    	PushFollow(FOLLOW_proc_descr_in_expr1466);
+                    	PushFollow(FOLLOW_proc_descr_in_expr1472);
                     	proc_descr114 = proc_descr();
                     	state.followingStackPointer--;
                     	if (state.failed) return retval;
@@ -3014,7 +3016,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "expr_list"
-    // MathExpr.g:164:1: expr_list : ( ';' )* ( var )? expr ( ( ';' )+ expr )* ( ';' )* ;
+    // MathExpr.g:165:1: expr_list : ( ';' )* ( var )? expr ( ( ';' )+ expr )* ( ';' )* ;
     public MathExprParser.expr_list_return expr_list() // throws RecognitionException [1]
     {   
         MathExprParser.expr_list_return retval = new MathExprParser.expr_list_return();
@@ -3042,12 +3044,12 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:164:10: ( ( ';' )* ( var )? expr ( ( ';' )+ expr )* ( ';' )* )
-            // MathExpr.g:165:3: ( ';' )* ( var )? expr ( ( ';' )+ expr )* ( ';' )*
+            // MathExpr.g:165:10: ( ( ';' )* ( var )? expr ( ( ';' )+ expr )* ( ';' )* )
+            // MathExpr.g:166:3: ( ';' )* ( var )? expr ( ( ';' )+ expr )* ( ';' )*
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	// MathExpr.g:165:3: ( ';' )*
+            	// MathExpr.g:166:3: ( ';' )*
             	do 
             	{
             	    int alt25 = 2;
@@ -3062,9 +3064,9 @@ public partial class MathExprParser : Parser
             	    switch (alt25) 
             		{
             			case 1 :
-            			    // MathExpr.g:165:4: ';'
+            			    // MathExpr.g:166:4: ';'
             			    {
-            			    	char_literal115=(IToken)Match(input,TTT,FOLLOW_TTT_in_expr_list1478); if (state.failed) return retval;
+            			    	char_literal115=(IToken)Match(input,TTT,FOLLOW_TTT_in_expr_list1484); if (state.failed) return retval;
 
             			    }
             			    break;
@@ -3077,7 +3079,7 @@ public partial class MathExprParser : Parser
             	loop25:
             		;	// Stops C# compiler whining that label 'loop25' has no statements
 
-            	// MathExpr.g:165:11: ( var )?
+            	// MathExpr.g:166:11: ( var )?
             	int alt26 = 2;
             	int LA26_0 = input.LA(1);
 
@@ -3090,7 +3092,7 @@ public partial class MathExprParser : Parser
             	    case 1 :
             	        // MathExpr.g:0:0: var
             	        {
-            	        	PushFollow(FOLLOW_var_in_expr_list1483);
+            	        	PushFollow(FOLLOW_var_in_expr_list1489);
             	        	var116 = var();
             	        	state.followingStackPointer--;
             	        	if (state.failed) return retval;
@@ -3101,12 +3103,12 @@ public partial class MathExprParser : Parser
 
             	}
 
-            	PushFollow(FOLLOW_expr_in_expr_list1486);
+            	PushFollow(FOLLOW_expr_in_expr_list1492);
             	expr117 = expr();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
             	if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expr117.Tree);
-            	// MathExpr.g:165:21: ( ( ';' )+ expr )*
+            	// MathExpr.g:166:21: ( ( ';' )+ expr )*
             	do 
             	{
             	    int alt28 = 2;
@@ -3114,9 +3116,9 @@ public partial class MathExprParser : Parser
             	    switch (alt28) 
             		{
             			case 1 :
-            			    // MathExpr.g:165:22: ( ';' )+ expr
+            			    // MathExpr.g:166:22: ( ';' )+ expr
             			    {
-            			    	// MathExpr.g:165:22: ( ';' )+
+            			    	// MathExpr.g:166:22: ( ';' )+
             			    	int cnt27 = 0;
             			    	do 
             			    	{
@@ -3132,9 +3134,9 @@ public partial class MathExprParser : Parser
             			    	    switch (alt27) 
             			    		{
             			    			case 1 :
-            			    			    // MathExpr.g:165:23: ';'
+            			    			    // MathExpr.g:166:23: ';'
             			    			    {
-            			    			    	char_literal118=(IToken)Match(input,TTT,FOLLOW_TTT_in_expr_list1490); if (state.failed) return retval;
+            			    			    	char_literal118=(IToken)Match(input,TTT,FOLLOW_TTT_in_expr_list1496); if (state.failed) return retval;
 
             			    			    }
             			    			    break;
@@ -3152,7 +3154,7 @@ public partial class MathExprParser : Parser
             			    	loop27:
             			    		;	// Stops C# compiler whining that label 'loop27' has no statements
 
-            			    	PushFollow(FOLLOW_expr_in_expr_list1495);
+            			    	PushFollow(FOLLOW_expr_in_expr_list1501);
             			    	expr119 = expr();
             			    	state.followingStackPointer--;
             			    	if (state.failed) return retval;
@@ -3169,7 +3171,7 @@ public partial class MathExprParser : Parser
             	loop28:
             		;	// Stops C# compiler whining that label 'loop28' has no statements
 
-            	// MathExpr.g:165:37: ( ';' )*
+            	// MathExpr.g:166:37: ( ';' )*
             	do 
             	{
             	    int alt29 = 2;
@@ -3184,9 +3186,9 @@ public partial class MathExprParser : Parser
             	    switch (alt29) 
             		{
             			case 1 :
-            			    // MathExpr.g:165:38: ';'
+            			    // MathExpr.g:166:38: ';'
             			    {
-            			    	char_literal120=(IToken)Match(input,TTT,FOLLOW_TTT_in_expr_list1500); if (state.failed) return retval;
+            			    	char_literal120=(IToken)Match(input,TTT,FOLLOW_TTT_in_expr_list1506); if (state.failed) return retval;
 
             			    }
             			    break;
@@ -3238,7 +3240,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "program"
-    // MathExpr.g:169:1: program : expr_list ;
+    // MathExpr.g:170:1: program : expr_list ;
     public MathExprParser.program_return program() // throws RecognitionException [1]
     {   
         MathExprParser.program_return retval = new MathExprParser.program_return();
@@ -3256,12 +3258,12 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:169:8: ( expr_list )
-            // MathExpr.g:170:2: expr_list
+            // MathExpr.g:170:8: ( expr_list )
+            // MathExpr.g:171:2: expr_list
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_expr_list_in_program1516);
+            	PushFollow(FOLLOW_expr_list_in_program1522);
             	expr_list121 = expr_list();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -3305,7 +3307,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "result"
-    // MathExpr.g:172:1: result : program -> ^( PROGRAM program ) ;
+    // MathExpr.g:173:1: result : program -> ^( PROGRAM program ) ;
     public MathExprParser.result_return result() // throws RecognitionException [1]
     {   
         MathExprParser.result_return retval = new MathExprParser.result_return();
@@ -3323,10 +3325,10 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:172:7: ( program -> ^( PROGRAM program ) )
-            // MathExpr.g:172:9: program
+            // MathExpr.g:173:7: ( program -> ^( PROGRAM program ) )
+            // MathExpr.g:173:9: program
             {
-            	PushFollow(FOLLOW_program_in_result1523);
+            	PushFollow(FOLLOW_program_in_result1529);
             	program122 = program();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -3345,9 +3347,9 @@ public partial class MathExprParser : Parser
             	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(adaptor, "rule retval", retval!=null ? retval.Tree : null);
 
             	root_0 = (object)adaptor.GetNilNode();
-            	// 172:17: -> ^( PROGRAM program )
+            	// 173:17: -> ^( PROGRAM program )
             	{
-            	    // MathExpr.g:172:20: ^( PROGRAM program )
+            	    // MathExpr.g:173:20: ^( PROGRAM program )
             	    {
             	    object root_1 = (object)adaptor.GetNilNode();
             	    root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(PROGRAM, "PROGRAM"), root_1);
@@ -3398,7 +3400,7 @@ public partial class MathExprParser : Parser
     };
 
     // $ANTLR start "execute"
-    // MathExpr.g:174:1: execute : result ;
+    // MathExpr.g:175:1: execute : result ;
     public MathExprParser.execute_return execute() // throws RecognitionException [1]
     {   
         MathExprParser.execute_return retval = new MathExprParser.execute_return();
@@ -3416,12 +3418,12 @@ public partial class MathExprParser : Parser
     	    {
     	    	return retval; 
     	    }
-            // MathExpr.g:174:8: ( result )
-            // MathExpr.g:175:3: result
+            // MathExpr.g:175:8: ( result )
+            // MathExpr.g:176:3: result
             {
             	root_0 = (object)adaptor.GetNilNode();
 
-            	PushFollow(FOLLOW_result_in_execute1540);
+            	PushFollow(FOLLOW_result_in_execute1546);
             	result123 = result();
             	state.followingStackPointer--;
             	if (state.failed) return retval;
@@ -3456,14 +3458,14 @@ public partial class MathExprParser : Parser
 
     // $ANTLR start "synpred24_MathExpr"
     public void synpred24_MathExpr_fragment() {
-        // MathExpr.g:129:2: ( exprvar ( ';' )+ ( exprvar ( ';' )+ )* )
-        // MathExpr.g:129:2: exprvar ( ';' )+ ( exprvar ( ';' )+ )*
+        // MathExpr.g:130:2: ( exprvar ( ';' )+ ( exprvar ( ';' )+ )* )
+        // MathExpr.g:130:2: exprvar ( ';' )+ ( exprvar ( ';' )+ )*
         {
-        	PushFollow(FOLLOW_exprvar_in_synpred24_MathExpr1137);
+        	PushFollow(FOLLOW_exprvar_in_synpred24_MathExpr1143);
         	exprvar();
         	state.followingStackPointer--;
         	if (state.failed) return ;
-        	// MathExpr.g:129:10: ( ';' )+
+        	// MathExpr.g:130:10: ( ';' )+
         	int cnt32 = 0;
         	do 
         	{
@@ -3479,9 +3481,9 @@ public partial class MathExprParser : Parser
         	    switch (alt32) 
         		{
         			case 1 :
-        			    // MathExpr.g:129:11: ';'
+        			    // MathExpr.g:130:11: ';'
         			    {
-        			    	Match(input,TTT,FOLLOW_TTT_in_synpred24_MathExpr1140); if (state.failed) return ;
+        			    	Match(input,TTT,FOLLOW_TTT_in_synpred24_MathExpr1146); if (state.failed) return ;
 
         			    }
         			    break;
@@ -3499,7 +3501,7 @@ public partial class MathExprParser : Parser
         	loop32:
         		;	// Stops C# compiler whining that label 'loop32' has no statements
 
-        	// MathExpr.g:129:18: ( exprvar ( ';' )+ )*
+        	// MathExpr.g:130:18: ( exprvar ( ';' )+ )*
         	do 
         	{
         	    int alt34 = 2;
@@ -3514,13 +3516,13 @@ public partial class MathExprParser : Parser
         	    switch (alt34) 
         		{
         			case 1 :
-        			    // MathExpr.g:129:19: exprvar ( ';' )+
+        			    // MathExpr.g:130:19: exprvar ( ';' )+
         			    {
-        			    	PushFollow(FOLLOW_exprvar_in_synpred24_MathExpr1146);
+        			    	PushFollow(FOLLOW_exprvar_in_synpred24_MathExpr1152);
         			    	exprvar();
         			    	state.followingStackPointer--;
         			    	if (state.failed) return ;
-        			    	// MathExpr.g:129:27: ( ';' )+
+        			    	// MathExpr.g:130:27: ( ';' )+
         			    	int cnt33 = 0;
         			    	do 
         			    	{
@@ -3536,9 +3538,9 @@ public partial class MathExprParser : Parser
         			    	    switch (alt33) 
         			    		{
         			    			case 1 :
-        			    			    // MathExpr.g:129:28: ';'
+        			    			    // MathExpr.g:130:28: ';'
         			    			    {
-        			    			    	Match(input,TTT,FOLLOW_TTT_in_synpred24_MathExpr1149); if (state.failed) return ;
+        			    			    	Match(input,TTT,FOLLOW_TTT_in_synpred24_MathExpr1155); if (state.failed) return ;
 
         			    			    }
         			    			    break;
@@ -3575,10 +3577,10 @@ public partial class MathExprParser : Parser
 
     // $ANTLR start "synpred28_MathExpr"
     public void synpred28_MathExpr_fragment() {
-        // MathExpr.g:134:25: ( ';' )
-        // MathExpr.g:134:25: ';'
+        // MathExpr.g:135:25: ( ';' )
+        // MathExpr.g:135:25: ';'
         {
-        	Match(input,TTT,FOLLOW_TTT_in_synpred28_MathExpr1196); if (state.failed) return ;
+        	Match(input,TTT,FOLLOW_TTT_in_synpred28_MathExpr1202); if (state.failed) return ;
 
         }
     }
@@ -3586,10 +3588,10 @@ public partial class MathExprParser : Parser
 
     // $ANTLR start "synpred30_MathExpr"
     public void synpred30_MathExpr_fragment() {
-        // MathExpr.g:135:62: ( ';' )
-        // MathExpr.g:135:62: ';'
+        // MathExpr.g:136:62: ( ';' )
+        // MathExpr.g:136:62: ';'
         {
-        	Match(input,TTT,FOLLOW_TTT_in_synpred30_MathExpr1234); if (state.failed) return ;
+        	Match(input,TTT,FOLLOW_TTT_in_synpred30_MathExpr1240); if (state.failed) return ;
 
         }
     }
@@ -3597,11 +3599,11 @@ public partial class MathExprParser : Parser
 
     // $ANTLR start "synpred40_MathExpr"
     public void synpred40_MathExpr_fragment() {
-        // MathExpr.g:156:27: ( ELSE expr )
-        // MathExpr.g:156:27: ELSE expr
+        // MathExpr.g:157:27: ( ELSE expr )
+        // MathExpr.g:157:27: ELSE expr
         {
-        	Match(input,ELSE,FOLLOW_ELSE_in_synpred40_MathExpr1417); if (state.failed) return ;
-        	PushFollow(FOLLOW_expr_in_synpred40_MathExpr1420);
+        	Match(input,ELSE,FOLLOW_ELSE_in_synpred40_MathExpr1423); if (state.failed) return ;
+        	PushFollow(FOLLOW_expr_in_synpred40_MathExpr1426);
         	expr();
         	state.followingStackPointer--;
         	if (state.failed) return ;
@@ -3702,13 +3704,13 @@ public partial class MathExprParser : Parser
     const string DFA17_eofS =
         "\x05\uffff\x03\x0b\x0b\uffff\x03\x0b\x01\uffff";
     const string DFA17_minS =
-        "\x01\x23\x01\x1c\x01\x2d\x01\x23\x01\x2e\x03\x0a\x01\x1c\x01\x20"+
-        "\x01\x00\x01\uffff\x01\x32\x01\x2f\x01\uffff\x01\x20\x01\x30\x01"+
-        "\x31\x01\x32\x03\x0a\x01\x00";
+        "\x01\x24\x01\x1d\x01\x2e\x01\x24\x01\x2f\x03\x0a\x01\x1d\x01\x21"+
+        "\x01\x00\x01\uffff\x01\x33\x01\x30\x01\uffff\x01\x21\x01\x31\x01"+
+        "\x32\x01\x33\x03\x0a\x01\x00";
     const string DFA17_maxS =
-        "\x01\x23\x01\x2c\x01\x34\x01\x23\x01\x2e\x03\x35\x01\x2c\x01\x20"+
-        "\x01\x00\x01\uffff\x01\x34\x01\x2f\x01\uffff\x01\x20\x01\x30\x01"+
-        "\x31\x01\x34\x03\x35\x01\x00";
+        "\x01\x24\x01\x2d\x01\x35\x01\x24\x01\x2f\x03\x36\x01\x2d\x01\x21"+
+        "\x01\x00\x01\uffff\x01\x35\x01\x30\x01\uffff\x01\x21\x01\x31\x01"+
+        "\x32\x01\x35\x03\x36\x01\x00";
     const string DFA17_acceptS =
         "\x0b\uffff\x01\x02\x02\uffff\x01\x01\x08\uffff";
     const string DFA17_specialS =
@@ -3719,11 +3721,11 @@ public partial class MathExprParser : Parser
             "\x01\x04\x04\uffff\x01\x05\x01\x06\x01\x07",
             "\x01\x08",
             "\x01\x09",
-            "\x06\x0b\x03\uffff\x02\x0b\x08\uffff\x01\x0a\x05\uffff\x01"+
+            "\x06\x0b\x03\uffff\x02\x0b\x09\uffff\x01\x0a\x05\uffff\x01"+
             "\x0b\x07\uffff\x01\x0b\x09\uffff\x01\x0b",
-            "\x06\x0b\x03\uffff\x02\x0b\x08\uffff\x01\x0a\x05\uffff\x01"+
+            "\x06\x0b\x03\uffff\x02\x0b\x09\uffff\x01\x0a\x05\uffff\x01"+
             "\x0b\x07\uffff\x01\x0b\x09\uffff\x01\x0b",
-            "\x06\x0b\x03\uffff\x02\x0b\x08\uffff\x01\x0a\x05\uffff\x01"+
+            "\x06\x0b\x03\uffff\x02\x0b\x09\uffff\x01\x0a\x05\uffff\x01"+
             "\x0b\x07\uffff\x01\x0b\x09\uffff\x01\x0b",
             "\x01\x0c\x0f\uffff\x01\x03",
             "\x01\x0d",
@@ -3736,11 +3738,11 @@ public partial class MathExprParser : Parser
             "\x01\x11",
             "\x01\x12",
             "\x01\x13\x01\x14\x01\x15",
-            "\x06\x0b\x03\uffff\x02\x0b\x08\uffff\x01\x16\x05\uffff\x01"+
+            "\x06\x0b\x03\uffff\x02\x0b\x09\uffff\x01\x16\x05\uffff\x01"+
             "\x0b\x07\uffff\x01\x0b\x09\uffff\x01\x0b",
-            "\x06\x0b\x03\uffff\x02\x0b\x08\uffff\x01\x16\x05\uffff\x01"+
+            "\x06\x0b\x03\uffff\x02\x0b\x09\uffff\x01\x16\x05\uffff\x01"+
             "\x0b\x07\uffff\x01\x0b\x09\uffff\x01\x0b",
-            "\x06\x0b\x03\uffff\x02\x0b\x08\uffff\x01\x16\x05\uffff\x01"+
+            "\x06\x0b\x03\uffff\x02\x0b\x09\uffff\x01\x16\x05\uffff\x01"+
             "\x0b\x07\uffff\x01\x0b\x09\uffff\x01\x0b",
             "\x01\uffff"
     };
@@ -3771,7 +3773,7 @@ public partial class MathExprParser : Parser
 
         override public string Description
         {
-            get { return "128:1: var_list : ( exprvar ( ';' )+ ( exprvar ( ';' )+ )* | exprvar ( ';' )* ( exprvar ( ';' )* )* );"; }
+            get { return "129:1: var_list : ( exprvar ( ';' )+ ( exprvar ( ';' )+ )* | exprvar ( ';' )* ( exprvar ( ';' )* )* );"; }
         }
 
     }
@@ -3827,7 +3829,7 @@ public partial class MathExprParser : Parser
     const string DFA24_minS =
         "\x01\x0a\x01\x10\x0c\uffff";
     const string DFA24_maxS =
-        "\x01\x35\x01\x36\x0c\uffff";
+        "\x01\x36\x01\x37\x0c\uffff";
     const string DFA24_acceptS =
         "\x02\uffff\x01\x03\x01\x04\x01\x05\x01\x06\x01\x07\x01\x08\x01"+
         "\x09\x01\x0b\x01\x0c\x01\x01\x01\x0a\x01\x02";
@@ -3835,8 +3837,8 @@ public partial class MathExprParser : Parser
         "\x0e\uffff}>";
     static readonly string[] DFA24_transitionS = {
             "\x01\x07\x01\x08\x01\x09\x01\x0a\x01\x03\x01\x05\x03\uffff"+
-            "\x01\x04\x01\x06\x0e\uffff\x01\x01\x11\uffff\x01\x02",
-            "\x01\x0d\x05\uffff\x01\x0d\x06\uffff\x01\x0d\x0a\uffff\x01"+
+            "\x01\x04\x01\x06\x0f\uffff\x01\x01\x11\uffff\x01\x02",
+            "\x01\x0d\x05\uffff\x01\x0d\x07\uffff\x01\x0d\x0a\uffff\x01"+
             "\x0b\x01\uffff\x01\x0c\x0b\uffff\x01\x0d",
             "",
             "",
@@ -3878,7 +3880,7 @@ public partial class MathExprParser : Parser
 
         override public string Description
         {
-            get { return "149:1: expr : ( IDENT ASSIGN term | IDENT -> ^( FUNC_CALL IDENT PARAMS ) | 'begin' expr_list 'end' -> ^( BLOCK expr_list ) | FOR IDENT ASSIGN term TO term DO expr | WHILE logic DO expr | REPEAT expr_list UNTIL logic | IF logic THEN expr ( ELSE expr )? | INC '(' IDENT ')' | DEC '(' IDENT ')' | func_call | func_descr | proc_descr );"; }
+            get { return "150:1: expr : ( IDENT ASSIGN term | IDENT -> ^( FUNC_CALL IDENT PARAMS ) | 'begin' expr_list 'end' -> ^( BLOCK expr_list ) | FOR IDENT ASSIGN term TO term DO expr | WHILE logic DO expr | REPEAT expr_list UNTIL logic | IF logic THEN expr ( ELSE expr )? | INC '(' IDENT ')' | DEC '(' IDENT ')' | func_call | func_descr | proc_descr );"; }
         }
 
     }
@@ -3890,14 +3892,14 @@ public partial class MathExprParser : Parser
     const string DFA28_minS =
         "\x01\x10\x01\x0a\x02\uffff";
     const string DFA28_maxS =
-        "\x02\x36\x02\uffff";
+        "\x02\x37\x02\uffff";
     const string DFA28_acceptS =
         "\x02\uffff\x01\x02\x01\x01";
     const string DFA28_specialS =
         "\x04\uffff}>";
     static readonly string[] DFA28_transitionS = {
-            "\x01\x02\x0c\uffff\x01\x01\x18\uffff\x01\x02",
-            "\x06\x03\x01\x02\x02\uffff\x02\x03\x08\uffff\x01\x01\x05\uffff"+
+            "\x01\x02\x0d\uffff\x01\x01\x18\uffff\x01\x02",
+            "\x06\x03\x01\x02\x02\uffff\x02\x03\x09\uffff\x01\x01\x05\uffff"+
             "\x01\x03\x11\uffff\x01\x03\x01\x02",
             "",
             ""
@@ -3929,144 +3931,144 @@ public partial class MathExprParser : Parser
 
         override public string Description
         {
-            get { return "()* loopback of 165:21: ( ( ';' )+ expr )*"; }
+            get { return "()* loopback of 166:21: ( ( ';' )+ expr )*"; }
         }
 
     }
 
  
 
-    public static readonly BitSet FOLLOW_42_in_group784 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_term_in_group787 = new BitSet(new ulong[]{0x0000080000000000UL});
-    public static readonly BitSet FOLLOW_43_in_group789 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_REAL_in_group794 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_INTEGER_in_group806 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_STRING_in_group810 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_func_call_in_group814 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_group818 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_group_in_mult827 = new BitSet(new ulong[]{0x000000C003800002UL});
-    public static readonly BitSet FOLLOW_set_in_mult831 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_group_in_mult854 = new BitSet(new ulong[]{0x000000C003800002UL});
-    public static readonly BitSet FOLLOW_mult_in_add866 = new BitSet(new ulong[]{0x0000003004000002UL});
-    public static readonly BitSet FOLLOW_set_in_add871 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_mult_in_add886 = new BitSet(new ulong[]{0x0000003004000002UL});
-    public static readonly BitSet FOLLOW_add_in_logic898 = new BitSet(new ulong[]{0x0000020000000002UL});
-    public static readonly BitSet FOLLOW_COMPARE_in_logic902 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_add_in_logic905 = new BitSet(new ulong[]{0x0000020000000002UL});
-    public static readonly BitSet FOLLOW_logic_in_term918 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_term_in_params_929 = new BitSet(new ulong[]{0x0000100000000002UL});
-    public static readonly BitSet FOLLOW_44_in_params_932 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_term_in_params_935 = new BitSet(new ulong[]{0x0000100000000002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_func_call950 = new BitSet(new ulong[]{0x0000040000000000UL});
-    public static readonly BitSet FOLLOW_42_in_func_call954 = new BitSet(new ulong[]{0x00000C0F00000000UL});
-    public static readonly BitSet FOLLOW_params__in_func_call956 = new BitSet(new ulong[]{0x0000080000000000UL});
-    public static readonly BitSet FOLLOW_43_in_func_call958 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_FUNCTION_in_func_descr992 = new BitSet(new ulong[]{0x0000000800000000UL});
-    public static readonly BitSet FOLLOW_IDENT_in_func_descr994 = new BitSet(new ulong[]{0x0000040000000000UL});
-    public static readonly BitSet FOLLOW_42_in_func_descr997 = new BitSet(new ulong[]{0x0000080800000000UL});
-    public static readonly BitSet FOLLOW_var_list_in_func_descr999 = new BitSet(new ulong[]{0x0000080000000000UL});
-    public static readonly BitSet FOLLOW_43_in_func_descr1002 = new BitSet(new ulong[]{0x0000000010000000UL});
-    public static readonly BitSet FOLLOW_DDD_in_func_descr1004 = new BitSet(new ulong[]{0x001C000000000000UL});
-    public static readonly BitSet FOLLOW_type_in_func_descr1006 = new BitSet(new ulong[]{0x0000000020000000UL});
-    public static readonly BitSet FOLLOW_TTT_in_func_descr1008 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_var_in_func_descr1011 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_func_descr1015 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_PROCEDURE_in_proc_descr1057 = new BitSet(new ulong[]{0x0000000800000000UL});
-    public static readonly BitSet FOLLOW_IDENT_in_proc_descr1059 = new BitSet(new ulong[]{0x0000040000000000UL});
-    public static readonly BitSet FOLLOW_42_in_proc_descr1062 = new BitSet(new ulong[]{0x0000080800000000UL});
-    public static readonly BitSet FOLLOW_var_list_in_proc_descr1064 = new BitSet(new ulong[]{0x0000080000000000UL});
-    public static readonly BitSet FOLLOW_43_in_proc_descr1067 = new BitSet(new ulong[]{0x0000000020000000UL});
-    public static readonly BitSet FOLLOW_TTT_in_proc_descr1069 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_var_in_proc_descr1072 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_proc_descr1076 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_VAR_in_var1116 = new BitSet(new ulong[]{0x0000000800000000UL});
-    public static readonly BitSet FOLLOW_var_list_in_var1118 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_exprvar_in_var_list1137 = new BitSet(new ulong[]{0x0000000020000000UL});
-    public static readonly BitSet FOLLOW_TTT_in_var_list1140 = new BitSet(new ulong[]{0x0000000820000002UL});
-    public static readonly BitSet FOLLOW_exprvar_in_var_list1146 = new BitSet(new ulong[]{0x0000000020000000UL});
-    public static readonly BitSet FOLLOW_TTT_in_var_list1149 = new BitSet(new ulong[]{0x0000000820000002UL});
-    public static readonly BitSet FOLLOW_exprvar_in_var_list1160 = new BitSet(new ulong[]{0x0000000820000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_var_list1163 = new BitSet(new ulong[]{0x0000000820000002UL});
-    public static readonly BitSet FOLLOW_exprvar_in_var_list1169 = new BitSet(new ulong[]{0x0000000820000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_var_list1172 = new BitSet(new ulong[]{0x0000000820000002UL});
-    public static readonly BitSet FOLLOW_ident_list_in_exprvar1187 = new BitSet(new ulong[]{0x0000000010000000UL});
-    public static readonly BitSet FOLLOW_DDD_in_exprvar1190 = new BitSet(new ulong[]{0x001C000000000000UL});
-    public static readonly BitSet FOLLOW_type_in_exprvar1192 = new BitSet(new ulong[]{0x0000000020000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_exprvar1196 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_exprvar1212 = new BitSet(new ulong[]{0x0000000010000000UL});
-    public static readonly BitSet FOLLOW_DDD_in_exprvar1214 = new BitSet(new ulong[]{0x0000200000000000UL});
-    public static readonly BitSet FOLLOW_45_in_exprvar1216 = new BitSet(new ulong[]{0x0000400000000000UL});
-    public static readonly BitSet FOLLOW_46_in_exprvar1218 = new BitSet(new ulong[]{0x0000000100000000UL});
-    public static readonly BitSet FOLLOW_INTEGER_in_exprvar1220 = new BitSet(new ulong[]{0x0000800000000000UL});
-    public static readonly BitSet FOLLOW_47_in_exprvar1222 = new BitSet(new ulong[]{0x0000000100000000UL});
-    public static readonly BitSet FOLLOW_INTEGER_in_exprvar1224 = new BitSet(new ulong[]{0x0001000000000000UL});
-    public static readonly BitSet FOLLOW_48_in_exprvar1227 = new BitSet(new ulong[]{0x0002000000000000UL});
-    public static readonly BitSet FOLLOW_49_in_exprvar1229 = new BitSet(new ulong[]{0x001C000000000000UL});
-    public static readonly BitSet FOLLOW_type_in_exprvar1231 = new BitSet(new ulong[]{0x0000000020000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_exprvar1234 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_50_in_type1261 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_51_in_type1270 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_52_in_type1279 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_ident_list1293 = new BitSet(new ulong[]{0x0000100000000002UL});
-    public static readonly BitSet FOLLOW_44_in_ident_list1296 = new BitSet(new ulong[]{0x0000000800000000UL});
-    public static readonly BitSet FOLLOW_IDENT_in_ident_list1299 = new BitSet(new ulong[]{0x0000100000000002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_expr1312 = new BitSet(new ulong[]{0x0000010000000000UL});
-    public static readonly BitSet FOLLOW_ASSIGN_in_expr1314 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_term_in_expr1317 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_IDENT_in_expr1322 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_53_in_expr1337 = new BitSet(new ulong[]{0x002000082018FC20UL});
-    public static readonly BitSet FOLLOW_expr_list_in_expr1339 = new BitSet(new ulong[]{0x0040000000000000UL});
-    public static readonly BitSet FOLLOW_54_in_expr1341 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_FOR_in_expr1354 = new BitSet(new ulong[]{0x0000000800000000UL});
-    public static readonly BitSet FOLLOW_IDENT_in_expr1357 = new BitSet(new ulong[]{0x0000010000000000UL});
-    public static readonly BitSet FOLLOW_ASSIGN_in_expr1359 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_term_in_expr1362 = new BitSet(new ulong[]{0x0000000000020000UL});
-    public static readonly BitSet FOLLOW_TO_in_expr1364 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_term_in_expr1367 = new BitSet(new ulong[]{0x0000000000040000UL});
-    public static readonly BitSet FOLLOW_DO_in_expr1369 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_expr1372 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_WHILE_in_expr1377 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_logic_in_expr1380 = new BitSet(new ulong[]{0x0000000000040000UL});
-    public static readonly BitSet FOLLOW_DO_in_expr1382 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_expr1385 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_REPEAT_in_expr1390 = new BitSet(new ulong[]{0x002000082018FC20UL});
-    public static readonly BitSet FOLLOW_expr_list_in_expr1393 = new BitSet(new ulong[]{0x0000000000010000UL});
-    public static readonly BitSet FOLLOW_UNTIL_in_expr1395 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_logic_in_expr1398 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_IF_in_expr1405 = new BitSet(new ulong[]{0x0000040F00000000UL});
-    public static readonly BitSet FOLLOW_logic_in_expr1408 = new BitSet(new ulong[]{0x0000000000200000UL});
-    public static readonly BitSet FOLLOW_THEN_in_expr1410 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_expr1413 = new BitSet(new ulong[]{0x0000000000400002UL});
-    public static readonly BitSet FOLLOW_ELSE_in_expr1417 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_expr1420 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_INC_in_expr1427 = new BitSet(new ulong[]{0x0000040000000000UL});
-    public static readonly BitSet FOLLOW_42_in_expr1430 = new BitSet(new ulong[]{0x0000000800000000UL});
-    public static readonly BitSet FOLLOW_IDENT_in_expr1433 = new BitSet(new ulong[]{0x0000080000000000UL});
-    public static readonly BitSet FOLLOW_43_in_expr1435 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_DEC_in_expr1441 = new BitSet(new ulong[]{0x0000040000000000UL});
-    public static readonly BitSet FOLLOW_42_in_expr1444 = new BitSet(new ulong[]{0x0000000800000000UL});
-    public static readonly BitSet FOLLOW_IDENT_in_expr1447 = new BitSet(new ulong[]{0x0000080000000000UL});
-    public static readonly BitSet FOLLOW_43_in_expr1449 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_func_call_in_expr1455 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_func_descr_in_expr1461 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_proc_descr_in_expr1466 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_expr_list1478 = new BitSet(new ulong[]{0x002000082018FC20UL});
-    public static readonly BitSet FOLLOW_var_in_expr_list1483 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_expr_list1486 = new BitSet(new ulong[]{0x0000000020000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_expr_list1490 = new BitSet(new ulong[]{0x002000082018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_expr_list1495 = new BitSet(new ulong[]{0x0000000020000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_expr_list1500 = new BitSet(new ulong[]{0x0000000020000002UL});
-    public static readonly BitSet FOLLOW_expr_list_in_program1516 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_program_in_result1523 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_result_in_execute1540 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_exprvar_in_synpred24_MathExpr1137 = new BitSet(new ulong[]{0x0000000020000000UL});
-    public static readonly BitSet FOLLOW_TTT_in_synpred24_MathExpr1140 = new BitSet(new ulong[]{0x0000000820000002UL});
-    public static readonly BitSet FOLLOW_exprvar_in_synpred24_MathExpr1146 = new BitSet(new ulong[]{0x0000000020000000UL});
-    public static readonly BitSet FOLLOW_TTT_in_synpred24_MathExpr1149 = new BitSet(new ulong[]{0x0000000820000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_synpred28_MathExpr1196 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_TTT_in_synpred30_MathExpr1234 = new BitSet(new ulong[]{0x0000000000000002UL});
-    public static readonly BitSet FOLLOW_ELSE_in_synpred40_MathExpr1417 = new BitSet(new ulong[]{0x002000080018FC20UL});
-    public static readonly BitSet FOLLOW_expr_in_synpred40_MathExpr1420 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_43_in_group790 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_term_in_group793 = new BitSet(new ulong[]{0x0000100000000000UL});
+    public static readonly BitSet FOLLOW_44_in_group795 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_REAL_in_group800 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_INTEGER_in_group812 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_STRING_in_group816 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_func_call_in_group820 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_group824 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_group_in_mult833 = new BitSet(new ulong[]{0x0000018003800002UL});
+    public static readonly BitSet FOLLOW_set_in_mult837 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_group_in_mult860 = new BitSet(new ulong[]{0x0000018003800002UL});
+    public static readonly BitSet FOLLOW_mult_in_add872 = new BitSet(new ulong[]{0x0000006004000002UL});
+    public static readonly BitSet FOLLOW_set_in_add877 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_mult_in_add892 = new BitSet(new ulong[]{0x0000006004000002UL});
+    public static readonly BitSet FOLLOW_add_in_logic904 = new BitSet(new ulong[]{0x0000040000000002UL});
+    public static readonly BitSet FOLLOW_COMPARE_in_logic908 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_add_in_logic911 = new BitSet(new ulong[]{0x0000040000000002UL});
+    public static readonly BitSet FOLLOW_logic_in_term924 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_term_in_params_935 = new BitSet(new ulong[]{0x0000200000000002UL});
+    public static readonly BitSet FOLLOW_45_in_params_938 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_term_in_params_941 = new BitSet(new ulong[]{0x0000200000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_func_call956 = new BitSet(new ulong[]{0x0000080000000000UL});
+    public static readonly BitSet FOLLOW_43_in_func_call960 = new BitSet(new ulong[]{0x0000181E00000000UL});
+    public static readonly BitSet FOLLOW_params__in_func_call962 = new BitSet(new ulong[]{0x0000100000000000UL});
+    public static readonly BitSet FOLLOW_44_in_func_call964 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_FUNCTION_in_func_descr998 = new BitSet(new ulong[]{0x0000001000000000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_func_descr1000 = new BitSet(new ulong[]{0x0000080000000000UL});
+    public static readonly BitSet FOLLOW_43_in_func_descr1003 = new BitSet(new ulong[]{0x0000101000000000UL});
+    public static readonly BitSet FOLLOW_var_list_in_func_descr1005 = new BitSet(new ulong[]{0x0000100000000000UL});
+    public static readonly BitSet FOLLOW_44_in_func_descr1008 = new BitSet(new ulong[]{0x0000000020000000UL});
+    public static readonly BitSet FOLLOW_DDD_in_func_descr1010 = new BitSet(new ulong[]{0x0038000000000000UL});
+    public static readonly BitSet FOLLOW_type_in_func_descr1012 = new BitSet(new ulong[]{0x0000000040000000UL});
+    public static readonly BitSet FOLLOW_TTT_in_func_descr1014 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_var_in_func_descr1017 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_func_descr1021 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_PROCEDURE_in_proc_descr1063 = new BitSet(new ulong[]{0x0000001000000000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_proc_descr1065 = new BitSet(new ulong[]{0x0000080000000000UL});
+    public static readonly BitSet FOLLOW_43_in_proc_descr1068 = new BitSet(new ulong[]{0x0000101000000000UL});
+    public static readonly BitSet FOLLOW_var_list_in_proc_descr1070 = new BitSet(new ulong[]{0x0000100000000000UL});
+    public static readonly BitSet FOLLOW_44_in_proc_descr1073 = new BitSet(new ulong[]{0x0000000040000000UL});
+    public static readonly BitSet FOLLOW_TTT_in_proc_descr1075 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_var_in_proc_descr1078 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_proc_descr1082 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_VAR_in_var1122 = new BitSet(new ulong[]{0x0000001000000000UL});
+    public static readonly BitSet FOLLOW_var_list_in_var1124 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_exprvar_in_var_list1143 = new BitSet(new ulong[]{0x0000000040000000UL});
+    public static readonly BitSet FOLLOW_TTT_in_var_list1146 = new BitSet(new ulong[]{0x0000001040000002UL});
+    public static readonly BitSet FOLLOW_exprvar_in_var_list1152 = new BitSet(new ulong[]{0x0000000040000000UL});
+    public static readonly BitSet FOLLOW_TTT_in_var_list1155 = new BitSet(new ulong[]{0x0000001040000002UL});
+    public static readonly BitSet FOLLOW_exprvar_in_var_list1166 = new BitSet(new ulong[]{0x0000001040000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_var_list1169 = new BitSet(new ulong[]{0x0000001040000002UL});
+    public static readonly BitSet FOLLOW_exprvar_in_var_list1175 = new BitSet(new ulong[]{0x0000001040000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_var_list1178 = new BitSet(new ulong[]{0x0000001040000002UL});
+    public static readonly BitSet FOLLOW_ident_list_in_exprvar1193 = new BitSet(new ulong[]{0x0000000020000000UL});
+    public static readonly BitSet FOLLOW_DDD_in_exprvar1196 = new BitSet(new ulong[]{0x0038000000000000UL});
+    public static readonly BitSet FOLLOW_type_in_exprvar1198 = new BitSet(new ulong[]{0x0000000040000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_exprvar1202 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_exprvar1218 = new BitSet(new ulong[]{0x0000000020000000UL});
+    public static readonly BitSet FOLLOW_DDD_in_exprvar1220 = new BitSet(new ulong[]{0x0000400000000000UL});
+    public static readonly BitSet FOLLOW_46_in_exprvar1222 = new BitSet(new ulong[]{0x0000800000000000UL});
+    public static readonly BitSet FOLLOW_47_in_exprvar1224 = new BitSet(new ulong[]{0x0000000200000000UL});
+    public static readonly BitSet FOLLOW_INTEGER_in_exprvar1226 = new BitSet(new ulong[]{0x0001000000000000UL});
+    public static readonly BitSet FOLLOW_48_in_exprvar1228 = new BitSet(new ulong[]{0x0000000200000000UL});
+    public static readonly BitSet FOLLOW_INTEGER_in_exprvar1230 = new BitSet(new ulong[]{0x0002000000000000UL});
+    public static readonly BitSet FOLLOW_49_in_exprvar1233 = new BitSet(new ulong[]{0x0004000000000000UL});
+    public static readonly BitSet FOLLOW_50_in_exprvar1235 = new BitSet(new ulong[]{0x0038000000000000UL});
+    public static readonly BitSet FOLLOW_type_in_exprvar1237 = new BitSet(new ulong[]{0x0000000040000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_exprvar1240 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_51_in_type1267 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_52_in_type1276 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_53_in_type1285 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_ident_list1299 = new BitSet(new ulong[]{0x0000200000000002UL});
+    public static readonly BitSet FOLLOW_45_in_ident_list1302 = new BitSet(new ulong[]{0x0000001000000000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_ident_list1305 = new BitSet(new ulong[]{0x0000200000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_expr1318 = new BitSet(new ulong[]{0x0000020000000000UL});
+    public static readonly BitSet FOLLOW_ASSIGN_in_expr1320 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_term_in_expr1323 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IDENT_in_expr1328 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_54_in_expr1343 = new BitSet(new ulong[]{0x004000104018FC20UL});
+    public static readonly BitSet FOLLOW_expr_list_in_expr1345 = new BitSet(new ulong[]{0x0080000000000000UL});
+    public static readonly BitSet FOLLOW_55_in_expr1347 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_FOR_in_expr1360 = new BitSet(new ulong[]{0x0000001000000000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_expr1363 = new BitSet(new ulong[]{0x0000020000000000UL});
+    public static readonly BitSet FOLLOW_ASSIGN_in_expr1365 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_term_in_expr1368 = new BitSet(new ulong[]{0x0000000000020000UL});
+    public static readonly BitSet FOLLOW_TO_in_expr1370 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_term_in_expr1373 = new BitSet(new ulong[]{0x0000000000040000UL});
+    public static readonly BitSet FOLLOW_DO_in_expr1375 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_expr1378 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_WHILE_in_expr1383 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_logic_in_expr1386 = new BitSet(new ulong[]{0x0000000000040000UL});
+    public static readonly BitSet FOLLOW_DO_in_expr1388 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_expr1391 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_REPEAT_in_expr1396 = new BitSet(new ulong[]{0x004000104018FC20UL});
+    public static readonly BitSet FOLLOW_expr_list_in_expr1399 = new BitSet(new ulong[]{0x0000000000010000UL});
+    public static readonly BitSet FOLLOW_UNTIL_in_expr1401 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_logic_in_expr1404 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_IF_in_expr1411 = new BitSet(new ulong[]{0x0000081E00000000UL});
+    public static readonly BitSet FOLLOW_logic_in_expr1414 = new BitSet(new ulong[]{0x0000000000200000UL});
+    public static readonly BitSet FOLLOW_THEN_in_expr1416 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_expr1419 = new BitSet(new ulong[]{0x0000000000400002UL});
+    public static readonly BitSet FOLLOW_ELSE_in_expr1423 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_expr1426 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_INC_in_expr1433 = new BitSet(new ulong[]{0x0000080000000000UL});
+    public static readonly BitSet FOLLOW_43_in_expr1436 = new BitSet(new ulong[]{0x0000001000000000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_expr1439 = new BitSet(new ulong[]{0x0000100000000000UL});
+    public static readonly BitSet FOLLOW_44_in_expr1441 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_DEC_in_expr1447 = new BitSet(new ulong[]{0x0000080000000000UL});
+    public static readonly BitSet FOLLOW_43_in_expr1450 = new BitSet(new ulong[]{0x0000001000000000UL});
+    public static readonly BitSet FOLLOW_IDENT_in_expr1453 = new BitSet(new ulong[]{0x0000100000000000UL});
+    public static readonly BitSet FOLLOW_44_in_expr1455 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_func_call_in_expr1461 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_func_descr_in_expr1467 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_proc_descr_in_expr1472 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_expr_list1484 = new BitSet(new ulong[]{0x004000104018FC20UL});
+    public static readonly BitSet FOLLOW_var_in_expr_list1489 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_expr_list1492 = new BitSet(new ulong[]{0x0000000040000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_expr_list1496 = new BitSet(new ulong[]{0x004000104018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_expr_list1501 = new BitSet(new ulong[]{0x0000000040000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_expr_list1506 = new BitSet(new ulong[]{0x0000000040000002UL});
+    public static readonly BitSet FOLLOW_expr_list_in_program1522 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_program_in_result1529 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_result_in_execute1546 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_exprvar_in_synpred24_MathExpr1143 = new BitSet(new ulong[]{0x0000000040000000UL});
+    public static readonly BitSet FOLLOW_TTT_in_synpred24_MathExpr1146 = new BitSet(new ulong[]{0x0000001040000002UL});
+    public static readonly BitSet FOLLOW_exprvar_in_synpred24_MathExpr1152 = new BitSet(new ulong[]{0x0000000040000000UL});
+    public static readonly BitSet FOLLOW_TTT_in_synpred24_MathExpr1155 = new BitSet(new ulong[]{0x0000001040000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_synpred28_MathExpr1202 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_TTT_in_synpred30_MathExpr1240 = new BitSet(new ulong[]{0x0000000000000002UL});
+    public static readonly BitSet FOLLOW_ELSE_in_synpred40_MathExpr1423 = new BitSet(new ulong[]{0x004000100018FC20UL});
+    public static readonly BitSet FOLLOW_expr_in_synpred40_MathExpr1426 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 }
 }

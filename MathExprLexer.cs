@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 MathExpr.g 2013-11-05 17:58:41
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 MathExpr.g 2013-11-17 00:33:41
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -22,52 +22,53 @@ public partial class MathExprLexer : Lexer {
     public const int WHILE = 19;
     public const int DO = 18;
     public const int FOR = 14;
-    public const int SUB = 37;
-    public const int TTT = 29;
+    public const int SUB = 38;
+    public const int TTT = 30;
     public const int AND = 25;
     public const int EOF = -1;
     public const int IF = 20;
     public const int FUNC_CALL = 8;
-    public const int ML_COMMENT = 31;
+    public const int T__55 = 55;
+    public const int ML_COMMENT = 32;
     public const int INC = 10;
     public const int T__51 = 51;
     public const int T__52 = 52;
     public const int THEN = 21;
     public const int T__53 = 53;
-    public const int DDD = 28;
+    public const int DDD = 29;
     public const int UNKNOWN = 4;
     public const int T__54 = 54;
-    public const int COMPARE = 41;
-    public const int IDENT = 35;
+    public const int COMPARE = 42;
+    public const int IDENT = 36;
     public const int VAR = 5;
     public const int T__50 = 50;
-    public const int ADD = 36;
+    public const int ADD = 37;
     public const int PARAMS = 9;
-    public const int INTEGER = 32;
-    public const int T__42 = 42;
+    public const int INTEGER = 33;
     public const int T__43 = 43;
     public const int T__46 = 46;
-    public const int XOR = 27;
+    public const int XOR = 28;
     public const int T__47 = 47;
     public const int T__44 = 44;
     public const int T__45 = 45;
+    public const int CONVERT = 27;
     public const int TO = 17;
     public const int T__48 = 48;
     public const int T__49 = 49;
     public const int DIV_INT = 23;
     public const int ELSE = 22;
-    public const int MUL = 38;
+    public const int MUL = 39;
     public const int PROCEDURE = 13;
-    public const int REAL = 33;
-    public const int WS = 30;
+    public const int REAL = 34;
+    public const int WS = 31;
     public const int UNTIL = 16;
     public const int BLOCK = 6;
     public const int OR = 26;
-    public const int ASSIGN = 40;
+    public const int ASSIGN = 41;
     public const int PROGRAM = 7;
     public const int REPEAT = 15;
-    public const int DIV = 39;
-    public const int STRING = 34;
+    public const int DIV = 40;
+    public const int STRING = 35;
 
     // delegates
     // delegators
@@ -592,29 +593,6 @@ public partial class MathExprLexer : Lexer {
     }
     // $ANTLR end "TTT"
 
-    // $ANTLR start "T__42"
-    public void mT__42() // throws RecognitionException [2]
-    {
-    		try
-    		{
-            int _type = T__42;
-    	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:30:7: ( '(' )
-            // MathExpr.g:30:9: '('
-            {
-            	Match('('); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally 
-    	{
-        }
-    }
-    // $ANTLR end "T__42"
-
     // $ANTLR start "T__43"
     public void mT__43() // throws RecognitionException [2]
     {
@@ -622,10 +600,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__43;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:31:7: ( ')' )
-            // MathExpr.g:31:9: ')'
+            // MathExpr.g:30:7: ( '(' )
+            // MathExpr.g:30:9: '('
             {
-            	Match(')'); 
+            	Match('('); 
 
             }
 
@@ -645,10 +623,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__44;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:32:7: ( ',' )
-            // MathExpr.g:32:9: ','
+            // MathExpr.g:31:7: ( ')' )
+            // MathExpr.g:31:9: ')'
             {
-            	Match(','); 
+            	Match(')'); 
 
             }
 
@@ -668,11 +646,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__45;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:33:7: ( 'array' )
-            // MathExpr.g:33:9: 'array'
+            // MathExpr.g:32:7: ( ',' )
+            // MathExpr.g:32:9: ','
             {
-            	Match("array"); 
-
+            	Match(','); 
 
             }
 
@@ -692,10 +669,11 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__46;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:34:7: ( '[' )
-            // MathExpr.g:34:9: '['
+            // MathExpr.g:33:7: ( 'array' )
+            // MathExpr.g:33:9: 'array'
             {
-            	Match('['); 
+            	Match("array"); 
+
 
             }
 
@@ -715,11 +693,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__47;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:35:7: ( '..' )
-            // MathExpr.g:35:9: '..'
+            // MathExpr.g:34:7: ( '[' )
+            // MathExpr.g:34:9: '['
             {
-            	Match(".."); 
-
+            	Match('['); 
 
             }
 
@@ -739,10 +716,11 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__48;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:36:7: ( ']' )
-            // MathExpr.g:36:9: ']'
+            // MathExpr.g:35:7: ( '..' )
+            // MathExpr.g:35:9: '..'
             {
-            	Match(']'); 
+            	Match(".."); 
+
 
             }
 
@@ -762,11 +740,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__49;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:37:7: ( 'of' )
-            // MathExpr.g:37:9: 'of'
+            // MathExpr.g:36:7: ( ']' )
+            // MathExpr.g:36:9: ']'
             {
-            	Match("of"); 
-
+            	Match(']'); 
 
             }
 
@@ -786,10 +763,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__50;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:38:7: ( 'real' )
-            // MathExpr.g:38:9: 'real'
+            // MathExpr.g:37:7: ( 'of' )
+            // MathExpr.g:37:9: 'of'
             {
-            	Match("real"); 
+            	Match("of"); 
 
 
             }
@@ -810,10 +787,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__51;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:39:7: ( 'integer' )
-            // MathExpr.g:39:9: 'integer'
+            // MathExpr.g:38:7: ( 'real' )
+            // MathExpr.g:38:9: 'real'
             {
-            	Match("integer"); 
+            	Match("real"); 
 
 
             }
@@ -834,10 +811,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__52;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:40:7: ( 'string' )
-            // MathExpr.g:40:9: 'string'
+            // MathExpr.g:39:7: ( 'integer' )
+            // MathExpr.g:39:9: 'integer'
             {
-            	Match("string"); 
+            	Match("integer"); 
 
 
             }
@@ -858,10 +835,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__53;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:41:7: ( 'begin' )
-            // MathExpr.g:41:9: 'begin'
+            // MathExpr.g:40:7: ( 'string' )
+            // MathExpr.g:40:9: 'string'
             {
-            	Match("begin"); 
+            	Match("string"); 
 
 
             }
@@ -882,6 +859,30 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = T__54;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
+            // MathExpr.g:41:7: ( 'begin' )
+            // MathExpr.g:41:9: 'begin'
+            {
+            	Match("begin"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally 
+    	{
+        }
+    }
+    // $ANTLR end "T__54"
+
+    // $ANTLR start "T__55"
+    public void mT__55() // throws RecognitionException [2]
+    {
+    		try
+    		{
+            int _type = T__55;
+    	int _channel = DEFAULT_TOKEN_CHANNEL;
             // MathExpr.g:42:7: ( 'end' )
             // MathExpr.g:42:9: 'end'
             {
@@ -897,7 +898,7 @@ public partial class MathExprLexer : Lexer {
     	{
         }
     }
-    // $ANTLR end "T__54"
+    // $ANTLR end "T__55"
 
     // $ANTLR start "WS"
     public void mWS() // throws RecognitionException [2]
@@ -906,10 +907,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = WS;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:60:3: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
-            // MathExpr.g:61:3: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+            // MathExpr.g:61:3: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+            // MathExpr.g:62:3: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
             {
-            	// MathExpr.g:61:3: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+            	// MathExpr.g:62:3: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
             	int cnt1 = 0;
             	do 
             	{
@@ -976,12 +977,12 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = ML_COMMENT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:66:11: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // MathExpr.g:67:3: '/*' ( options {greedy=false; } : . )* '*/'
+            // MathExpr.g:67:11: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // MathExpr.g:68:3: '/*' ( options {greedy=false; } : . )* '*/'
             {
             	Match("/*"); 
 
-            	// MathExpr.g:67:8: ( options {greedy=false; } : . )*
+            	// MathExpr.g:68:8: ( options {greedy=false; } : . )*
             	do 
             	{
             	    int alt2 = 2;
@@ -1011,7 +1012,7 @@ public partial class MathExprLexer : Lexer {
             	    switch (alt2) 
             		{
             			case 1 :
-            			    // MathExpr.g:67:38: .
+            			    // MathExpr.g:68:38: .
             			    {
             			    	MatchAny(); 
 
@@ -1050,13 +1051,13 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = INTEGER;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:72:8: ( ( ( '0' .. '9' )+ ) )
-            // MathExpr.g:72:10: ( ( '0' .. '9' )+ )
+            // MathExpr.g:73:8: ( ( ( '0' .. '9' )+ ) )
+            // MathExpr.g:73:10: ( ( '0' .. '9' )+ )
             {
-            	// MathExpr.g:72:10: ( ( '0' .. '9' )+ )
-            	// MathExpr.g:72:11: ( '0' .. '9' )+
+            	// MathExpr.g:73:10: ( ( '0' .. '9' )+ )
+            	// MathExpr.g:73:11: ( '0' .. '9' )+
             	{
-            		// MathExpr.g:72:11: ( '0' .. '9' )+
+            		// MathExpr.g:73:11: ( '0' .. '9' )+
             		int cnt3 = 0;
             		do 
             		{
@@ -1072,7 +1073,7 @@ public partial class MathExprLexer : Lexer {
             		    switch (alt3) 
             			{
             				case 1 :
-            				    // MathExpr.g:72:12: '0' .. '9'
+            				    // MathExpr.g:73:12: '0' .. '9'
             				    {
             				    	MatchRange('0','9'); 
 
@@ -1113,10 +1114,10 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = REAL;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:74:5: ( ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ ) )
-            // MathExpr.g:74:7: ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )
+            // MathExpr.g:75:5: ( ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ ) )
+            // MathExpr.g:75:7: ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )
             {
-            	// MathExpr.g:74:7: ( '0' .. '9' )+
+            	// MathExpr.g:75:7: ( '0' .. '9' )+
             	int cnt4 = 0;
             	do 
             	{
@@ -1132,7 +1133,7 @@ public partial class MathExprLexer : Lexer {
             	    switch (alt4) 
             		{
             			case 1 :
-            			    // MathExpr.g:74:8: '0' .. '9'
+            			    // MathExpr.g:75:8: '0' .. '9'
             			    {
             			    	MatchRange('0','9'); 
 
@@ -1151,11 +1152,11 @@ public partial class MathExprLexer : Lexer {
             	loop4:
             		;	// Stops C# compiler whining that label 'loop4' has no statements
 
-            	// MathExpr.g:74:19: ( '.' ( '0' .. '9' )+ )
-            	// MathExpr.g:74:20: '.' ( '0' .. '9' )+
+            	// MathExpr.g:75:19: ( '.' ( '0' .. '9' )+ )
+            	// MathExpr.g:75:20: '.' ( '0' .. '9' )+
             	{
             		Match('.'); 
-            		// MathExpr.g:74:24: ( '0' .. '9' )+
+            		// MathExpr.g:75:24: ( '0' .. '9' )+
             		int cnt5 = 0;
             		do 
             		{
@@ -1171,7 +1172,7 @@ public partial class MathExprLexer : Lexer {
             		    switch (alt5) 
             			{
             				case 1 :
-            				    // MathExpr.g:74:25: '0' .. '9'
+            				    // MathExpr.g:75:25: '0' .. '9'
             				    {
             				    	MatchRange('0','9'); 
 
@@ -1212,11 +1213,11 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = STRING;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:76:8: ( '\"' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ '\"' )
-            // MathExpr.g:76:10: '\"' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ '\"'
+            // MathExpr.g:77:8: ( '\"' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ '\"' )
+            // MathExpr.g:77:10: '\"' ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+ '\"'
             {
             	Match('\"'); 
-            	// MathExpr.g:76:14: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
+            	// MathExpr.g:77:14: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )+
             	int cnt6 = 0;
             	do 
             	{
@@ -1281,8 +1282,8 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = IDENT;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:79:6: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // MathExpr.g:79:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // MathExpr.g:80:6: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // MathExpr.g:80:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             	if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') || input.LA(1) == '_' || (input.LA(1) >= 'a' && input.LA(1) <= 'z') ) 
             	{
@@ -1295,7 +1296,7 @@ public partial class MathExprLexer : Lexer {
             	    Recover(mse);
             	    throw mse;}
 
-            	// MathExpr.g:80:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            	// MathExpr.g:81:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             	do 
             	{
             	    int alt7 = 2;
@@ -1354,8 +1355,8 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = ADD;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:82:4: ( '+' )
-            // MathExpr.g:82:9: '+'
+            // MathExpr.g:83:4: ( '+' )
+            // MathExpr.g:83:9: '+'
             {
             	Match('+'); 
 
@@ -1377,8 +1378,8 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = SUB;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:83:4: ( '-' )
-            // MathExpr.g:83:9: '-'
+            // MathExpr.g:84:4: ( '-' )
+            // MathExpr.g:84:9: '-'
             {
             	Match('-'); 
 
@@ -1400,8 +1401,8 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = MUL;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:84:4: ( '*' )
-            // MathExpr.g:84:9: '*'
+            // MathExpr.g:85:4: ( '*' )
+            // MathExpr.g:85:9: '*'
             {
             	Match('*'); 
 
@@ -1423,8 +1424,8 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = DIV;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:85:4: ( '/' )
-            // MathExpr.g:85:9: '/'
+            // MathExpr.g:86:4: ( '/' )
+            // MathExpr.g:86:9: '/'
             {
             	Match('/'); 
 
@@ -1446,8 +1447,8 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = ASSIGN;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:86:7: ( ':=' )
-            // MathExpr.g:86:9: ':='
+            // MathExpr.g:87:7: ( ':=' )
+            // MathExpr.g:87:9: ':='
             {
             	Match(":="); 
 
@@ -1470,7 +1471,7 @@ public partial class MathExprLexer : Lexer {
     		{
             int _type = COMPARE;
     	int _channel = DEFAULT_TOKEN_CHANNEL;
-            // MathExpr.g:87:8: ( '>' | '>=' | '<' | '<=' | '=' | '<>' )
+            // MathExpr.g:88:8: ( '>' | '>=' | '<' | '<=' | '=' | '<>' )
             int alt8 = 6;
             switch ( input.LA(1) ) 
             {
@@ -1522,14 +1523,14 @@ public partial class MathExprLexer : Lexer {
             switch (alt8) 
             {
                 case 1 :
-                    // MathExpr.g:87:10: '>'
+                    // MathExpr.g:88:10: '>'
                     {
                     	Match('>'); 
 
                     }
                     break;
                 case 2 :
-                    // MathExpr.g:87:16: '>='
+                    // MathExpr.g:88:16: '>='
                     {
                     	Match(">="); 
 
@@ -1537,14 +1538,14 @@ public partial class MathExprLexer : Lexer {
                     }
                     break;
                 case 3 :
-                    // MathExpr.g:87:23: '<'
+                    // MathExpr.g:88:23: '<'
                     {
                     	Match('<'); 
 
                     }
                     break;
                 case 4 :
-                    // MathExpr.g:87:29: '<='
+                    // MathExpr.g:88:29: '<='
                     {
                     	Match("<="); 
 
@@ -1552,14 +1553,14 @@ public partial class MathExprLexer : Lexer {
                     }
                     break;
                 case 5 :
-                    // MathExpr.g:87:36: '='
+                    // MathExpr.g:88:36: '='
                     {
                     	Match('='); 
 
                     }
                     break;
                 case 6 :
-                    // MathExpr.g:87:42: '<>'
+                    // MathExpr.g:88:42: '<>'
                     {
                     	Match("<>"); 
 
@@ -1579,7 +1580,7 @@ public partial class MathExprLexer : Lexer {
 
     override public void mTokens() // throws RecognitionException 
     {
-        // MathExpr.g:1:8: ( VAR | INC | DEC | FUNCTION | PROCEDURE | FOR | REPEAT | UNTIL | TO | DO | WHILE | IF | THEN | ELSE | DIV_INT | MOD_INT | AND | OR | XOR | DDD | TTT | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | WS | ML_COMMENT | INTEGER | REAL | STRING | IDENT | ADD | SUB | MUL | DIV | ASSIGN | COMPARE )
+        // MathExpr.g:1:8: ( VAR | INC | DEC | FUNCTION | PROCEDURE | FOR | REPEAT | UNTIL | TO | DO | WHILE | IF | THEN | ELSE | DIV_INT | MOD_INT | AND | OR | XOR | DDD | TTT | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | WS | ML_COMMENT | INTEGER | REAL | STRING | IDENT | ADD | SUB | MUL | DIV | ASSIGN | COMPARE )
         int alt9 = 46;
         alt9 = dfa9.Predict(input);
         switch (alt9) 
@@ -1732,93 +1733,93 @@ public partial class MathExprLexer : Lexer {
                 }
                 break;
             case 22 :
-                // MathExpr.g:1:118: T__42
-                {
-                	mT__42(); 
-
-                }
-                break;
-            case 23 :
-                // MathExpr.g:1:124: T__43
+                // MathExpr.g:1:118: T__43
                 {
                 	mT__43(); 
 
                 }
                 break;
-            case 24 :
-                // MathExpr.g:1:130: T__44
+            case 23 :
+                // MathExpr.g:1:124: T__44
                 {
                 	mT__44(); 
 
                 }
                 break;
-            case 25 :
-                // MathExpr.g:1:136: T__45
+            case 24 :
+                // MathExpr.g:1:130: T__45
                 {
                 	mT__45(); 
 
                 }
                 break;
-            case 26 :
-                // MathExpr.g:1:142: T__46
+            case 25 :
+                // MathExpr.g:1:136: T__46
                 {
                 	mT__46(); 
 
                 }
                 break;
-            case 27 :
-                // MathExpr.g:1:148: T__47
+            case 26 :
+                // MathExpr.g:1:142: T__47
                 {
                 	mT__47(); 
 
                 }
                 break;
-            case 28 :
-                // MathExpr.g:1:154: T__48
+            case 27 :
+                // MathExpr.g:1:148: T__48
                 {
                 	mT__48(); 
 
                 }
                 break;
-            case 29 :
-                // MathExpr.g:1:160: T__49
+            case 28 :
+                // MathExpr.g:1:154: T__49
                 {
                 	mT__49(); 
 
                 }
                 break;
-            case 30 :
-                // MathExpr.g:1:166: T__50
+            case 29 :
+                // MathExpr.g:1:160: T__50
                 {
                 	mT__50(); 
 
                 }
                 break;
-            case 31 :
-                // MathExpr.g:1:172: T__51
+            case 30 :
+                // MathExpr.g:1:166: T__51
                 {
                 	mT__51(); 
 
                 }
                 break;
-            case 32 :
-                // MathExpr.g:1:178: T__52
+            case 31 :
+                // MathExpr.g:1:172: T__52
                 {
                 	mT__52(); 
 
                 }
                 break;
-            case 33 :
-                // MathExpr.g:1:184: T__53
+            case 32 :
+                // MathExpr.g:1:178: T__53
                 {
                 	mT__53(); 
 
                 }
                 break;
-            case 34 :
-                // MathExpr.g:1:190: T__54
+            case 33 :
+                // MathExpr.g:1:184: T__54
                 {
                 	mT__54(); 
+
+                }
+                break;
+            case 34 :
+                // MathExpr.g:1:190: T__55
+                {
+                	mT__55(); 
 
                 }
                 break;
@@ -2181,7 +2182,7 @@ public partial class MathExprLexer : Lexer {
 
         override public string Description
         {
-            get { return "1:1: Tokens : ( VAR | INC | DEC | FUNCTION | PROCEDURE | FOR | REPEAT | UNTIL | TO | DO | WHILE | IF | THEN | ELSE | DIV_INT | MOD_INT | AND | OR | XOR | DDD | TTT | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | WS | ML_COMMENT | INTEGER | REAL | STRING | IDENT | ADD | SUB | MUL | DIV | ASSIGN | COMPARE );"; }
+            get { return "1:1: Tokens : ( VAR | INC | DEC | FUNCTION | PROCEDURE | FOR | REPEAT | UNTIL | TO | DO | WHILE | IF | THEN | ELSE | DIV_INT | MOD_INT | AND | OR | XOR | DDD | TTT | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | WS | ML_COMMENT | INTEGER | REAL | STRING | IDENT | ADD | SUB | MUL | DIV | ASSIGN | COMPARE );"; }
         }
 
     }

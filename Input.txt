@@ -1,78 +1,12 @@
 ;;; ;;;;;
 
 var
-	a,c:string;
+	a,c:real;
 	b:integer;
 	
 	dd: real;
 begin
-
-
-/* sadsdadsad dadasdgadjhsagdhgsdhsajhdgagdjsagdjhsdhsadjg*/
-procedure name(x:real; j:integer);
-var
-	a:integer;
-	f:real;
-	
-begin
- dd:=44 + 1;
- end;
-
-
- name(A,35,2);
-
-		function sdasdasd(x:real; j:real) : real;
-		var
-			dd:integer;
-		begin
-			
-			dd:=44 + 44;
-			dd:=44;
-			dd:=44;
-			dd:=44;
-		end;
-function cos(s:integer) : real;
-var
-	a:integer;
-	f:real;
-	as : integer;
-begin
- dd:=44;
-		function sdasdasd(x:real; j:real) : real;
-		var
-			dd:integer;
-			
-		begin
-			dd:=44 + 44;
-			dd:=44;
-			dd:=44;
-			dd:=44;
-		end;
-
-
-	as:=22;
-end;
-
-
-
-	
-	
-
-	repeat
-		inc(A);
-		inc(A);
-	until A<10;
-
-	for i:=100 to 1000 do begin
-	  A := A + 1;
-	  
-	end;
-
-	while (A < 89) do
-	begin
-	  if t(678) and (A>2) then
-		A := A > 0;
-	end;
+	a := 2 + 2.3 ;
 end;
 
 
