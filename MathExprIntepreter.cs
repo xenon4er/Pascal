@@ -313,9 +313,21 @@ namespace MathExpr
 
             case AstNodeType.ADD:
                 //тут, как и везде, присутствуют только два childs
+                ITree parent = node.Parent;
+                //ищем переменную, в которую записываем, чтобы узнать ее тип
+                while (parent.Type != AstNodeType.ASSIGN)
+                    parent = parent.Parent;
+                IdentDescr ident1 = context.find_var(parent.GetChild(0).Text);
+                
                 CommonTree nodeAdd0 = (CommonTree)node.GetChild(0);
+                if (nodeAdd0.Type == AstNodeType.ADD)
+                    ExecuteNode(node.GetChild(0), context);
                 CommonTree nodeAdd1 = (CommonTree)node.GetChild(1);
-               
+                
+                validate_convert(nodeAdd0, ident1);
+                validate_convert(nodeAdd1, ident1);
+                mass_convert(ident1, 0, nodeAdd0);
+                mass_convert(ident1, 1, nodeAdd1);
 
                 break;
             case AstNodeType.BLOCK:
@@ -365,15 +377,40 @@ namespace MathExpr
             case AstNodeType.REAL:
                 if (ident.dataType.type == DataType.Type.my_integer)
                 {
-                    throw new SemException("Невозможно преобразовать integer в real " + node.Parent.Line);
+                    throw new SemException("Невозможно преобразовать real в integer " + node.Parent.Line);
                 }
                 break;
             case AstNodeType.STRING:
                 if (ident.dataType.type != DataType.Type.my_string)
                 {
-                    throw new SemException("Невозможно преобразовать число в string " + node.Parent.Line);
+                    throw new SemException("Невозможно преобразовать string в число " + node.Parent.Line);
                 }
                 break;
+        }
+    }
+
+    private void mass_convert(IdentDescr ident, int pos, ITree node)
+    {
+        switch (node.Type)
+        {
+            case AstNodeType.INTEGER:
+                if (ident.dataType.type == DataType.Type.my_real)
+                {
+                    ConvertType(node, AstNodeType.REAL, pos);
+                }
+                else if (ident.dataType.type == DataType.Type.my_string)
+                {
+                    ConvertType(node, AstNodeType.STRING, pos);
+                }
+                break;
+            case AstNodeType.REAL:
+                if (ident.dataType.type == DataType.Type.my_string)
+                {
+                    ConvertType(node, AstNodeType.STRING, pos);
+                }
+                break;
+
+
         }
     }
     public static void Execute(ITree programNode, Context context) {
