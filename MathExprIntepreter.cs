@@ -301,6 +301,7 @@ namespace MathExpr
                 break;
 
             case AstNodeType.FOR:
+                //необходимо проверить, что переменна€ по которой идет счет описана, какие еще могут быть ошибки?
                 break;
             case AstNodeType.WHILE:
                 break;

@@ -6,6 +6,11 @@ var
 	d: string;
 	dd: real;
 begin
+	for b := 100 to 1000 do
+	begin
+		d := 2.6;
+	end; 
+
 	a := 2.2 + 2 + 20.3 + 2.2 ;
 	d := 2.2;
 end;
