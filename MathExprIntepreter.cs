@@ -308,6 +308,7 @@ namespace MathExpr
             case AstNodeType.IF:
                 break;
             
+                // возможно, реализация будет не нужна. тут же дерево строиться будет только
             case AstNodeType.COMPARE:
                 break;
 
@@ -330,6 +331,19 @@ namespace MathExpr
                 mass_convert(ident1, 1, nodeAdd1);
 
                 break;
+            case AstNodeType.MUL:
+                //строки перемножать нельзя, так же как и строку на число (по-моему) так что на забудь сделат на это проверку
+                // скорее всего их(строе) тут и не должно быть
+                break;
+
+            case AstNodeType.DIV:
+                //здесь вообще строк не должно быть
+                break;
+            case AstNodeType.SUB:
+                //здесь вообще строк не должно быть
+            break;
+
+
             case AstNodeType.BLOCK:
                 case AstNodeType.PROGRAM:
                     for (int i = 0; i < node.ChildCount; i++)

@@ -1,12 +1,12 @@
 ;;; ;;;;;
 
 var
-	a,c:integer;
+	a,c:real;
 	b:integer;
 	d: string;
 	dd: real;
 begin
-	a := "sds" + 2 + 2 + 2 ;
+	a := 2.2 + 2 + 20.3 + 2.2 ;
 	d := 2.2;
 end;
 
