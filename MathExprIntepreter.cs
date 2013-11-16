@@ -261,19 +261,32 @@ namespace MathExpr
                     throw new IntepreterException("Переменная не описана: строка " + nodeAssign0.Line);
                 }
                 CommonTree nodeAssign1 = (CommonTree)node.GetChild(1);
-                //ExecuteNode(node.GetChild(1),context);
-                switch (nodeAssign1.Type)
+                
+            // метод для выкидывания исключений в случае невозможно преобразования
+                validate_convert(nodeAssign1, ident);
+                
+            switch (nodeAssign1.Type)
                 {
                     case AstNodeType.INTEGER:
-                        //ident.intValue = Convert.ToInt32(nodeAssign1.Text);
+                        if (ident.dataType.type == DataType.Type.my_real)
+                        {
+                            ConvertType(nodeAssign1, AstNodeType.REAL, 1);
+                        }
+                        else if (ident.dataType.type == DataType.Type.my_string)
+                        {
+                            ConvertType(nodeAssign1, AstNodeType.STRING, 1);
+                        }
+                        
                         ident.value = nodeAssign1.Text;
                         break;
                     case AstNodeType.REAL:
-                        //ident.realValue = Convert.ToDouble(nodeAssign1.Text);
+                        if (ident.dataType.type == DataType.Type.my_string)
+                        {
+                            ConvertType(nodeAssign1, AstNodeType.STRING, 1);
+                        }
                         ident.value = nodeAssign1.Text;
                         break;
                     case AstNodeType.STRING:
-                        ident.stringValue = ident.value = nodeAssign1.Text;
                         ident.value = nodeAssign1.Text;
                         break;
                     default:
@@ -299,13 +312,11 @@ namespace MathExpr
                 break;
 
             case AstNodeType.ADD:
-                ConvertType(node.GetChild(0), AstNodeType.REAL, 0);
-                for (int i = 0; i < node.ChildCount; i++)
-                {
-                    CommonTree childNode = (CommonTree)node.GetChild(i);
-                    
+                //тут, как и везде, присутствуют только два childs
+                CommonTree nodeAdd0 = (CommonTree)node.GetChild(0);
+                CommonTree nodeAdd1 = (CommonTree)node.GetChild(1);
+               
 
-                }
                 break;
             case AstNodeType.BLOCK:
                 case AstNodeType.PROGRAM:
@@ -347,6 +358,24 @@ namespace MathExpr
         
     }
 
+    private void validate_convert(CommonTree node, IdentDescr ident)
+    {
+        switch (node.Type)
+        {
+            case AstNodeType.REAL:
+                if (ident.dataType.type == DataType.Type.my_integer)
+                {
+                    throw new SemException("Невозможно преобразовать integer в real " + node.Parent.Line);
+                }
+                break;
+            case AstNodeType.STRING:
+                if (ident.dataType.type != DataType.Type.my_string)
+                {
+                    throw new SemException("Невозможно преобразовать число в string " + node.Parent.Line);
+                }
+                break;
+        }
+    }
     public static void Execute(ITree programNode, Context context) {
         MathExprIntepreter mei=new MathExprIntepreter(programNode, context);
         mei.Execute();

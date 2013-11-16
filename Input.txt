@@ -3,10 +3,11 @@
 var
 	a,c:real;
 	b:integer;
-	
+	d: string;
 	dd: real;
 begin
-	a := 2 + 2.3 ;
+	a := 2.2 + 2 + 2 + 2 ;
+	d := 2.2;
 end;
 
 
