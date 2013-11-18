@@ -6,9 +6,8 @@ var
 	d: string;
 	dd: real;
 begin
-
-
-	if ((a<2) > (a > 0)) then
+	d := 2+6+a*4/6 - "sd";
+	if ((d < "ds") and (a > 0)) then
 	begin
 		a:= 3;
 	end;

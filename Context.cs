@@ -16,6 +16,7 @@ namespace MathExpr
             {
                 if (k.Value.name.CompareTo(name) == 0)
                     return true;
+                
             }
                 return false;
         }

@@ -328,15 +328,48 @@ namespace MathExpr
                 break;
 
             case AstNodeType.IF:
-                if (node.GetChild(0).Type == AstNodeType.COMPARE)
-                {
-                    ExecuteNode(node.GetChild(0), context);
-                }
+                for (int i = 0; i < node.ChildCount; i++)
+                    ExecuteNode(node.GetChild(i), context);
                 break;
             
-                // возможно, реализация будет не нужна. тут же дерево строиться будет только
-            case AstNodeType.COMPARE:
+            case AstNodeType.AND:
+                for (int i = 0; i < node.ChildCount; i++)
+                    ExecuteNode(node.GetChild(i), context);
                 break;
+            
+            case AstNodeType.OR:
+                for (int i = 0; i < node.ChildCount; i++)
+                    ExecuteNode(node.GetChild(i), context);
+                break;
+            
+            case AstNodeType.COMPARE:
+                IdentDescr tmpCmp0 = null;
+                IdentDescr tmpCmp1 = null;
+                CommonTree nodeCmp0 = (CommonTree)node.GetChild(0);
+                if (nodeCmp0.Type != AstNodeType.STRING && nodeCmp0.Type != AstNodeType.REAL && nodeCmp0.Type != AstNodeType.INTEGER)
+                {
+                    tmpCmp0 = context.find_var(nodeCmp0.Text);
+                    if (null == tmpCmp0)
+                        throw new SemException("переменная не описана " + nodeCmp0.Text + " " + nodeCmp0.Line);
+                }
+
+                CommonTree nodeCmp1 = (CommonTree)node.GetChild(1);
+                if (nodeCmp1.Type != AstNodeType.STRING && nodeCmp1.Type != AstNodeType.REAL && nodeCmp1.Type != AstNodeType.INTEGER)
+                {
+                    tmpCmp1 = context.find_var(nodeCmp1.Text);
+                    if (null == tmpCmp1)
+                        throw new SemException("переменная не описана " + nodeCmp1.Text + " " + nodeCmp1.Line);
+                }
+
+                if ((null == tmpCmp0) && (null == tmpCmp1))
+                    validate_compare(nodeCmp0, nodeCmp1);
+                else if ((null != tmpCmp0) && (null != tmpCmp1))
+                    validate_compare(tmpCmp0, tmpCmp1);
+                else if ((null != tmpCmp0) && (null == tmpCmp1))
+                    validate_compare(nodeCmp1, tmpCmp0);
+                else if ((null == tmpCmp0) && (null != tmpCmp1))
+                    validate_compare(nodeCmp0, tmpCmp1);
+                    break;
 
             case AstNodeType.ADD:
                 //тут, как и везде, присутствуют только два childs
@@ -378,16 +411,16 @@ namespace MathExpr
 
                 break;
             case AstNodeType.MUL:
-                //строки перемножать нельзя, так же как и строку на число (по-моему) так что на забудь сделат на это проверку
-                // скорее всего их(строе) тут и не должно быть
+                add_div_sub(node, "умножать");
                 break;
 
             case AstNodeType.DIV:
-                //здесь вообще строк не должно быть
+                add_div_sub(node, "делить");
                 break;
+
             case AstNodeType.SUB:
-                //здесь вообще строк не должно быть
-            break;
+                add_div_sub(node, " вычитать ");
+                break;
 
 
             case AstNodeType.BLOCK:
@@ -404,6 +437,52 @@ namespace MathExpr
 
     public void Execute() {
         ExecuteNode(programNode, context);
+    }
+
+
+    private void add_div_sub(ITree node, string mess)
+    {
+        ITree parentm = node.Parent;
+        while (parentm.Type != AstNodeType.ASSIGN)
+            parentm = parentm.Parent;
+
+        IdentDescr identMul = context.find_var(parentm.GetChild(0).Text);
+        IdentDescr tmpMul;
+
+
+        if (identMul.dataType.type == DataType.Type.my_string)
+            throw new IntepreterException("Нельзя "+ mess +" строки " + parentm.Line);
+        else
+        {
+            CommonTree nodeMul0 = (CommonTree)node.GetChild(0);
+            if (nodeMul0.Type == AstNodeType.ADD || nodeMul0.Type == AstNodeType.MUL || nodeMul0.Type == AstNodeType.DIV || nodeMul0.Type == AstNodeType.SUB)
+                ExecuteNode(node.GetChild(0), context);
+            else if (nodeMul0.Type != AstNodeType.STRING && nodeMul0.Type != AstNodeType.REAL && nodeMul0.Type != AstNodeType.INTEGER)
+            {
+                tmpMul = context.find_var(nodeMul0.Text);
+                if (null == tmpMul)
+                    throw new SemException("переменная не описана " + nodeMul0.Text + " " + nodeMul0.Line);
+                validate_convert(nodeMul0, tmpMul, identMul);
+                mass_convert(identMul, 0, nodeMul0, tmpMul);
+            }
+
+            CommonTree nodeMul1 = (CommonTree)node.GetChild(1);
+            if (nodeMul1.Type == AstNodeType.ADD || nodeMul1.Type == AstNodeType.MUL || nodeMul1.Type == AstNodeType.DIV || nodeMul1.Type == AstNodeType.SUB)
+                ExecuteNode(node.GetChild(0), context);
+            else if (nodeMul1.Type != AstNodeType.STRING && nodeMul1.Type != AstNodeType.REAL && nodeMul1.Type != AstNodeType.INTEGER)
+            {
+                tmpMul = context.find_var(nodeMul1.Text);
+                if (null == tmpMul)
+                    throw new SemException("переменная не описана " + nodeMul1.Text + " " + nodeMul1.Line);
+                validate_convert(nodeMul1, tmpMul, identMul);
+                mass_convert(identMul, 1, nodeMul1, tmpMul);
+            }
+
+            validate_convert(nodeMul0, identMul);
+            validate_convert(nodeMul1, identMul);
+            mass_convert(identMul, 0, nodeMul0);
+            mass_convert(identMul, 1, nodeMul1);
+        }
     }
 
     private void ConvertType(ITree node, int toType, int pos)
@@ -448,7 +527,26 @@ namespace MathExpr
                 break;
         }
     }
+    private void validate_convert1(CommonTree node, IdentDescr ident)
+    {
+        switch (node.Type)
+        {
 
+            case AstNodeType.INTEGER:
+                if (ident.dataType.type != DataType.Type.my_string)
+                {
+                    throw new SemException("Ошибка  " + node.Parent.Line);
+                }
+                break;
+
+            case AstNodeType.STRING:
+                if (ident.dataType.type != DataType.Type.my_integer)
+                {
+                    throw new SemException("Ошибка  " + node.Parent.Line);
+                }
+                break;
+        }
+    }
     private void validate_convert(CommonTree node,IdentDescr ident1, IdentDescr to_ident)
     {
         switch (ident1.dataType.type)
@@ -464,6 +562,83 @@ namespace MathExpr
                 {
                     throw new SemException("Невозможно преобразовать string в число " + node.Parent.Line);
                 }
+                break;
+        }
+    }
+
+    private void validate_compare(IdentDescr i1, IdentDescr i2)
+    {
+        switch (i1.dataType.type)
+        {
+            case DataType.Type.my_string:
+                switch (i2.dataType.type)
+                {
+                    case DataType.Type.my_real:
+                        throw new SemException("can't compare string and real");
+                    case DataType.Type.my_integer:
+                        throw new SemException("can't compare string and integer");
+                }
+                break;
+            case DataType.Type.my_real:
+                if (i2.dataType.type == DataType.Type.my_string)
+                    throw new SemException("can't compare string and real");
+                break;
+            case DataType.Type.my_integer:
+                if (i2.dataType.type == DataType.Type.my_string)
+                    throw new SemException("can't compare string and real");
+                break;
+         
+        }
+        
+        
+
+    }
+
+    private void validate_compare(ITree i1,  IdentDescr i2)
+    {
+        switch (i1.Type)
+        {
+            case AstNodeType.STRING:
+                switch (i2.dataType.type)
+                {
+                    case DataType.Type.my_real:
+                        throw new SemException("can't compare string and real");
+                    case DataType.Type.my_integer:
+                        throw new SemException("can't compare string and integer");
+                }
+                break;
+            case AstNodeType.REAL:
+                if (i2.dataType.type == DataType.Type.my_string)
+                    throw new SemException("can't compare string and real");
+                break;
+            case AstNodeType.INTEGER:
+                if (i2.dataType.type == DataType.Type.my_string)
+                    throw new SemException("can't compare string and integer");
+                break;
+        }
+
+    }
+
+    private void validate_compare(ITree t1, ITree t2)
+    {
+        switch (t1.Type)
+        {
+            case AstNodeType.STRING:
+                switch (t2.Type)
+                {
+                    case AstNodeType.REAL:
+                        throw new SemException("can't compare string and real");
+                    case AstNodeType.INTEGER:
+                        throw new SemException("can't compare string and integer");
+                }
+                break;
+            case AstNodeType.REAL:
+                if(t2.Type == AstNodeType.STRING)
+                    throw new SemException("can't compare string and real");
+                break;
+            case AstNodeType.INTEGER:
+                if (t2.Type == AstNodeType.STRING)
+                    throw new SemException("can't compare string and integer");
                 break;
         }
     }
