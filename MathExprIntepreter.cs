@@ -298,10 +298,28 @@ namespace MathExpr
                 break;
             
             case AstNodeType.REPEAT:
+                
                 break;
 
             case AstNodeType.FOR:
                 //необходимо проверить, что переменная по которой идет счет описана, какие еще могут быть ошибки?
+                CommonTree nodeFor0 = (CommonTree)node.GetChild(0);
+                IdentDescr identFor = context.find_var(nodeFor0.Text);
+                if (null == identFor)
+                {
+                    throw new SemException("Переменная не описана: строка " + nodeFor0.Line);
+                }
+                if (identFor.dataType.type != DataType.Type.my_integer)
+                    throw new SemException("невозможен цикл for не по integer");
+                CommonTree nodeFor1 = (CommonTree)node.GetChild(1);
+                if (nodeFor1.Type != AstNodeType.INTEGER)
+                    throw new SemException("узел не integer " + nodeFor1.Line);
+                CommonTree nodeFor2 = (CommonTree)node.GetChild(2);
+                if (nodeFor2.Type != AstNodeType.INTEGER)
+                    throw new SemException("узел не integer " + nodeFor0.Line);
+                ExecuteNode(node.GetChild(3), context);  
+
+
                 break;
             case AstNodeType.WHILE:
                 break;
@@ -320,12 +338,32 @@ namespace MathExpr
                 while (parent.Type != AstNodeType.ASSIGN)
                     parent = parent.Parent;
                 IdentDescr ident1 = context.find_var(parent.GetChild(0).Text);
+                IdentDescr tmp;
                 
                 CommonTree nodeAdd0 = (CommonTree)node.GetChild(0);
-                if (nodeAdd0.Type == AstNodeType.ADD)
+                if (nodeAdd0.Type == AstNodeType.ADD || nodeAdd0.Type == AstNodeType.MUL || nodeAdd0.Type == AstNodeType.DIV || nodeAdd0.Type == AstNodeType.SUB)
                     ExecuteNode(node.GetChild(0), context);
+                else if (nodeAdd0.Type != AstNodeType.STRING && nodeAdd0.Type != AstNodeType.REAL && nodeAdd0.Type != AstNodeType.INTEGER)
+                {
+                    tmp = context.find_var(nodeAdd0.Text);
+                    if (null == tmp)
+                        throw new SemException("переменная не описана " + nodeAdd0.Text +" "+ nodeAdd0.Line);
+                    validate_convert(nodeAdd0, tmp, ident1);
+                    mass_convert(ident1, 0, nodeAdd0,tmp);
+                }
+
                 CommonTree nodeAdd1 = (CommonTree)node.GetChild(1);
-                
+                if (nodeAdd1.Type == AstNodeType.ADD || nodeAdd1.Type == AstNodeType.MUL || nodeAdd1.Type == AstNodeType.DIV || nodeAdd1.Type == AstNodeType.SUB)
+                    ExecuteNode(node.GetChild(1), context);
+                else if (nodeAdd1.Type != AstNodeType.STRING && nodeAdd1.Type != AstNodeType.REAL && nodeAdd1.Type != AstNodeType.INTEGER)
+                {
+                    tmp = context.find_var(nodeAdd1.Text);
+                    if (null == tmp)
+                        throw new SemException("переменная не описана " + nodeAdd1.Text + " " + nodeAdd0.Line);
+                    validate_convert(nodeAdd1, tmp, ident1);
+                    mass_convert(ident1, 1, nodeAdd1, tmp);
+                }
+
                 validate_convert(nodeAdd0, ident1);
                 validate_convert(nodeAdd1, ident1);
                 mass_convert(ident1, 0, nodeAdd0);
@@ -404,6 +442,25 @@ namespace MathExpr
         }
     }
 
+    private void validate_convert(CommonTree node,IdentDescr ident1, IdentDescr to_ident)
+    {
+        switch (ident1.dataType.type)
+        {
+            case DataType.Type.my_real:
+                if (to_ident.dataType.type == DataType.Type.my_integer)
+                {
+                    throw new SemException("Невозможно преобразовать real в integer " + node.Parent.Line);
+                }
+                break;
+            case DataType.Type.my_string:
+                if (to_ident.dataType.type != DataType.Type.my_string)
+                {
+                    throw new SemException("Невозможно преобразовать string в число " + node.Parent.Line);
+                }
+                break;
+        }
+    }
+
     private void mass_convert(IdentDescr ident, int pos, ITree node)
     {
         switch (node.Type)
@@ -428,6 +485,33 @@ namespace MathExpr
 
         }
     }
+
+    private void mass_convert(IdentDescr ident, int pos, ITree node, IdentDescr from_ident)
+    {
+        switch (from_ident.dataType.type)
+        {
+            case DataType.Type.my_integer:
+                if (ident.dataType.type == DataType.Type.my_real)
+                {
+                    ConvertType(node, AstNodeType.REAL, pos);
+                }
+                else if (ident.dataType.type == DataType.Type.my_string)
+                {
+                    ConvertType(node, AstNodeType.STRING, pos);
+                }
+                break;
+            case DataType.Type.my_real:
+                if (ident.dataType.type == DataType.Type.my_string)
+                {
+                    ConvertType(node, AstNodeType.STRING, pos);
+                }
+                break;
+
+
+        }
+    }
+    
+
     public static void Execute(ITree programNode, Context context) {
         MathExprIntepreter mei=new MathExprIntepreter(programNode, context);
         mei.Execute();
