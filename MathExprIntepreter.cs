@@ -298,7 +298,8 @@ namespace MathExpr
                 break;
             
             case AstNodeType.REPEAT:
-                
+                for (int i = 0; i< node.ChildCount; i ++ )
+                    ExecuteNode(node.GetChild(i), context);
                 break;
 
             case AstNodeType.FOR:
@@ -322,9 +323,15 @@ namespace MathExpr
 
                 break;
             case AstNodeType.WHILE:
+                for (int i = 0; i < node.ChildCount; i++)
+                    ExecuteNode(node.GetChild(i), context);
                 break;
 
             case AstNodeType.IF:
+                if (node.GetChild(0).Type == AstNodeType.COMPARE)
+                {
+                    ExecuteNode(node.GetChild(0), context);
+                }
                 break;
             
                 // возможно, реализация будет не нужна. тут же дерево строиться будет только

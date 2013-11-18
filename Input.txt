@@ -6,14 +6,12 @@ var
 	d: string;
 	dd: real;
 begin
-	
-	repeat
-		a := a + sad;
-		a := a + 1;
-	until a <2; 
 
-	
 
+	if ((a<2) > (a > 0)) then
+	begin
+		a:= 3;
+	end;
 end;
 
 
