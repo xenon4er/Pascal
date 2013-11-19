@@ -292,9 +292,10 @@ namespace MathExpr
                     default:
                         ExecuteNode(nodeAssign1, context);
                         break;
+                        
 
                 }
-               
+                    ident.init = true;
                 break;
             
             case AstNodeType.REPEAT:
@@ -309,6 +310,10 @@ namespace MathExpr
                 if (null == identFor)
                 {
                     throw new SemException("Переменная не описана: строка " + nodeFor0.Line);
+                }
+                if (identFor.init == false)
+                {
+                    throw new SemException("Переменной не присвоено значение " +  nodeFor0.Line);
                 }
                 if (identFor.dataType.type != DataType.Type.my_integer)
                     throw new SemException("невозможен цикл for не по integer");
@@ -351,6 +356,10 @@ namespace MathExpr
                     tmpCmp0 = context.find_var(nodeCmp0.Text);
                     if (null == tmpCmp0)
                         throw new SemException("переменная не описана " + nodeCmp0.Text + " " + nodeCmp0.Line);
+                    if (tmpCmp0.init == false)
+                    {
+                        throw new SemException("Переменной не присвоено значение " + nodeCmp0.Line);
+                    }
                 }
 
                 CommonTree nodeCmp1 = (CommonTree)node.GetChild(1);
@@ -359,6 +368,10 @@ namespace MathExpr
                     tmpCmp1 = context.find_var(nodeCmp1.Text);
                     if (null == tmpCmp1)
                         throw new SemException("переменная не описана " + nodeCmp1.Text + " " + nodeCmp1.Line);
+                    if (tmpCmp1.init == false)
+                    {
+                        throw new SemException("Переменной не присвоено значение " + nodeCmp1.Line);
+                    }
                 }
 
                 if ((null == tmpCmp0) && (null == tmpCmp1))
@@ -388,6 +401,10 @@ namespace MathExpr
                     tmp = context.find_var(nodeAdd0.Text);
                     if (null == tmp)
                         throw new SemException("переменная не описана " + nodeAdd0.Text +" "+ nodeAdd0.Line);
+                    if (tmp.init == false)
+                    {
+                        throw new SemException("Переменной не присвоено значение " + parent.Line);
+                    }
                     validate_convert(nodeAdd0, tmp, ident1);
                     mass_convert(ident1, 0, nodeAdd0,tmp);
                 }
@@ -400,6 +417,10 @@ namespace MathExpr
                     tmp = context.find_var(nodeAdd1.Text);
                     if (null == tmp)
                         throw new SemException("переменная не описана " + nodeAdd1.Text + " " + nodeAdd0.Line);
+                    if (tmp.init == false)
+                    {
+                        throw new SemException("Переменной не присвоено значение " + parent.Line);
+                    }
                     validate_convert(nodeAdd1, tmp, ident1);
                     mass_convert(ident1, 1, nodeAdd1, tmp);
                 }
@@ -462,6 +483,10 @@ namespace MathExpr
                 tmpMul = context.find_var(nodeMul0.Text);
                 if (null == tmpMul)
                     throw new SemException("переменная не описана " + nodeMul0.Text + " " + nodeMul0.Line);
+                if (tmpMul.init == false)
+                {
+                    throw new SemException("Переменной не присвоено значение " + nodeMul0.Line);
+                }
                 validate_convert(nodeMul0, tmpMul, identMul);
                 mass_convert(identMul, 0, nodeMul0, tmpMul);
             }
@@ -474,6 +499,10 @@ namespace MathExpr
                 tmpMul = context.find_var(nodeMul1.Text);
                 if (null == tmpMul)
                     throw new SemException("переменная не описана " + nodeMul1.Text + " " + nodeMul1.Line);
+                if (tmpMul.init == false)
+                {
+                    throw new SemException("Переменной не присвоено значение " + nodeMul1.Line);
+                }
                 validate_convert(nodeMul1, tmpMul, identMul);
                 mass_convert(identMul, 1, nodeMul1, tmpMul);
             }

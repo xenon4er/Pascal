@@ -6,11 +6,9 @@ var
 	d: string;
 	dd: real;
 begin
-	d := 2+6+a*4/6 - "sd";
-	if ((d < "ds") and (a > 0)) then
-	begin
-		a:= 3;
-	end;
+	a:=2;
+	c := 2+6+a*4/6 ;
+	
 end;
 
 
