@@ -19,8 +19,8 @@
     ldc.i4.s 1
     sub
     brfalse.s L_0002
-    ldloc.s 0
-    call void [mscorlib]System.Console::WriteLine(int32)
+    ldc.r4 3.5
+    call void [mscorlib]System.Console::WriteLine(float32)
     ldloc.s 0
     ldc.i4.s 1
     add

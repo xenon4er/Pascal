@@ -69,13 +69,11 @@ namespace MathExpr
                     msil.Append(string.Format("    ldloc.s {0}\n", vars[node.Text]));
                     break;
                 
-                case AstNodeType.INTEGER:
-                    msil.Append(string.Format("    ldc.i4.s {0}\n", node.Text));
-                    break;
+               
                 
                 case AstNodeType.FUNC_CALL:
                     Generate(node.GetChild(1).GetChild(0));
-                    msil.Append(string.Format("    call void [mscorlib]System.Console::WriteLine(int32)\n"));
+                    msil.Append(string.Format("    call void [mscorlib]System.Console::WriteLine(float32)\n"));
                     break;
 
                 case AstNodeType.ADD:
@@ -138,10 +136,15 @@ namespace MathExpr
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
                     break;
 
-                case AstNodeType.REAL:
+
+                case AstNodeType.INTEGER:
                     msil.Append(string.Format("    ldc.i4.s {0}\n", node.Text));
                     break;
+                case AstNodeType.REAL:
+                    msil.Append(string.Format("    ldc.r4 {0}\n", node.Text)); // what is ".s" ?
+                    break;
                 case AstNodeType.STRING:
+                    msil.Append(string.Format("    ldstr {0}\n", node.Text));
                     break;
 
                 case AstNodeType.REPEAT:
