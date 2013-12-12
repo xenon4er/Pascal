@@ -112,6 +112,7 @@ namespace MathExpr
                             break;
 
                         case AstNodeType.PARAMS:
+                            //ExecuteNode(child.GetChild(0), newContext);
                             break;
                     }
                 }
@@ -119,6 +120,8 @@ namespace MathExpr
                 if (context.if_exists(newIdentFunc.name))
                     throw new IntepreterException("функция уже описана: строка " +  childName.Line);
                 context.idents.AddLast(newIdentFunc);
+
+
                 break;
 
 

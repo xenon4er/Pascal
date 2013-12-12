@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Context.cs" />
     <Compile Include="DataType.cs" />
+    <Compile Include="msil.cs" />
     <Compile Include="Parametr.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ParserBaseException.cs" />

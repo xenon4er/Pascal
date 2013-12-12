@@ -28,7 +28,9 @@ namespace MathExpr
         ITree program = (ITree)parser.execute().Tree;
         AstNodePrinter.Print(program);
         Console.WriteLine();
-        MathExprIntepreter.Execute(program, mainContext);
+        //MathExprIntepreter.Execute(program, mainContext);
+        string msil = MSILGenerator.GenerateMSIL(program);
+        Console.WriteLine(msil);
         AstNodePrinter.Print(program);
       }
       catch (Exception e) {

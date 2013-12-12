@@ -1,18 +1,4 @@
 ;;; ;;;;;
+	for i := 0 to 100 do
+		print(i);
 
-var
-	a,c:real;
-	b:integer;
-	d: string;
-	dd: real;
-begin
-	a:=2;
-	c := 2+6+a*4/6 ;
-	
-end;
-
-
-
-
-
-;;;;;
