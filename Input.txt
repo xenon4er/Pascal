@@ -1,5 +1,8 @@
 ;;; ;;;;;
-	for i := 0 to 100 do
-		print("as");
-               
+i:=0;
+while (i<=6) do
+begin
+	i:= i+1;				
+	print(i);
+end;          
 

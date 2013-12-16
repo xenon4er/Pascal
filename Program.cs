@@ -29,7 +29,7 @@ namespace MathExpr
         AstNodePrinter.Print(program);
         Console.WriteLine();
         //MathExprIntepreter.Execute(program, mainContext);
-        string msil = MSILGenerator.GenerateMSIL(program);
+        string msil = MSIL.GenerateMSIL(program);
         Console.WriteLine(msil);
         AstNodePrinter.Print(program);
       }
