@@ -14,16 +14,16 @@
     stloc.s 0
   L_0001:
     ldloc.s 0
-    ldc.i4.s 6
-    ble L_0003
-    br.s L_0002
-  L_0003:
-    ldloc.s 0
     ldc.i4.s 1
     add
     stloc.s 0
     ldloc.s 0
     call void [mscorlib]System.Console::WriteLine(int32)
+    ldc.i4.s 6
+    ldc.i4.s 6
+    blt L_0003
+    br.s L_0002
+  L_0003:
     br.s L_0001
   L_0002:
     ret

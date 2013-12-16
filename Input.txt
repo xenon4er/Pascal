@@ -1,8 +1,6 @@
 ;;; ;;;;;
 i:=0;
-while (i<=6) do
-begin
+repeat
 	i:= i+1;				
 	print(i);
-end;          
-
+until (6 < 6);

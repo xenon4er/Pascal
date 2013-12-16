@@ -148,8 +148,24 @@ namespace MathExpr
                     break;
 
                 case AstNodeType.REPEAT:
-                    //this you write code for reapeat cycle
-                    break;
+                    tempLabIndex = labIndex;
+                    labIndex += 2;
+                    msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 1));
+                    /*
+                    Generate(node.GetChild(0));
+                    //msil.Append(string.Format("    brfalse.s L_{0:X4}\n", tempLabIndex + 2));
+                    Generate(node.GetChild(1));
+                    msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 1));
+                    msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
+                    */
+                    for (int i = 0; i < node.ChildCount - 1; i++)
+                        Generate(node.GetChild(i));
+                    
+                    Generate(node.GetChild(node.ChildCount - 1));
+                    msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 1));
+                    msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
+                    
+                        break;
 
                 case AstNodeType.VAR:
                     break;
@@ -164,8 +180,6 @@ namespace MathExpr
                     tempLabIndex = labIndex;
                     labIndex += 2;
 
-                    //ITree node1 = node.GetChild(0);
-                    //ITree node2 = node.GetChild(1);
                     Generate(node.GetChild(0));
                     Generate(node.GetChild(1));
                     switch (node.Text)
