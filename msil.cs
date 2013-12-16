@@ -168,6 +168,7 @@ namespace MathExpr
                         break;
 
                 case AstNodeType.VAR:
+                        
                     break;
 
                 case AstNodeType.FUNCTION:
@@ -221,6 +222,7 @@ namespace MathExpr
 
                 case AstNodeType.OR:
                     break;
+
                 case AstNodeType.BLOCK:
                 case AstNodeType.PROGRAM:
                     for (int i = 0; i < node.ChildCount; i++)

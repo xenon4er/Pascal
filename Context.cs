@@ -8,7 +8,8 @@ namespace MathExpr
     {
         public Context upper;
         public LinkedList<IdentDescr> idents = new LinkedList<IdentDescr>();
-        
+        public LinkedList<Parametr> parametrs = new LinkedList<Parametr>();
+
         public bool if_exists(string name)
         {
             LinkedListNode<IdentDescr> k;

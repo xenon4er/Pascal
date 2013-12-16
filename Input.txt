@@ -1,11 +1,11 @@
 ;;; ;;;;;
 
-for i:=0 to 5 do 
-begin
-	a:=0;
-	while (a<5) do 
+	procedure MaxNumber(a,b: integer; max: integer);
 	begin
-		a := a + 1;
-		print (a);
+	   if a>b then max:=a else max:=b;
 	end;
-end;
+
+	begin
+	   MaxNumber(x,y);
+	   MaxNumber(2,x+y,n);
+	end;

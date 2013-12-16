@@ -124,6 +124,42 @@ namespace MathExpr
 
                 break;
 
+            case AstNodeType.PARAMS:
+                // при добавлении параметров заполнять позиции, чтобы потом смотреть
+                for (int i = 0; i < node.ChildCount; i++)
+                {
+                    CommonTree childNode = (CommonTree)node.GetChild(i);
+                    DataType.Type type = DataType.Type.None;
+                    CommonTree childType = (CommonTree)childNode.GetChild(0);
+                    switch (childType.Type)
+                    {
+                        case AstNodeType.STRING:
+                            type = DataType.Type.my_string;
+                            break;
+                        case AstNodeType.INTEGER:
+                            type = DataType.Type.my_integer;
+                            break;
+                        case AstNodeType.REAL:
+                            type = DataType.Type.my_real;
+                            break;
+
+                    }
+                    for (int j = 1; j < childNode.ChildCount; j++)
+                    {
+                        CommonTree childIdent = (CommonTree)childNode.GetChild(j);
+                        IdentDescr newIdent = new IdentDescr();
+                        newIdent.varType = IdentDescr.VarType.var;
+                        newIdent.dataType.demention = 0;
+                        newIdent.name = childIdent.Text;
+                        newIdent.dataType.type = type;
+
+                        if (context.if_exists(newIdent.name))
+                            throw new IntepreterException("переменная уже описана: строка " + childIdent.Line); //add string where was exception
+
+                        context.idents.AddLast(newIdent);
+                    }
+                }
+                break;
 
             case AstNodeType.PROCEDURE:
                 Context P_Context = new Context();
