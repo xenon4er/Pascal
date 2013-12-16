@@ -1,6 +1,11 @@
 ;;; ;;;;;
-i:=0;
-repeat
-	i:= i+1;				
-	print(i);
-until (6 < 6);
+
+for i:=0 to 5 do 
+begin
+	a:=0;
+	while (a<5) do 
+	begin
+		a := a + 1;
+		print (a);
+	end;
+end;
