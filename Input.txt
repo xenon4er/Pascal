@@ -2,12 +2,12 @@
 var
 	i,k,r : integer;
 begin
-	function a(aa:integer;b:string):integer;		
+	procedure a(aa:integer;b:string);		
 	begin
 		aa:=2;
 	end;
 
-	a("s",1);
+	a(1,"s");
 	i:=1;
 	k:=5;
 	r:=1;

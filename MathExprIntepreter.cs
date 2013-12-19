@@ -178,15 +178,15 @@ namespace MathExpr
                 IdentDescr newIdentProc = new IdentDescr();
                 DataType.Type type_return_p = DataType.Type.None;
                 newIdentProc.dataType.type = type_return_p;
-                CommonTree childName_p = (CommonTree)node.GetChild(1);
+                CommonTree childName_p = (CommonTree)node.GetChild(0);
                 newIdentProc.name = childName_p.Text;
 
                 P_Context.f_p_name = newIdentProc.name;
 
-                newIdentProc.varType = IdentDescr.VarType.ret_value;
+                newIdentProc.varType = IdentDescr.VarType.proc;
                 newIdentProc.dataType.demention = 0;
                 
-                for (int i = 2; i < node.ChildCount; i++)
+                for (int i = 1; i < node.ChildCount; i++)
                 {
                     CommonTree child = (CommonTree)node.GetChild(i);
                     switch(child.Type)

@@ -5,7 +5,7 @@ namespace MathExpr
   {
       //public const int VAR = 1;
 
-      public enum VarType { var, parametr, ret_value }; // var or parametr
+      public enum VarType { var, parametr, ret_value, proc }; // var or parametr
       public bool init = false;
       public string name
       {
