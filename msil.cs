@@ -58,7 +58,7 @@ namespace MathExpr
         private void Generate(ITree node, Context context)
         {
             int tempLabIndex;
-
+            ITree child = null;
             switch (node.Type)
             {
                 case AstNodeType.ASSIGN:
@@ -73,8 +73,39 @@ namespace MathExpr
                
                 
                 case AstNodeType.FUNC_CALL:
-                    Generate(node.GetChild(1).GetChild(0), context);
-                    msil.Append(string.Format("    call void [mscorlib]System.Console::WriteLine(int32)\n"));
+
+
+                    child = node.GetChild(0);
+                    if (child.Text == "print")
+                    {
+                        child = node.GetChild(1).GetChild(0);
+                        Generate(child, context);
+                        int t = child.Type;
+                        if (t == AstNodeType.IDENT)
+                        {
+                            IdentDescr ident = context.find_var(child.Text);
+                            if (ident.dataType.type == DataType.Type.my_integer)
+                                t = AstNodeType.INTEGER;
+                            if (ident.dataType.type == DataType.Type.my_real)
+                                t = AstNodeType.REAL;
+                            if (ident.dataType.type == DataType.Type.my_string)
+                                t = AstNodeType.STRING;
+
+                        }
+                        if (t == AstNodeType.INTEGER)
+                            msil.Append(string.Format("    call void [mscorlib]System.Console::WriteLine(int32)\n"));
+                        if (t == AstNodeType.STRING)
+                            msil.Append(string.Format("    call void [mscorlib]System.Console::WriteLine(string)\n"));
+                        if (t == AstNodeType.REAL)
+                            msil.Append(string.Format("    call void [mscorlib]System.Console::WriteLine(float32)\n"));
+
+                    }
+                    else
+                    {
+                        
+                        Generate(node.GetChild(1).GetChild(0), context);
+                        msil.Append(string.Format("    call void [mscorlib]System.Console::WriteLine(int32)\n"));
+                    }
                     break;
 
                 case AstNodeType.ADD:

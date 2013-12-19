@@ -1,25 +1,9 @@
 ;;; ;;;;;
 var
 	i,k,r : integer;
+	b:real;
 begin
-	procedure a(aa:integer;b:string);		
-	begin
-		function b(f:integer):real;
-		begin
-			print(2);
-		end;
-
-		aa:=2;
-	end;
-	a(1,"s");
-	i:=1;
-	k:=5;
-	r:=1;
-	while (i<=k) do
-	begin
-		r:=r*i;
-		i:=i+1;
-		print(r);
-	end;
+	b:=6.5;
+	print(b);
 end;
 	;;;
