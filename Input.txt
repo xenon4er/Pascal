@@ -4,9 +4,13 @@ var
 begin
 	procedure a(aa:integer;b:string);		
 	begin
+		function b(f:integer):real;
+		begin
+			print(2);
+		end;
+
 		aa:=2;
 	end;
-
 	a(1,"s");
 	i:=1;
 	k:=5;

@@ -15,8 +15,10 @@ namespace MathExpr
 
     public static void Main(string[] args) {  
      try {
+         mainContext.f_p_name = "print";
          IdentDescr iden = new IdentDescr();
          iden.name = "print";
+         iden.varType = VarDescr.VarType.proc;
          mainContext.idents.AddLast(iden);
          mainContext.upper = null;
          /*необходимо заполнить контекст стандартными данными*/

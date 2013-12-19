@@ -63,7 +63,7 @@ namespace MathExpr
                         newIdent.name = childIdent.Text;
                         newIdent.dataType.type = type;
 
-                        if(context.if_exists(newIdent.name))
+                        if (context.if_exists(newIdent.name, VarDescr.VarType.var, VarDescr.VarType.parametr))
                             throw new IntepreterException("переменная уже описана: строка " + childIdent.Line); //add string where was exception
                         
                         context.idents.AddLast(newIdent);
@@ -74,9 +74,10 @@ namespace MathExpr
            
             case AstNodeType.FUNCTION:
                 Context newContext = new Context();
-                this.context.childs.AddLast(newContext);
                 newContext.upper = this.context;
-                
+                this.context.childs.AddLast(newContext);
+                this.context = newContext;
+
                 IdentDescr newIdentFunc = new IdentDescr();
                 DataType.Type type_return = DataType.Type.None;
                 CommonTree childTypeReturn = (CommonTree)node.GetChild(0);
@@ -121,7 +122,7 @@ namespace MathExpr
                     }
                 }
 
-                if (context.if_exists(newIdentFunc.name))
+                if (context.if_exists(newIdentFunc.name, VarDescr.VarType.ret_value, VarDescr.VarType.proc))
                     throw new IntepreterException("функция уже описана: строка " +  childName.Line);
                 context.idents.AddLast(newIdentFunc);
 
@@ -162,7 +163,7 @@ namespace MathExpr
                         newIdent.dataType.type = type;
                         newIdent.pos = i;
 
-                        if (context.if_exists(newIdent.name))
+                        if (context.if_exists(newIdent.name, VarDescr.VarType.var, VarDescr.VarType.parametr))
                             throw new IntepreterException("переменная уже описана: строка " + childIdent.Line); //add string where was exception
 
                         context.idents.AddLast(newIdent);
@@ -172,8 +173,9 @@ namespace MathExpr
 
             case AstNodeType.PROCEDURE:
                 Context P_Context = new Context();
-                this.context.childs.AddLast(P_Context);
                 P_Context.upper = this.context;
+                this.context.childs.AddLast(P_Context);
+                this.context = P_Context;
 
                 IdentDescr newIdentProc = new IdentDescr();
                 DataType.Type type_return_p = DataType.Type.None;
@@ -204,7 +206,7 @@ namespace MathExpr
                     }
                 }
 
-                if (context.if_exists(newIdentProc.name))
+                if (context.if_exists(newIdentProc.name, VarDescr.VarType.proc, VarDescr.VarType.ret_value))
                     throw new IntepreterException("процедура уже описана: строка " +  childName_p.Line);
                 context.idents.AddLast(newIdentProc);
        
@@ -218,10 +220,13 @@ namespace MathExpr
                 IdentDescr newIdentFunc_call = new IdentDescr();
                 CommonTree childName_func_call = (CommonTree)node.GetChild(0);
                 newIdentFunc_call.name = childName_func_call.Text;
-                
+
+
+                if (newIdentFunc_call.name == "print")
+                    break;
                 //Context Func_call_Context = find_context(newIdentFunc_call.name);
-                if (!context.if_exists(newIdentFunc_call.name))
-                    throw new IntepreterException("not found: line " + childName_func_call.Line);
+                if (!context.if_exists_everywhere(newIdentFunc_call.name))
+                    throw new IntepreterException("function or procedure \"" + newIdentFunc_call.name + "\" not found: line " + childName_func_call.Line);
                 
                 //newIdentFunc_call.varType = IdentDescr.VarType.ret_value;
                 //newIdentFunc_call.dataType.demention = 0;

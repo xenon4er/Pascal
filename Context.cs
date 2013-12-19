@@ -12,14 +12,36 @@ namespace MathExpr
         public LinkedList<Parametr> parametrs = new LinkedList<Parametr>();
         public string f_p_name = "";
 
-        public bool if_exists(string name)
+        public bool if_exists(string name, VarDescr.VarType t1, VarDescr.VarType t2)
         {
             LinkedListNode<IdentDescr> k;
             for (k = idents.First; k != null; k = k.Next)
             {
                 if (k.Value.name.CompareTo(name) == 0)
-                    return true;
+                    if((k.Value.varType==t1)||(k.Value.varType==t2))
+                        return true;
                 
+            }
+            return false;
+        }
+
+        public bool if_exists_everywhere(string name)
+        {
+            LinkedListNode<IdentDescr> k;
+            LinkedList<IdentDescr> tmp = idents;
+            Context tmpCon = this;
+
+            while (tmpCon != null)
+            {
+                for (k = tmp.First; k != null; k = k.Next)
+                {
+                    if (k.Value.name.CompareTo(name) == 0)
+                        return true;
+
+                }
+                tmpCon = tmpCon.upper;
+                if (tmpCon != null)
+                    tmp = tmpCon.idents;
             }
             return false;
         }
@@ -37,7 +59,8 @@ namespace MathExpr
                 for (k = tmp.First; k != null; k = k.Next)
                 {
                     if (k.Value.name.CompareTo(name) == 0)
-                        return k.Value;
+                        if((k.Value.varType==VarDescr.VarType.var)||(k.Value.varType==VarDescr.VarType.parametr))
+                            return k.Value;
                 }
                 tmpCon = tmpCon.upper;
                 if (tmpCon != null)
@@ -69,6 +92,9 @@ namespace MathExpr
             LinkedListNode<Context> i;
             Context tmpCon = this;
 
+            //if (name == "print")
+                //return Program.mainContext;
+
             while (tmpCon != null)
             {
                 for (k = tmp.First; k != null; k = k.Next)
@@ -80,7 +106,6 @@ namespace MathExpr
                             if (i.Value.f_p_name.CompareTo(name) == 0)
                                 return i.Value;
                         }
-                        return null;
                     }
                 }
                 tmpCon = tmpCon.upper;
