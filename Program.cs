@@ -15,6 +15,9 @@ namespace MathExpr
 
     public static void Main(string[] args) {  
      try {
+         IdentDescr iden = new IdentDescr();
+         iden.name = "print";
+         mainContext.idents.AddLast(iden);
          mainContext.upper = null;
          /*необходимо заполнить контекст стандартными данными*/
         
@@ -28,10 +31,12 @@ namespace MathExpr
         ITree program = (ITree)parser.execute().Tree;
         AstNodePrinter.Print(program);
         Console.WriteLine();
-        //MathExprIntepreter.Execute(program, mainContext);
-        string msil = MSIL.GenerateMSIL(program);
-        Console.WriteLine(msil);
+        MathExprIntepreter.Execute(program, mainContext);
         AstNodePrinter.Print(program);
+        
+        string msil = MSIL.GenerateMSIL(program,mainContext);
+        Console.WriteLine(msil);
+        
       }
       catch (Exception e) {
         Console.WriteLine("Error: {0}", e);

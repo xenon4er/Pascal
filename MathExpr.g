@@ -90,7 +90,7 @@ COMPARE: '>' | '>=' | '<' | '<=' | '=' | '<>' ;
 
 group:
   '('! term ')'!
-| REAL -> REAL<NumAstNode>[double.Parse($REAL.text, NFI)]
+| REAL 
 | INTEGER
 | STRING
 | func_call

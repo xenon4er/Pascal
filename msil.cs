@@ -16,14 +16,15 @@ namespace MathExpr
         private Dictionary<string, int> vars = new Dictionary<string, int>();
         private StringBuilder msil = new StringBuilder();
         private int labIndex = 0;
+        private Context programContext = null; 
 
-
-        public MSIL(ITree programNode)
+        public MSIL(ITree programNode, Context proCo)
         {
             if (programNode.Type != AstNodeType.PROGRAM)
                 throw new IntepreterException("AST-дерево не является программой");
 
             this.programNode = programNode;
+            this.programContext = proCo;
         }
 
 
@@ -54,14 +55,14 @@ namespace MathExpr
         }
 
 
-        private void Generate(ITree node)
+        private void Generate(ITree node, Context context)
         {
             int tempLabIndex;
 
             switch (node.Type)
             {
                 case AstNodeType.ASSIGN:
-                    Generate(node.GetChild(1));
+                    Generate(node.GetChild(1),context);
                     msil.Append(string.Format("    stloc.s {0}\n", vars[node.GetChild(0).Text]));
                     break;
 
@@ -72,7 +73,7 @@ namespace MathExpr
                
                 
                 case AstNodeType.FUNC_CALL:
-                    Generate(node.GetChild(1).GetChild(0));
+                    Generate(node.GetChild(1).GetChild(0), context);
                     msil.Append(string.Format("    call void [mscorlib]System.Console::WriteLine(int32)\n"));
                     break;
 
@@ -86,21 +87,21 @@ namespace MathExpr
                                   node.Type == AstNodeType.DIV ? "div" :
                                   "unknown";
 
-                    Generate(node.GetChild(0));
-                    Generate(node.GetChild(1));
+                    Generate(node.GetChild(0),context);
+                    Generate(node.GetChild(1),context);
                     msil.Append(string.Format("    {0}\n", oper));
                     break;
 
                 case AstNodeType.IF:
                     tempLabIndex = labIndex;
                     labIndex += 2;
-                    Generate(node.GetChild(0)); //this must be COMPARE NODE!!!! 
+                    Generate(node.GetChild(0),context); //this must be COMPARE NODE!!!! 
                     //msil.Append(string.Format("    brfalse.s L_{0:X4}\n", tempLabIndex + 1));
-                    Generate(node.GetChild(1));
+                    Generate(node.GetChild(1), context);
                     msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 2));
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 1));
                     if (node.ChildCount > 2)
-                        Generate(node.GetChild(2));
+                        Generate(node.GetChild(2), context);
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
                     break;
 
@@ -108,9 +109,9 @@ namespace MathExpr
                     tempLabIndex = labIndex;
                     labIndex += 2;
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 1));
-                    Generate(node.GetChild(0));
+                    Generate(node.GetChild(0), context);
                     //msil.Append(string.Format("    brfalse.s L_{0:X4}\n", tempLabIndex + 2));
-                    Generate(node.GetChild(1));
+                    Generate(node.GetChild(1), context);
                     msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 1));
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
                     break;
@@ -118,16 +119,16 @@ namespace MathExpr
                 case AstNodeType.FOR:
                     tempLabIndex = labIndex;
                     labIndex += 2;
-                    Generate(node.GetChild(1));
+                    Generate(node.GetChild(1), context);
                     msil.Append(string.Format("    stloc.s {0}\n", vars[node.GetChild(0).Text]));
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 1));
                     msil.Append(string.Format("    ldloc.s {0}\n", vars[node.GetChild(0).Text]));
-                    Generate(node.GetChild(2));
+                    Generate(node.GetChild(2), context);
                     msil.Append(string.Format("    sub\n"));
                     msil.Append(string.Format("    ldc.i4.s {0}\n", 1));
                     msil.Append(string.Format("    sub\n"));
                     msil.Append(string.Format("    brfalse.s L_{0:X4}\n", tempLabIndex + 2));
-                    Generate(node.GetChild(3));
+                    Generate(node.GetChild(3), context);
                     msil.Append(string.Format("    ldloc.s {0}\n", vars[node.GetChild(0).Text]));
                     msil.Append(string.Format("    ldc.i4.s {0}\n", 1));
                     msil.Append(string.Format("    add\n"));
@@ -141,7 +142,7 @@ namespace MathExpr
                     msil.Append(string.Format("    ldc.i4.s {0}\n", node.Text));
                     break;
                 case AstNodeType.REAL:
-                    msil.Append(string.Format("    ldc.r4 {0}\n", node.Text)); // what is ".s" ?
+                    msil.Append(string.Format("    ldc.r4 {0}\n", node.Text)); 
                     break;
                 case AstNodeType.STRING:
                     msil.Append(string.Format("    ldstr {0}\n", node.Text));
@@ -159,9 +160,9 @@ namespace MathExpr
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
                     */
                     for (int i = 0; i < node.ChildCount - 1; i++)
-                        Generate(node.GetChild(i));
-                    
-                    Generate(node.GetChild(node.ChildCount - 1));
+                        Generate(node.GetChild(i), context);
+
+                    Generate(node.GetChild(node.ChildCount - 1), context);
                     msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 1));
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
                     
@@ -181,8 +182,8 @@ namespace MathExpr
                     tempLabIndex = labIndex;
                     labIndex += 2;
 
-                    Generate(node.GetChild(0));
-                    Generate(node.GetChild(1));
+                    Generate(node.GetChild(0), context);
+                    Generate(node.GetChild(1), context);
                     switch (node.Text)
                     {
                         case ">":
@@ -226,7 +227,7 @@ namespace MathExpr
                 case AstNodeType.BLOCK:
                 case AstNodeType.PROGRAM:
                     for (int i = 0; i < node.ChildCount; i++)
-                        Generate(node.GetChild(i));
+                        Generate(node.GetChild(i), context);
                     break;
 
                 default:
@@ -260,7 +261,7 @@ namespace MathExpr
 
                 msil.Append("    )\n");
             }
-            Generate(programNode);
+            Generate(programNode,Program.mainContext);
             msil.Append(string.Format("    ret"));
             msil.Append(@"
   }
@@ -269,9 +270,9 @@ namespace MathExpr
         }
 
 
-        public static string GenerateMSIL(ITree programNode)
+        public static string GenerateMSIL(ITree programNode, Context context)
         {
-            MSIL g = new MSIL(programNode);
+            MSIL g = new MSIL(programNode,context);
             g.NumVariables();
             g.Generate();
             return g.msil.ToString();

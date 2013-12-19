@@ -71,10 +71,12 @@ namespace MathExpr
                 }
                
                 break;
-
+           
             case AstNodeType.FUNCTION:
                 Context newContext = new Context();
+                this.context.childs.AddLast(newContext);
                 newContext.upper = this.context;
+                
                 IdentDescr newIdentFunc = new IdentDescr();
                 DataType.Type type_return = DataType.Type.None;
                 CommonTree childTypeReturn = (CommonTree)node.GetChild(0);
@@ -95,6 +97,8 @@ namespace MathExpr
 
                 CommonTree childName = (CommonTree)node.GetChild(1);
                 newIdentFunc.name = childName.Text; //получили имя функции
+                newContext.f_p_name = newIdentFunc.name;
+
                 newIdentFunc.varType = IdentDescr.VarType.ret_value;
                 newIdentFunc.dataType.demention = 0;
                 
@@ -112,7 +116,7 @@ namespace MathExpr
                             break;
 
                         case AstNodeType.PARAMS:
-                            //ExecuteNode(child.GetChild(0), newContext);
+                            ExecuteNode(child, newContext);
                             break;
                     }
                 }
@@ -147,11 +151,16 @@ namespace MathExpr
                     for (int j = 1; j < childNode.ChildCount; j++)
                     {
                         CommonTree childIdent = (CommonTree)childNode.GetChild(j);
+                        //Parametr newPa = new Parametr();
+                        //newPa.name = childIdent.Text;
+                        //newPa.pos = i;
+                        //newPa.type = type; 
                         IdentDescr newIdent = new IdentDescr();
-                        newIdent.varType = IdentDescr.VarType.var;
+                        newIdent.varType = IdentDescr.VarType.parametr;
                         newIdent.dataType.demention = 0;
                         newIdent.name = childIdent.Text;
                         newIdent.dataType.type = type;
+                        newIdent.pos = i;
 
                         if (context.if_exists(newIdent.name))
                             throw new IntepreterException("переменная уже описана: строка " + childIdent.Line); //add string where was exception
@@ -163,12 +172,17 @@ namespace MathExpr
 
             case AstNodeType.PROCEDURE:
                 Context P_Context = new Context();
+                this.context.childs.AddLast(P_Context);
                 P_Context.upper = this.context;
+
                 IdentDescr newIdentProc = new IdentDescr();
                 DataType.Type type_return_p = DataType.Type.None;
                 newIdentProc.dataType.type = type_return_p;
                 CommonTree childName_p = (CommonTree)node.GetChild(1);
                 newIdentProc.name = childName_p.Text;
+
+                P_Context.f_p_name = newIdentProc.name;
+
                 newIdentProc.varType = IdentDescr.VarType.ret_value;
                 newIdentProc.dataType.demention = 0;
                 
@@ -184,40 +198,7 @@ namespace MathExpr
                             ExecuteNode(child, P_Context);
                             break;
                         case AstNodeType.PARAMS:
-                            for (int k = 0; k < node.ChildCount; k++)
-                            {
-                                CommonTree childNode = (CommonTree)node.GetChild(k);
-                                DataType.Type type = DataType.Type.None;
-                                CommonTree childType = (CommonTree)childNode.GetChild(0);
-                                switch (childType.Type)
-                                {
-                                    case AstNodeType.STRING:
-                                        type = DataType.Type.my_string;
-                                        break;
-                                    case AstNodeType.INTEGER:
-                                        type = DataType.Type.my_integer;
-                                        break;
-                                    case AstNodeType.REAL:
-                                        type = DataType.Type.my_real;
-                                        break;
-
-                                }
-                                for (int j = 1; j < childNode.ChildCount; j++)
-                                {
-                                    CommonTree childIdent = (CommonTree)childNode.GetChild(j);
-                                    IdentDescr newIdent = new IdentDescr();
-                                    newIdent.varType = IdentDescr.VarType.var;
-                                    newIdent.dataType.demention = 0;
-                                    newIdent.name = childIdent.Text;
-                                    newIdent.dataType.type = type;
-
-                                    if (context.if_exists(newIdent.name))
-                                        throw new IntepreterException("Не верный параметр: строка " + childIdent.Line);
-
-                                    context.idents.AddLast(newIdent);
-                                }
-
-                            }
+                                ExecuteNode(child, P_Context);
                             break;
             
                     }
@@ -231,61 +212,42 @@ namespace MathExpr
 
             case AstNodeType.FUNC_CALL:
                 Context Func_call_Context = new Context();
-                Func_call_Context.upper = this.context;
+                //this.context.child = Func_call_Context;
+                //Func_call_Context.upper = this.context;
+
                 IdentDescr newIdentFunc_call = new IdentDescr();
-                CommonTree childName_func_call = (CommonTree)node.GetChild(1);
+                CommonTree childName_func_call = (CommonTree)node.GetChild(0);
                 newIdentFunc_call.name = childName_func_call.Text;
-                newIdentFunc_call.varType = IdentDescr.VarType.ret_value;
-                newIdentFunc_call.dataType.demention = 0;
                 
-                for (int i = 2; i < node.ChildCount; i++)
+                //Context Func_call_Context = find_context(newIdentFunc_call.name);
+                if (!context.if_exists(newIdentFunc_call.name))
+                    throw new IntepreterException("not found: line " + childName_func_call.Line);
+                
+                //newIdentFunc_call.varType = IdentDescr.VarType.ret_value;
+                //newIdentFunc_call.dataType.demention = 0;
+
+                Context tmpContext = context.find_context(newIdentFunc_call.name);
+                CommonTree childParams = (CommonTree)node.GetChild(1);
+                for (int k = 0; k < childParams.ChildCount; k++)
                 {
-                    CommonTree child = (CommonTree)node.GetChild(i);
-                    switch(child.Type)
+                    CommonTree childNode = (CommonTree)childParams.GetChild(k);
+                    switch (childNode.Type)
                     {
-                        case AstNodeType.VAR:
-                            ExecuteNode(child, Func_call_Context);
+                        case AstNodeType.STRING:
+                            if (!tmpContext.find_parametr(k, DataType.Type.my_string))
+                                throw new SemException("Не так переданы параметры ");
                             break;
-                        case AstNodeType.PARAMS:
-                            for (int k = 0; k < node.ChildCount; k++)
-                            {
-                                CommonTree childNode = (CommonTree)node.GetChild(k);
-                                DataType.Type type = DataType.Type.None;
-                                CommonTree childType = (CommonTree)childNode.GetChild(0);
-                                switch (childType.Type)
-                                {
-                                    case AstNodeType.STRING:
-                                        type = DataType.Type.my_string;
-                                        break;
-                                    case AstNodeType.INTEGER:
-                                        type = DataType.Type.my_integer;
-                                        break;
-                                    case AstNodeType.REAL:
-                                        type = DataType.Type.my_real;
-                                        break;
-
-                                }
-                                for (int j = 1; j < childNode.ChildCount; j++)
-                                {
-                                    CommonTree childIdent = (CommonTree)childNode.GetChild(j);
-                                    IdentDescr newIdent = new IdentDescr();
-                                    newIdent.varType = IdentDescr.VarType.var;
-                                    newIdent.dataType.demention = 0;
-                                    newIdent.name = childIdent.Text;
-                                    newIdent.dataType.type = type;
-
-                                    if (context.if_exists(newIdent.name))
-                                        throw new IntepreterException("Не верный параметр: строка " + childIdent.Line);
-
-                                    context.idents.AddLast(newIdent);
-                                }
-
-                            }
+                        case AstNodeType.INTEGER:
+                            if (!tmpContext.find_parametr(k, DataType.Type.my_integer))
+                                throw new SemException("Не так переданы параметры ");
                             break;
-            
-                    }
+                        case AstNodeType.REAL:
+                            if (!tmpContext.find_parametr(k, DataType.Type.my_real))
+                                throw new SemException("Не так переданы параметры ");
+                            break;
+
+                    }                    
                 }
-
            
                 break;
 
@@ -295,7 +257,8 @@ namespace MathExpr
                 CommonTree nodeAssign0 = (CommonTree)node.GetChild(0);
                 IdentDescr ident = context.find_var(nodeAssign0.Text);
                 //поменял find_var теперь если есть, то возвращает ident, если нет - null
-                if (null == ident)
+                //Parametr par = context.find_par(nodeAssign0.Text);
+                if ((null == ident))
                 {
                     throw new IntepreterException("Переменная не описана: строка " + nodeAssign0.Line);
                 }
@@ -735,6 +698,22 @@ namespace MathExpr
 
         }
     }
+
+    private Context find_context(string f_p_name)
+    {
+        Context f_context = this.context;
+        bool find = false;
+        while (!find && (f_context != null))
+        {
+            if (f_context.f_p_name == f_p_name)
+            {
+                return f_context;
+            }
+            f_context = f_context.upper;
+        }
+        return null;
+    }
+
 
     private void mass_convert(IdentDescr ident, int pos, ITree node, IdentDescr from_ident)
     {

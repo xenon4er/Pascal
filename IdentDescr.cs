@@ -13,7 +13,7 @@ namespace MathExpr
           set;
       }
       public DataType dataType = new DataType();
-
+    
       public VarType varType;
       public LinkedList<Parametr> parametrs; // list of parametrs
       
@@ -22,6 +22,11 @@ namespace MathExpr
       public string stringValue = "";
       public int intValue = 0;
       public double realValue = 0;
+
+      //public string name = "";
+      public int pos = 0;
+      //public DataType.Type type;
+      
       /*
     public int Type {
       get;
