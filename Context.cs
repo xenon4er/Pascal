@@ -46,6 +46,19 @@ namespace MathExpr
             return false;
         }
 
+        public IdentDescr get_var(string name)
+        {
+            LinkedListNode<IdentDescr> k;
+            LinkedList<IdentDescr> tmp = idents;
+            for (k = tmp.First; k != null; k = k.Next)
+            {
+                if (k.Value.name.CompareTo(name) == 0)
+                    if ((k.Value.varType == VarDescr.VarType.var))
+                        return k.Value;
+            }
+            return null;
+        }
+
         public IdentDescr find_var(string name)
         {
             LinkedListNode<IdentDescr> k;

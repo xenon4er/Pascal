@@ -13,7 +13,7 @@ namespace MathExpr
           set;
       }
       public DataType dataType = new DataType();
-    
+      public int countVar = 0;
       public VarType varType;
       public LinkedList<Parametr> parametrs; // list of parametrs
       

@@ -62,11 +62,11 @@ namespace MathExpr
             {
                 case AstNodeType.ASSIGN:
                     Generate(node.GetChild(1),context);
-                    msil.Append(string.Format("    stloc.s {0}\n", vars[node.GetChild(0).Text]));
+                    msil.Append(string.Format("    stloc.s {0}\n", context.get_var(node.GetChild(0).Text).countVar));
                     break;
 
                 case AstNodeType.IDENT:
-                    msil.Append(string.Format("    ldloc.s {0}\n", vars[node.Text]));
+                    msil.Append(string.Format("    ldloc.s {0}\n", context.get_var(node.Text).countVar));
                     break;
                 
                
@@ -125,8 +125,7 @@ namespace MathExpr
                 case AstNodeType.IF:
                     tempLabIndex = labIndex;
                     labIndex += 2;
-                    Generate(node.GetChild(0),context); //this must be COMPARE NODE!!!! 
-                    //msil.Append(string.Format("    brfalse.s L_{0:X4}\n", tempLabIndex + 1));
+                    Generate(node.GetChild(0),context); 
                     Generate(node.GetChild(1), context);
                     msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 2));
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 1));
@@ -140,7 +139,6 @@ namespace MathExpr
                     labIndex += 2;
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 1));
                     Generate(node.GetChild(0), context);
-                    //msil.Append(string.Format("    brfalse.s L_{0:X4}\n", tempLabIndex + 2));
                     Generate(node.GetChild(1), context);
                     msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 1));
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
@@ -150,19 +148,19 @@ namespace MathExpr
                     tempLabIndex = labIndex;
                     labIndex += 2;
                     Generate(node.GetChild(1), context);
-                    msil.Append(string.Format("    stloc.s {0}\n", vars[node.GetChild(0).Text]));
+                    msil.Append(string.Format("    stloc.s {0}\n", context.get_var(node.GetChild(0).Text).countVar));
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 1));
-                    msil.Append(string.Format("    ldloc.s {0}\n", vars[node.GetChild(0).Text]));
+                    msil.Append(string.Format("    ldloc.s {0}\n", context.get_var(node.GetChild(0).Text).countVar));
                     Generate(node.GetChild(2), context);
                     msil.Append(string.Format("    sub\n"));
                     msil.Append(string.Format("    ldc.i4.s {0}\n", 1));
                     msil.Append(string.Format("    sub\n"));
                     msil.Append(string.Format("    brfalse.s L_{0:X4}\n", tempLabIndex + 2));
                     Generate(node.GetChild(3), context);
-                    msil.Append(string.Format("    ldloc.s {0}\n", vars[node.GetChild(0).Text]));
+                    msil.Append(string.Format("    ldloc.s {0}\n", context.get_var(node.GetChild(0).Text).countVar));
                     msil.Append(string.Format("    ldc.i4.s {0}\n", 1));
                     msil.Append(string.Format("    add\n"));
-                    msil.Append(string.Format("    stloc.s {0}\n", vars[node.GetChild(0).Text]));
+                    msil.Append(string.Format("    stloc.s {0}\n", context.get_var(node.GetChild(0).Text).countVar));
                     msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 1));
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
                     break;
@@ -182,13 +180,6 @@ namespace MathExpr
                     tempLabIndex = labIndex;
                     labIndex += 2;
                     msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 1));
-                    /*
-                    Generate(node.GetChild(0));
-                    //msil.Append(string.Format("    brfalse.s L_{0:X4}\n", tempLabIndex + 2));
-                    Generate(node.GetChild(1));
-                    msil.Append(string.Format("    br.s L_{0:X4}\n", tempLabIndex + 1));
-                    msil.Append(string.Format("  L_{0:X4}:\n", tempLabIndex + 2));
-                    */
                     for (int i = 0; i < node.ChildCount - 1; i++)
                         Generate(node.GetChild(i), context);
 
@@ -202,18 +193,18 @@ namespace MathExpr
                     Context tmp = context;
                     LinkedListNode<IdentDescr> identif;
                     msil.Append("    .locals init (\n");
-                    int count = 0;
+                    //int count = 0;
                     for (identif = context.idents.First; identif != null; identif = identif.Next)
                     {
                         if (identif.Value.varType == VarDescr.VarType.var)
                         {
                             if(identif.Value.dataType.type==DataType.Type.my_integer)
-                                msil.Append(string.Format("      [{0}] int32 {1}{2}\n", count,identif.Value.name, identif.Next!=null ? ",":""));
+                                msil.Append(string.Format("      [{0}] int32 {1}{2}\n", identif.Value.countVar,identif.Value.name, identif.Next!=null ? ",":""));
                             if (identif.Value.dataType.type == DataType.Type.my_real)
-                                msil.Append(string.Format("      [{0}] float32 {1}{2}\n", count, identif.Value.name, identif.Next != null ? "," : ""));
+                                msil.Append(string.Format("      [{0}] float32 {1}{2}\n", identif.Value.countVar, identif.Value.name, identif.Next != null ? "," : ""));
                             if (identif.Value.dataType.type == DataType.Type.my_string)
-                                msil.Append(string.Format("      [{0}] string {1}{2}\n", count, identif.Value.name, identif.Next != null ? "," : ""));
-                            count++;
+                                msil.Append(string.Format("      [{0}] string {1}{2}\n", identif.Value.countVar, identif.Value.name, identif.Next != null ? "," : ""));
+                            //count++;
                         }
                     }
                     msil.Append("    )\n");

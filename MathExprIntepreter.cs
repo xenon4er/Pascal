@@ -36,6 +36,7 @@ namespace MathExpr
            
 
             case AstNodeType.VAR:
+                int count = 0;
                 for (int i = 0; i < node.ChildCount; i++)
                 {
                     CommonTree childNode =  (CommonTree)node.GetChild(i);
@@ -62,7 +63,8 @@ namespace MathExpr
                         newIdent.dataType.demention = 0;
                         newIdent.name = childIdent.Text;
                         newIdent.dataType.type = type;
-
+                        newIdent.countVar = count;
+                        count++;
                         if (context.if_exists(newIdent.name, VarDescr.VarType.var, VarDescr.VarType.parametr))
                             throw new IntepreterException("переменная уже описана: строка " + childIdent.Line); //add string where was exception
                         

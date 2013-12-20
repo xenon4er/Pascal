@@ -6,6 +6,9 @@ var
 begin
 	b:=6.5;
 	i:=4;
-	print(b);
+	for i:=0 to 5 do
+	begin
+		print(i);
+	end;
 end;
 	;;;
