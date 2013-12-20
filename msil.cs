@@ -54,11 +54,10 @@ namespace MathExpr
             NumVariables(programNode);
         }
 
-
+        ITree child = null;
         private void Generate(ITree node, Context context)
         {
             int tempLabIndex;
-            ITree child = null;
             switch (node.Type)
             {
                 case AstNodeType.ASSIGN:
@@ -200,7 +199,27 @@ namespace MathExpr
                         break;
 
                 case AstNodeType.VAR:
-                        
+                    Context tmp = context;
+                    LinkedListNode<IdentDescr> identif;
+                    msil.Append("    .locals init (\n");
+                    int count = 0;
+                    for (identif = context.idents.First; identif != null; identif = identif.Next)
+                    {
+                        if (identif.Value.varType == VarDescr.VarType.var)
+                        {
+                            if(identif.Value.dataType.type==DataType.Type.my_integer)
+                                msil.Append(string.Format("      [{0}] int32 {1}{2}\n", count,identif.Value.name, identif.Next!=null ? ",":""));
+                            if (identif.Value.dataType.type == DataType.Type.my_real)
+                                msil.Append(string.Format("      [{0}] float32 {1}{2}\n", count, identif.Value.name, identif.Next != null ? "," : ""));
+                            if (identif.Value.dataType.type == DataType.Type.my_string)
+                                msil.Append(string.Format("      [{0}] string {1}{2}\n", count, identif.Value.name, identif.Next != null ? "," : ""));
+                            count++;
+                        }
+                    }
+                    msil.Append("    )\n");
+                        //msil.Append(string.Format("      [{0}] int32 {1}{2}\n", kv.Value, kv.Key, ++index < vars.Count ? "," : ""));
+                    break;
+                case AstNodeType.PARAMS:
                     break;
 
                 case AstNodeType.FUNCTION:
@@ -249,10 +268,10 @@ namespace MathExpr
                 case AstNodeType.CONVERT:
                     break;
 
-                case AstNodeType.AND:
+                case AstNodeType.AND://?
                     break;
 
-                case AstNodeType.OR:
+                case AstNodeType.OR://?
                     break;
 
                 case AstNodeType.BLOCK:
@@ -282,7 +301,7 @@ namespace MathExpr
   .method public static void Main() cil managed
   {
     .entrypoint
-");
+");         /*
             if (vars.Count > 0)
             {
                 msil.Append("    .locals init (\n");
@@ -292,6 +311,7 @@ namespace MathExpr
 
                 msil.Append("    )\n");
             }
+             */
             Generate(programNode,Program.mainContext);
             msil.Append(string.Format("    ret"));
             msil.Append(@"

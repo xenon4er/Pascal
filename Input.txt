@@ -2,8 +2,10 @@
 var
 	i,k,r : integer;
 	b:real;
+	s:string;
 begin
 	b:=6.5;
+	i:=4;
 	print(b);
 end;
 	;;;
