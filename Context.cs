@@ -82,6 +82,29 @@ namespace MathExpr
             return null;
         }
 
+        public IdentDescr find_func(string name)
+        {
+            LinkedListNode<IdentDescr> k;
+            LinkedList<IdentDescr> tmp = idents;
+            LinkedList<Parametr> tmpPar = parametrs;
+
+            Context tmpCon = this;
+
+            while (tmpCon != null)
+            {
+                for (k = tmp.First; k != null; k = k.Next)
+                {
+                    if (k.Value.name.CompareTo(name) == 0)
+                        if ((k.Value.varType == VarDescr.VarType.proc) || (k.Value.varType == VarDescr.VarType.ret_value))
+                            return k.Value;
+                }
+                tmpCon = tmpCon.upper;
+                if (tmpCon != null)
+                    tmp = tmpCon.idents;
+            }
+            return null;
+        }
+
         public bool find_parametr(int pos, DataType.Type t)
         {
             LinkedListNode<IdentDescr> k;

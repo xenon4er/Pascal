@@ -133,6 +133,7 @@ namespace MathExpr
 
             case AstNodeType.PARAMS:
                 // при добавлении параметров заполнять позиции, чтобы потом смотреть
+                int pos = 1;
                 for (int i = 0; i < node.ChildCount; i++)
                 {
                     CommonTree childNode = (CommonTree)node.GetChild(i);
@@ -163,7 +164,8 @@ namespace MathExpr
                         newIdent.dataType.demention = 0;
                         newIdent.name = childIdent.Text;
                         newIdent.dataType.type = type;
-                        newIdent.pos = i;
+                        newIdent.pos = pos;
+                        pos++;
 
                         if (context.if_exists(newIdent.name, VarDescr.VarType.var, VarDescr.VarType.parametr))
                             throw new IntepreterException("переменная уже описана: строка " + childIdent.Line); //add string where was exception
@@ -241,15 +243,15 @@ namespace MathExpr
                     switch (childNode.Type)
                     {
                         case AstNodeType.STRING:
-                            if (!tmpContext.find_parametr(k, DataType.Type.my_string))
+                            if (!tmpContext.find_parametr(k+1, DataType.Type.my_string))
                                 throw new SemException("Не так переданы параметры ");
                             break;
                         case AstNodeType.INTEGER:
-                            if (!tmpContext.find_parametr(k, DataType.Type.my_integer))
+                            if (!tmpContext.find_parametr(k+1, DataType.Type.my_integer))
                                 throw new SemException("Не так переданы параметры ");
                             break;
                         case AstNodeType.REAL:
-                            if (!tmpContext.find_parametr(k, DataType.Type.my_real))
+                            if (!tmpContext.find_parametr(k+1, DataType.Type.my_real))
                                 throw new SemException("Не так переданы параметры ");
                             break;
 

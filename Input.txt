@@ -4,11 +4,20 @@ var
 	b:real;
 	s:string;
 begin
-	b:=6.5;
-	i:=4;
-	for i:=0 to 5 do
+	procedure A(r,m:integer;s:string);
 	begin
-		print(i);
+		b:=6.5;
+		i:=4;
+		for i:=0 to 5 do
+		begin
+			m:=2;
+		end;
+	end;
+	procedure B();
+	begin
+		i:=2;
+		A(2,i,"ss");
+		A(2,i,"ss");
 	end;
 end;
 	;;;
