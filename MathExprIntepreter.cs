@@ -179,7 +179,7 @@ namespace MathExpr
                 Context P_Context = new Context();
                 P_Context.upper = this.context;
                 this.context.childs.AddLast(P_Context);
-                this.context = P_Context;
+                
 
                 IdentDescr newIdentProc = new IdentDescr();
                 DataType.Type type_return_p = DataType.Type.None;

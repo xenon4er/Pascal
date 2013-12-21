@@ -28,6 +28,8 @@ namespace MathExpr
 
         private IdentDescr tmpIdent = new IdentDescr();
 
+        private Context tmpContext = new Context();
+
         public MSIL(ITree programNode, Context proCo)
         {
             if (programNode.Type != AstNodeType.PROGRAM)
@@ -72,7 +74,7 @@ namespace MathExpr
             {
                 case AstNodeType.ASSIGN:
                     Generate(node.GetChild(1),context,s);
-                    s.Append(string.Format("    stloc.s {0}\n", context.get_var(node.GetChild(0).Text).countVar));
+                    s.Append(string.Format("    stloc.s {0}\n", context.find_var(node.GetChild(0).Text).countVar));
                     break;
 
                 case AstNodeType.IDENT:
@@ -80,11 +82,11 @@ namespace MathExpr
                     s.Append(string.Format("    ldloc.s {0}\n", tmpIdent.countVar));
 
                     if (tmpIdent.dataType.type == DataType.Type.my_integer)
-                        list_params += "int32 ";
+                        list_params += "int32, ";
                     if (tmpIdent.dataType.type == DataType.Type.my_real)
-                        list_params += "float32 ";
+                        list_params += "float32, ";
                     if (tmpIdent.dataType.type == DataType.Type.my_string)
-                        list_params += "string ";
+                        list_params += "string, ";
                     //list_params += "";
                     break;
                 
@@ -144,25 +146,26 @@ namespace MathExpr
                         child = node.GetChild(1);
                         for (int i = 0; i < child.ChildCount; i++)
                         {
-                            Generate(child.GetChild(i), context,s);
+                            Generate(child.GetChild(i), context.find_context(f_p_name),s);
                             //ITree c = child.GetChild(i);
                             switch (child.GetChild(i).Type)
                             {
                                 case AstNodeType.REAL:
-                                    list_params += "float32 ";
+                                    list_params += "float32, ";
                                     break;
                                 case AstNodeType.INTEGER:
-                                    list_params += "int32 ";
+                                    list_params += "int32, ";
                                     break;
                                 case AstNodeType.STRING:
-                                    list_params += "string ";
+                                    list_params += "string, ";
                                     break;
                                 case AstNodeType.IDENT:
                                     break;
                             }
                         }
-#warning //проверить как параметры записываются при вызове
-                            s.Append(string.Format("    call {0} Program::{1}({2})\n", f_p_type ,f_p_name, list_params));
+                        if(list_params.Length > 2)
+                            list_params = list_params.Substring(0, list_params.Length - 2);
+                        s.Append(string.Format("    call {0} Program::{1}({2})\n", f_p_type ,f_p_name, list_params));
                     }
                     break;
 
@@ -270,6 +273,36 @@ namespace MathExpr
                         //msil.Append(string.Format("      [{0}] int32 {1}{2}\n", kv.Value, kv.Key, ++index < vars.Count ? "," : ""));
                     break;
                 case AstNodeType.PARAMS:
+                    list_params = "";
+                    for (int i = 0; i < node.ChildCount; i++)
+                    {
+                        CommonTree childNode = (CommonTree)node.GetChild(i);
+                        DataType.Type type = DataType.Type.None;
+                        CommonTree childType = (CommonTree)childNode.GetChild(0);
+                        switch (childType.Type)
+                        {
+                            case AstNodeType.STRING:
+                                type = DataType.Type.my_string;
+                                break;
+                            case AstNodeType.INTEGER:
+                                type = DataType.Type.my_integer;
+                                break;
+                            case AstNodeType.REAL:
+                                type = DataType.Type.my_real;
+                                break;
+
+                        }
+                        for (int j = 1; j < childNode.ChildCount; j++)
+                        {
+                            if (type == DataType.Type.my_integer)
+                                list_params += "int32, ";
+                            if (type == DataType.Type.my_real)
+                                list_params += "float32, ";
+                            if (type == DataType.Type.my_string)
+                                list_params += "string, ";
+                        }
+                    }
+
                     break;
 
                 case AstNodeType.FUNCTION:
@@ -278,34 +311,33 @@ namespace MathExpr
                 case AstNodeType.PROCEDURE:
                     StringBuilder function = new StringBuilder();
                     child = node.GetChild(0);// get child with proc name
-
-
+                    string proc_name = child.Text;
+                    
+                    tmpContext = context.find_context(proc_name);
+                    
                     list_params = "";
+                    
                     child = node.GetChild(1);
-                    for (int i = 0; i < child.ChildCount; i++)
+                    if (child.Type==AstNodeType.PARAMS)
+                        Generate(child, context.find_context(proc_name), function);
+                    if (list_params.Length > 2)
+                        list_params = list_params.Substring(0, list_params.Length - 2);
+                    
+                    function.Append(string.Format("\n  .method public static void {0}({1}) cil managed\n", proc_name,list_params));
+                    function.Append("  {\n");
+                    if (child.Type == AstNodeType.BLOCK)
                     {
-                        Generate(child.GetChild(i), context,s);
-                        //ITree c = child.GetChild(i);
-                        switch (child.GetChild(i).Type)
+                        Generate(child, tmpContext, function);    
+                    }
+                    else 
+                    {
+                        for (int i = 1; i < node.ChildCount; i++)
                         {
-                            case AstNodeType.REAL:
-                                list_params += "float32 ";
-                                break;
-                            case AstNodeType.INTEGER:
-                                list_params += "int32 ";
-                                break;
-                            case AstNodeType.STRING:
-                                list_params += "string ";
-                                break;
-                            case AstNodeType.IDENT:
-                                break;
+                            child = node.GetChild(i);
+                            if (child.Type == AstNodeType.PARAMS) continue;
+                            Generate(child, tmpContext, function);
                         }
                     }
-
-                    function.Append(string.Format("  .method public static void {0}({1}) cil managed\n", child.Text,list_params));
-                    function.Append("  {\n");
-//                    msil.Append(string.Format(,1));
-                    Generate(node.GetChild(1), context, function);
                     function.Append("  }\n");
                     list_functions.AddLast(function);
                     break;
@@ -384,17 +416,7 @@ namespace MathExpr
   .method public static void Main() cil managed
   {
     .entrypoint
-");         /*
-            if (vars.Count > 0)
-            {
-                msil.Append("    .locals init (\n");
-                int index = 0;
-                foreach (var kv in vars)
-                    msil.Append(string.Format("      [{0}] int32 {1}{2}\n", kv.Value, kv.Key, ++index < vars.Count ? "," : ""));
-
-                msil.Append("    )\n");
-            }
-             */
+");         
             Generate(programNode,Program.mainContext,Mfunction);
             //msil.Append(string.Format("    ret"));
             msil.Append(@"

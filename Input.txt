@@ -1,23 +1,22 @@
 ;;; ;;;;;
 var
-	i,k,r : integer;
+	i,r : integer;
 	b:real;
 	s:string;
 begin
-	procedure A(r,m:integer;s:string);
+	procedure A(i,m:integer;s:string);
+	var
+		k:string;
 	begin
 		b:=6.5;
-		i:=4;
-		for i:=0 to 5 do
-		begin
-			m:=2;
-		end;
 	end;
 	procedure B();
+	var 
+		a:integer;
 	begin
-		i:=2;
-		A(2,i,"ss");
-		A(2,i,"ss");
+		A(2,1,"ss");
 	end;
+
+	B();
 end;
 	;;;
