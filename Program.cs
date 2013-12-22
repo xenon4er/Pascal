@@ -38,6 +38,7 @@ namespace MathExpr
         
         string msil = MSIL.GenerateMSIL(program,mainContext);
         Console.WriteLine(msil);
+        System.IO.File.WriteAllText(@"C:\Users\Alex\Documents\GitHub\Pascal\test\WriteText.ilasm ", msil);
         
       }
       catch (Exception e) {

@@ -3,20 +3,23 @@ var
 	i,r : integer;
 	b:real;
 	s:string;
+	w:real;
 begin
 	procedure A(i,m:integer;s:string);
 	var
-		k:string;
+		k:integer;
 	begin
-		b:=6.5;
+		k:=0;
+		k:=i+m;
+		print(k);
 	end;
-	procedure B();
+	procedure B(i:integer);
 	var 
 		a:integer;
 	begin
-		A(2,1,"ss");
+		A(i,5,"ss");
 	end;
 
-	B();
+	B(4);
 end;
 	;;;

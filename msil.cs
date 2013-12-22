@@ -78,8 +78,11 @@ namespace MathExpr
                     break;
 
                 case AstNodeType.IDENT:
-                    tmpIdent = context.get_var(node.Text);
-                    s.Append(string.Format("    ldloc.s {0}\n", tmpIdent.countVar));
+                    tmpIdent = context.find_var(node.Text);
+                    if(tmpIdent.varType == VarDescr.VarType.var)
+                        s.Append(string.Format("    ldloc.s {0}\n", tmpIdent.countVar));
+                    if (tmpIdent.varType == VarDescr.VarType.parametr)
+                        s.Append(string.Format("    ldarg.{0}\n", tmpIdent.pos-1));
 
                     if (tmpIdent.dataType.type == DataType.Type.my_integer)
                         list_params += "int32, ";
@@ -261,11 +264,11 @@ namespace MathExpr
                         if (identif.Value.varType == VarDescr.VarType.var)
                         {
                             if(identif.Value.dataType.type==DataType.Type.my_integer)
-                                s.Append(string.Format("      [{0}] int32 {1}{2}\n", identif.Value.countVar,identif.Value.name, identif.Next!=null ? ",":""));
+                                s.Append(string.Format("      [{0}] int32 {1}{2}\n", identif.Value.countVar,identif.Value.name, (identif.Next!=null)&&(identif.Next.Value.varType==VarDescr.VarType.var) ? ",":""));
                             if (identif.Value.dataType.type == DataType.Type.my_real)
-                                s.Append(string.Format("      [{0}] float32 {1}{2}\n", identif.Value.countVar, identif.Value.name, identif.Next != null ? "," : ""));
+                                s.Append(string.Format("      [{0}] float32 {1}{2}\n", identif.Value.countVar, identif.Value.name, (identif.Next != null) && (identif.Next.Value.varType == VarDescr.VarType.var) ? "," : ""));
                             if (identif.Value.dataType.type == DataType.Type.my_string)
-                                s.Append(string.Format("      [{0}] string {1}{2}\n", identif.Value.countVar, identif.Value.name, identif.Next != null ? "," : ""));
+                                s.Append(string.Format("      [{0}] string {1}{2}\n", identif.Value.countVar, identif.Value.name, (identif.Next != null) && (identif.Next.Value.varType == VarDescr.VarType.var) ? "," : ""));
                             //count++;
                         }
                     }
@@ -419,6 +422,7 @@ namespace MathExpr
 ");         
             Generate(programNode,Program.mainContext,Mfunction);
             //msil.Append(string.Format("    ret"));
+            msil.Append(Mfunction);
             msil.Append(@"
   }
 ");

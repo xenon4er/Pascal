@@ -1,3 +1,4 @@
+
 .assembly program
 {
 }
@@ -11,7 +12,8 @@
       [0] int32 i,
       [1] int32 r,
       [2] float32 b,
-      [3] string s
+      [3] string s,
+      [4] float32 w
     )
     call void Program::B()
 
@@ -22,7 +24,7 @@
     .locals init (
       [0] string k
     )
-    ldc.i4.s 3
+    ldarg.0
     call void [mscorlib]System.Console::WriteLine(int32)
   }
 

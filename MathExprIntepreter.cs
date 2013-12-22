@@ -412,10 +412,7 @@ namespace MathExpr
                     tmp = context.find_var(nodeAdd0.Text);
                     if (null == tmp)
                         throw new SemException("переменная не описана " + nodeAdd0.Text +" "+ nodeAdd0.Line);
-                    if (tmp.init == false)
-                    {
-                        throw new SemException("Переменной не присвоено значение " + parent.Line);
-                    }
+                    
                     validate_convert(nodeAdd0, tmp, ident1);
                     mass_convert(ident1, 0, nodeAdd0,tmp);
                 }
@@ -428,10 +425,7 @@ namespace MathExpr
                     tmp = context.find_var(nodeAdd1.Text);
                     if (null == tmp)
                         throw new SemException("переменная не описана " + nodeAdd1.Text + " " + nodeAdd0.Line);
-                    if (tmp.init == false)
-                    {
-                        throw new SemException("Переменной не присвоено значение " + parent.Line);
-                    }
+                    
                     validate_convert(nodeAdd1, tmp, ident1);
                     mass_convert(ident1, 1, nodeAdd1, tmp);
                 }

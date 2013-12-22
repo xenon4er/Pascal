@@ -1,3 +1,4 @@
+
 .assembly program
 {
 }
@@ -11,28 +12,36 @@
       [0] int32 i,
       [1] int32 r,
       [2] float32 b,
-      [3] string s
+      [3] string s,
+      [4] float32 w
     )
-    call void Program::B()
+    ldc.i4.s 4
+    call void Program::B(int32)
 
   }
 
   .method public static void A(int32, int32, string) cil managed
   {
     .locals init (
-      [0] string k
+      [0] int32 k
     )
-    ldc.i4.s 3
+    ldc.i4.s 0
+    stloc.s 0
+    ldarg.0
+    ldarg.1
+    add
+    stloc.s 0
+    ldloc.s 0
     call void [mscorlib]System.Console::WriteLine(int32)
   }
 
-  .method public static void B() cil managed
+  .method public static void B(int32) cil managed
   {
     .locals init (
       [0] int32 a
     )
-    ldc.i4.s 2
-    ldc.i4.s 1
+    ldarg.0
+    ldc.i4.s 5
     ldstr "ss"
     call void Program::A(int32, int32, string)
   }
