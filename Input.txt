@@ -5,19 +5,19 @@ var
 	s:string;
 	w:real;
 begin
-	procedure A(i,m:integer;s:string);
+	function A(i,m:integer;s:string):integer;
 	var
 		k:integer;
 	begin
 		k:=0;
 		k:=i+m;
-		print(k);
+		return i;
 	end;
 	procedure B(i:integer);
 	var 
 		a:integer;
 	begin
-		A(i,5,"ss");
+		i:=3;
 	end;
 
 	B(4);

@@ -21,6 +21,7 @@ tokens {
   DEC = 'dec'		  ;
   FUNCTION = 'function'	  ;
   PROCEDURE = 'procedure' ;
+  RETURN = 'return';
   FOR  = 'for'        ;
   REPEAT  = 'repeat'  ;
   UNTIL  = 'until'    ;
@@ -113,7 +114,7 @@ func_call:
 ;
 	
 func_descr:
-	FUNCTION IDENT  '(' var_list? ')' ':' type ';' (var)? expr  ->
+	FUNCTION IDENT  '(' var_list? ')' ':' type ';' (var)? expr ->
     ^(FUNCTION type IDENT  ^(PARAMS var_list)? ^(var)? ^( expr))
 ;
 
@@ -134,6 +135,7 @@ var_list:
 exprvar:
 	ident_list (':' type) (';')? -> ^(':' type ident_list)
 	|IDENT ':' 'array' '[' INTEGER '..' INTEGER  ']' 'of' type (';')? -> ^('array' type IDENT INTEGER INTEGER)
+	
 	;
 
 
@@ -160,6 +162,7 @@ expr:
 	| func_call 
 	| func_descr
 	| proc_descr
+	| RETURN group -> ^(RETURN group)
 	;
 
 expr_list:

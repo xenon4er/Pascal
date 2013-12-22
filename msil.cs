@@ -309,6 +309,50 @@ namespace MathExpr
                     break;
 
                 case AstNodeType.FUNCTION:
+                    StringBuilder function2 = new StringBuilder();
+                    child = node.GetChild(0);
+                    string type_func = "";
+                    if (child.Type == AstNodeType.REAL)
+                        type_func = "float32";
+                    else
+                        if (child.Type == AstNodeType.INTEGER)
+                            type_func = "int32";
+                        else
+                            if (child.Type == AstNodeType.STRING)
+                                type_func = "string";
+                    
+                    child = node.GetChild(1);// get child with func name
+                    string func_name = child.Text;
+
+                    tmpContext = context.find_context(func_name);
+                    
+                    list_params = "";
+                    
+                    child = node.GetChild(2);
+                    if (child.Type==AstNodeType.PARAMS)
+                        Generate(child, context.find_context(func_name), function2);
+                    if (list_params.Length > 2)
+                        list_params = list_params.Substring(0, list_params.Length - 2);
+
+                    function2.Append(string.Format("\n  .method public static {0} {1}({2}) cil managed\n",type_func, func_name, list_params));
+                    function2.Append("  {\n");
+                    if (child.Type == AstNodeType.BLOCK)
+                    {
+                        Generate(child, tmpContext, function2);    
+                    }
+                    else 
+                    {
+                        for (int i = 2; i < node.ChildCount; i++)
+                        {
+                            child = node.GetChild(i);
+                            if (child.Type == AstNodeType.PARAMS) continue;
+                            Generate(child, tmpContext, function2);
+                        }
+                    }
+                    function2.Append("  }\n");
+                    list_functions.AddLast(function2);
+                    break;
+                case AstNodeType.RETURN:
                     break;
 
                 case AstNodeType.PROCEDURE:
@@ -390,7 +434,6 @@ namespace MathExpr
 
                 case AstNodeType.OR://?
                     break;
-
                 case AstNodeType.BLOCK:
                 case AstNodeType.PROGRAM:
                     for (int i = 0; i < node.ChildCount; i++)

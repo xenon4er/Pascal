@@ -78,7 +78,7 @@ namespace MathExpr
                 Context newContext = new Context();
                 newContext.upper = this.context;
                 this.context.childs.AddLast(newContext);
-                this.context = newContext;
+                //this.context = newContext;
 
                 IdentDescr newIdentFunc = new IdentDescr();
                 DataType.Type type_return = DataType.Type.None;
@@ -223,6 +223,7 @@ namespace MathExpr
 
                 IdentDescr newIdentFunc_call = new IdentDescr();
                 CommonTree childName_func_call = (CommonTree)node.GetChild(0);
+                //if(childName_func_call.Type==)
                 newIdentFunc_call.name = childName_func_call.Text;
 
 
@@ -448,6 +449,8 @@ namespace MathExpr
                 add_div_sub(node, " вычитать ");
                 break;
 
+            case AstNodeType.RETURN:
+                break;
 
             case AstNodeType.BLOCK:
                 case AstNodeType.PROGRAM:
