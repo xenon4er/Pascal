@@ -11,13 +11,14 @@ begin
 	begin
 		k:=0;
 		k:=i+m;
-		return i;
+		return k;
 	end;
 	procedure B(i:integer);
 	var 
 		a:integer;
 	begin
-		i:=3;
+		a:=A(10,2,"ss");
+		print (a);
 	end;
 
 	B(4);

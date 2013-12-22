@@ -338,7 +338,7 @@ namespace MathExpr
                     function2.Append("  {\n");
                     if (child.Type == AstNodeType.BLOCK)
                     {
-                        Generate(child, tmpContext, function2);    
+                       Generate(child, tmpContext, function2);    
                     }
                     else 
                     {
@@ -352,7 +352,10 @@ namespace MathExpr
                     function2.Append("  }\n");
                     list_functions.AddLast(function2);
                     break;
+                
                 case AstNodeType.RETURN:
+                    Generate(node.GetChild(0), context, s);
+                    s.Append("    ret\n");
                     break;
 
                 case AstNodeType.PROCEDURE:
