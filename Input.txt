@@ -18,7 +18,8 @@ begin
 		a:integer;
 	begin
 		a:=A(10,2,"ss");
-		print (a);
+		if (a>4) then
+			print (a);
 	end;
 
 	B(4);

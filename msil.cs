@@ -388,6 +388,7 @@ namespace MathExpr
                             Generate(child, tmpContext, function);
                         }
                     }
+                    function.Append("    ret\n");
                     function.Append("  }\n");
                     list_functions.AddLast(function);
                     break;
@@ -469,6 +470,7 @@ namespace MathExpr
             Generate(programNode,Program.mainContext,Mfunction);
             //msil.Append(string.Format("    ret"));
             msil.Append(Mfunction);
+            msil.Append(string.Format("    ret"));
             msil.Append(@"
   }
 ");
