@@ -5,19 +5,25 @@ var
 	s:string;
 	w:real;
 begin
-	function A(i,m:integer;s:string):integer;
+	function fact(i:integer):integer;
 	var
-		k:integer;
+		sum,c,f:integer;
 	begin
-		k:=0;
-		k:=i+m;
-		return k;
+		sum:=1;
+		c:=1;
+		f:=i;
+		while(c<f) do
+		begin
+			sum:=sum*c;
+			c:=c+1;
+		end;
+		return sum;
 	end;
 	procedure B(i:integer);
 	var 
 		a:integer;
 	begin
-		a:=A(10,2,"ss");
+		a:=fact(10);
 		if (a>4) then
 			print (a);
 	end;

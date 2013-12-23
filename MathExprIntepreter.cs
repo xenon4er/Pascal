@@ -33,7 +33,8 @@ namespace MathExpr
             case AstNodeType.UNKNOWN:
                 throw new IntepreterException("Ќеопределенный тип узла AST-дерева " + node.Line);
 
-           
+            case AstNodeType.IDENT:
+                break;
 
             case AstNodeType.VAR:
                 int count = 0;
@@ -319,14 +320,14 @@ namespace MathExpr
                 //необходимо проверить, что переменна€ по которой идет счет описана, какие еще могут быть ошибки?
                 CommonTree nodeFor0 = (CommonTree)node.GetChild(0);
                 IdentDescr identFor = context.find_var(nodeFor0.Text);
-                if (null == identFor)
+                /*if (null == identFor)
                 {
                     throw new SemException("ѕеременна€ не описана: строка " + nodeFor0.Line);
                 }
                 if (identFor.init == false)
                 {
                     throw new SemException("ѕеременной не присвоено значение " +  nodeFor0.Line);
-                }
+                }*/
                 if (identFor.dataType.type != DataType.Type.my_integer)
                     throw new SemException("невозможен цикл for не по integer");
                 CommonTree nodeFor1 = (CommonTree)node.GetChild(1);
@@ -368,10 +369,10 @@ namespace MathExpr
                     tmpCmp0 = context.find_var(nodeCmp0.Text);
                     if (null == tmpCmp0)
                         throw new SemException("переменна€ не описана " + nodeCmp0.Text + " " + nodeCmp0.Line);
-                    if (tmpCmp0.init == false)
+                    /*if (tmpCmp0.init == false)
                     {
                         throw new SemException("ѕеременной не присвоено значение " + nodeCmp0.Line);
-                    }
+                    }*/
                 }
 
                 CommonTree nodeCmp1 = (CommonTree)node.GetChild(1);
@@ -380,10 +381,10 @@ namespace MathExpr
                     tmpCmp1 = context.find_var(nodeCmp1.Text);
                     if (null == tmpCmp1)
                         throw new SemException("переменна€ не описана " + nodeCmp1.Text + " " + nodeCmp1.Line);
-                    if (tmpCmp1.init == false)
+                    /*if (tmpCmp1.init == false)
                     {
                         throw new SemException("ѕеременной не присвоено значение " + nodeCmp1.Line);
-                    }
+                    }*/
                 }
 
                 if ((null == tmpCmp0) && (null == tmpCmp1))
@@ -478,47 +479,48 @@ namespace MathExpr
         IdentDescr identMul = context.find_var(parentm.GetChild(0).Text);
         IdentDescr tmpMul;
 
-
-        if (identMul.dataType.type == DataType.Type.my_string)
-            throw new IntepreterException("Ќельз€ "+ mess +" строки " + parentm.Line);
-        else
-        {
-            CommonTree nodeMul0 = (CommonTree)node.GetChild(0);
-            if (nodeMul0.Type == AstNodeType.ADD || nodeMul0.Type == AstNodeType.MUL || nodeMul0.Type == AstNodeType.DIV || nodeMul0.Type == AstNodeType.SUB)
-                ExecuteNode(node.GetChild(0), context);
-            else if (nodeMul0.Type != AstNodeType.STRING && nodeMul0.Type != AstNodeType.REAL && nodeMul0.Type != AstNodeType.INTEGER)
+        if(identMul!=null){
+            if (identMul.dataType.type == DataType.Type.my_string)
+                throw new IntepreterException("Ќельз€ " + mess + " строки " + parentm.Line);
+            else
             {
-                tmpMul = context.find_var(nodeMul0.Text);
-                if (null == tmpMul)
-                    throw new SemException("переменна€ не описана " + nodeMul0.Text + " " + nodeMul0.Line);
-                if (tmpMul.init == false)
+                CommonTree nodeMul0 = (CommonTree)node.GetChild(0);
+                if (nodeMul0.Type == AstNodeType.ADD || nodeMul0.Type == AstNodeType.MUL || nodeMul0.Type == AstNodeType.DIV || nodeMul0.Type == AstNodeType.SUB)
+                    ExecuteNode(node.GetChild(0), context);
+                else if (nodeMul0.Type != AstNodeType.STRING && nodeMul0.Type != AstNodeType.REAL && nodeMul0.Type != AstNodeType.INTEGER)
                 {
-                    throw new SemException("ѕеременной не присвоено значение " + nodeMul0.Line);
+                    tmpMul = context.find_var(nodeMul0.Text);
+                    if (null == tmpMul)
+                        throw new SemException("переменна€ не описана " + nodeMul0.Text + " " + nodeMul0.Line);
+                    if (tmpMul.init == false)
+                    {
+                        throw new SemException("ѕеременной не присвоено значение " + nodeMul0.Line);
+                    }
+                    validate_convert(nodeMul0, tmpMul, identMul);
+                    mass_convert(identMul, 0, nodeMul0, tmpMul);
                 }
-                validate_convert(nodeMul0, tmpMul, identMul);
-                mass_convert(identMul, 0, nodeMul0, tmpMul);
-            }
 
-            CommonTree nodeMul1 = (CommonTree)node.GetChild(1);
-            if (nodeMul1.Type == AstNodeType.ADD || nodeMul1.Type == AstNodeType.MUL || nodeMul1.Type == AstNodeType.DIV || nodeMul1.Type == AstNodeType.SUB)
-                ExecuteNode(node.GetChild(0), context);
-            else if (nodeMul1.Type != AstNodeType.STRING && nodeMul1.Type != AstNodeType.REAL && nodeMul1.Type != AstNodeType.INTEGER)
-            {
-                tmpMul = context.find_var(nodeMul1.Text);
-                if (null == tmpMul)
-                    throw new SemException("переменна€ не описана " + nodeMul1.Text + " " + nodeMul1.Line);
-                if (tmpMul.init == false)
+                CommonTree nodeMul1 = (CommonTree)node.GetChild(1);
+                if (nodeMul1.Type == AstNodeType.ADD || nodeMul1.Type == AstNodeType.MUL || nodeMul1.Type == AstNodeType.DIV || nodeMul1.Type == AstNodeType.SUB)
+                    ExecuteNode(node.GetChild(0), context);
+                else if (nodeMul1.Type != AstNodeType.STRING && nodeMul1.Type != AstNodeType.REAL && nodeMul1.Type != AstNodeType.INTEGER)
                 {
-                    throw new SemException("ѕеременной не присвоено значение " + nodeMul1.Line);
+                    tmpMul = context.find_var(nodeMul1.Text);
+                    if (null == tmpMul)
+                        throw new SemException("переменна€ не описана " + nodeMul1.Text + " " + nodeMul1.Line);
+                    if (tmpMul.init == false)
+                    {
+                        throw new SemException("ѕеременной не присвоено значение " + nodeMul1.Line);
+                    }
+                    validate_convert(nodeMul1, tmpMul, identMul);
+                    mass_convert(identMul, 1, nodeMul1, tmpMul);
                 }
-                validate_convert(nodeMul1, tmpMul, identMul);
-                mass_convert(identMul, 1, nodeMul1, tmpMul);
-            }
 
-            validate_convert(nodeMul0, identMul);
-            validate_convert(nodeMul1, identMul);
-            mass_convert(identMul, 0, nodeMul0);
-            mass_convert(identMul, 1, nodeMul1);
+                validate_convert(nodeMul0, identMul);
+                validate_convert(nodeMul1, identMul);
+                mass_convert(identMul, 0, nodeMul0);
+                mass_convert(identMul, 1, nodeMul1);
+            }
         }
     }
 

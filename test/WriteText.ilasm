@@ -20,17 +20,35 @@
     ret
   }
 
-  .method public static int32 A(int32, int32, string) cil managed
+  .method public static int32 fact(int32) cil managed
   {
     .locals init (
-      [0] int32 k
+      [0] int32 sum,
+      [1] int32 c,
+      [2] int32 f
     )
-    ldc.i4.s 0
+    ldc.i4.s 1
     stloc.s 0
+    ldc.i4.s 1
+    stloc.s 1
     ldarg.0
-    ldarg.1
-    add
+    stloc.s 2
+  L_0001:
+    ldloc.s 1
+    ldloc.s 2
+    blt L_0003
+    br.s L_0002
+  L_0003:
+    ldloc.s 0
+    ldloc.s 1
+    mul
     stloc.s 0
+    ldloc.s 1
+    ldc.i4.s 1
+    add
+    stloc.s 1
+    br.s L_0001
+  L_0002:
     ldloc.s 0
     ret
   }
@@ -41,20 +59,18 @@
       [0] int32 a
     )
     ldc.i4.s 10
-    ldc.i4.s 2
-    ldstr "ss"
-    call int32 Program::A(int32, int32, string)
+    call int32 Program::fact(int32)
     stloc.s 0
     ldloc.s 0
     ldc.i4.s 4
-    bgt L_0003
-    br.s L_0002
-  L_0003:
+    bgt L_0007
+    br.s L_0006
+  L_0007:
     ldloc.s 0
     call void [mscorlib]System.Console::WriteLine(int32)
-    br.s L_0002
-  L_0001:
-  L_0002:
+    br.s L_0006
+  L_0005:
+  L_0006:
     ret
   }
 
